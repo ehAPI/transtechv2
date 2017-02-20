@@ -19,7 +19,10 @@
     		<field name="model">res.users</field>
 			<field name="inherit_id" ref="base.view_users_tree"></field>
 			<field name="arch" type="xml">
+<<<<<<< HEAD
+=======
 				<!-- <field name="date" position="replace"/> -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 				<field name="lang" position="after">
 					<field name="role"/>
 					<field name="contact_num"/>
@@ -35,14 +38,23 @@
 			<field name="arch" type="xml">
 				<field name='login' position='after'>
 					<div class='oe_title'>
+<<<<<<< HEAD
+	    				<label for='password' class='oe_edit_only'/>
+    					<h3>
+	    					<field name='password' password="True"/>
+=======
 	    				<label for='password1' class='oe_edit_only'/>
     					<h3>
 	    					<field name='password1' Password= "True" />
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	    				</h3>
     				</div>
     			</field>
     			<group>
+<<<<<<< HEAD
+=======
 				<!-- <field name="active" position="before"> -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	    			<group>
     					<field name="company"/>
 						<field name="is_team_leader"/>
@@ -50,13 +62,19 @@
     					<field name="contact_num"/>
     					<field name="joining_date"/>
 					</group>
+<<<<<<< HEAD
+=======
 				<!-- </field> -->
 				<!-- <field name="active" position="after"> -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 					<group>
     					<field name="survey_limit"/>
     					<field name="customer_ids"/>
     					<field name="comments"/>
 	    			</group>
+<<<<<<< HEAD
+				</group>
+=======
 				<!-- </field> -->
 				</group>
 	    		<!-- <notebook>
@@ -69,6 +87,7 @@
 			    		</field>
 			    	</page>
 			    </notebook> -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 			</field>
 	    </record>
 
@@ -104,7 +123,11 @@
 		</record>
 
 		<menuitem  id="admin_setup" name="Administration Setup" parent="atm_survey_management"/>		
+<<<<<<< HEAD
+
+=======
 <!-- groups='group_atm_manager' -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 
 		<menuitem  id="transtech_user_management" name="User Management" parent="admin_setup"/>	
 

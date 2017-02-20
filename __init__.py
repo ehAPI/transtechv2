@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+import models
+=======
 # import schedule_tasks
 # import site_inspection
 # import survey_details
@@ -14,4 +17,5 @@
 # # import res_users
 # import customer_details
 # import atm_details
-from.import models
+# from.import models
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
