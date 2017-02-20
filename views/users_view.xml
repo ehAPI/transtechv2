@@ -41,12 +41,18 @@
 <<<<<<< HEAD
 	    				<label for='password' class='oe_edit_only'/>
     					<h3>
+	    					<field name='password' Password= "True" />
+=======
+<<<<<<< HEAD
+	    				<label for='password' class='oe_edit_only'/>
+    					<h3>
 	    					<field name='password' password="True"/>
 =======
 	    				<label for='password1' class='oe_edit_only'/>
     					<h3>
 	    					<field name='password1' Password= "True" />
 >>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
+>>>>>>> d3b3edcb2c18353c24a2e54b2718131d2448e34d
 	    				</h3>
     				</div>
     			</field>

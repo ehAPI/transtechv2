@@ -39,9 +39,13 @@ class manage_users(osv.osv):
 	'role':fields.char('Role',size=32),
 	'survey_limit':fields.integer('Limit of Surveys'),
 	'customer_ids':fields.many2one('customer.info','Allowed Customers'),
+<<<<<<< HEAD
+	# 'password1' : fields.char('Password', invisible=True,required=True,size=64),
+=======
 	'password1' : fields.char('Password', invisible=True,required=True,size=64),
 <<<<<<< HEAD
 =======
+>>>>>>> d3b3edcb2c18353c24a2e54b2718131d2448e34d
 	'sharing' : fields.selection([('false','False'),('user_id','User')],'Sharing'),
 >>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	}
