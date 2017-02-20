@@ -18,7 +18,11 @@
 				 "views/remark_category_view.xml",
 				 "security/transtech_atm_updater_security_view.xml"],
 	#"customer_details_view.xml",
+<<<<<<< HEAD
 			#	 "atm_details_view.xml"]
+=======
+			#	 "atm_details_view.xml"],
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	"installable": True
 
 }
