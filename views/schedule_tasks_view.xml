@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="view_atm_schedule_tasks_form"> 
+		    <field name="name">schedule.tasks.form</field>
+		    <field name="model">schedule.tasks</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+			<form string="Survey Details" version="8.0">
+
+				<sheet>
+					<group>
+						<group>
+				
+							<field name="name"/>
+							
+							<field name="customer_name"/>
+							<field name="state"/>
+							<field name="atm"/>
+
+							<field name="visit_shift"/>
+							<field name="country"/>
+							<field name="acc_manager"/>
+							
+							<field name="start_date"/>
+							<field name= "add_instr"/>
+							<field name="bulk_insert"/>
+							<field name="visit_type/"/>
+						</group>
+						<group string='Visit Details'>
+							<field name="remarks_category"/>
+							<field name="remarks"/>
+							<field name="next_execution"/>
+						</group>
+
+						
+					</group>
+				</sheet>
+			</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_atm_schedule_tasks_tree"> 
+		    <field name="name">schedule.tasks.tree</field>
+		    <field name="model">schedule.tasks</field>
+		    <field name="type">tree</field>
+		    <field name="arch" type="xml">
+			<tree string="Schedule Tasks" version="8.0">
+					
+							<field name="name"/>
+
+							<field name="customer_name"/>
+						
+							<field name="atm"/>
+
+							
+							<field name="country"/>
+							<field name="state"/>
+							<field name="acc_manager"/>
+							
+							
+							<field name="no_of_visits"/>
+							
+							<field name="status"/>
+
+						
+			</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_schedule_tasks_form">
+			<field name="name">Schedule Tasks</field>
+			<field name="res_model">schedule.tasks</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence = "4"/>
+		
+		<!-- menu item -->
+		<menuitem name="Schedule Tasks" parent="tasks_management_menu" id="schedule_tasks_menu_mainform" action="action_schedule_tasks_form" sequence="2"/>
+
+	</data>
+</openerp>
+
+						

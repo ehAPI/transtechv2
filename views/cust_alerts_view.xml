@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="cust_alerts_tree_view">
+			<field name="name">cust.alerts.tree</field>
+			<field name="model">cust.alerts</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Customer Alerts">
+					<field name='alert_id'/>
+					<field name='customer'/>
+					<field name='atm'/>
+					<field name='priority'/>
+					<field name='summary'/>
+					<field name='category'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="cust_alerts_form_view">
+			<field name="name">cust.alerts.form</field>
+			<field name="model">cust.alerts</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Customer Alerts">
+					<sheet>
+						<group>
+							<group>
+								<field name='alert_id'/>
+								<field name='customer'/>
+								<field name='atm'/>
+								<field name='category'/>
+								<field name='priority'/>
+								<field name='country'/>
+								<field name='state'/>
+							</group>
+							<group string='Alert Categorization Details'>
+								<field name='reason_code_id'/>
+								<field name='reason_description'/>
+							</group>
+						</group>
+							<group string='Summary and Description'>
+								<field name='summary'/>
+								<field name='description'/>
+							</group>
+							<h2>Error Images</h2>
+							<field name='img1' widget='image'/>
+							<field name='img2' widget='image'/>
+							<field name='img3' widget='image'/>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_cust_alerts_form">
+			<field name="name">Customer Alerts</field>
+			<field name="res_model">cust.alerts</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="cust_alerts_tree_view"/>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" sequence="5"/>
+		
+		<!-- menu item -->
+		<menuitem name="Customer Alerts" parent="alerts" id="cust_alerts" action="action_cust_alerts_form" sequence="1"/>
+
+
+	</data>
+</openerp>
