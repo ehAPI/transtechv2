@@ -73,9 +73,13 @@
     					<field name="comments"/>
 	    			</group>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 				</group>
+>>>>>>> d4c3d2269861d12ee5b9625183a94423e323f780
 =======
 				<!-- </field> -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 				</group>
 	    		<!-- <notebook>
 	    			<page string='Access Rights'>
