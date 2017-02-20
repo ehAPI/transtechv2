@@ -19,7 +19,10 @@
     		<field name="model">res.users</field>
 			<field name="inherit_id" ref="base.view_users_tree"></field>
 			<field name="arch" type="xml">
+<<<<<<< HEAD
+=======
 				<!-- <field name="date" position="replace"/> -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 				<field name="lang" position="after">
 					<field name="role"/>
 					<field name="contact_num"/>
@@ -35,9 +38,15 @@
 			<field name="arch" type="xml">
 				<field name='login' position='after'>
 					<div class='oe_title'>
+<<<<<<< HEAD
+	    				<label for='password' class='oe_edit_only'/>
+    					<h3>
+	    					<field name='password' password="True"/>
+=======
 	    				<label for='password1' class='oe_edit_only'/>
     					<h3>
 	    					<field name='password1' Password= "True" />
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	    				</h3>
     				</div>
     			</field>
@@ -64,6 +73,10 @@
     					<field name="comments"/>
 	    			</group>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				</group>
+>>>>>>> d4c3d2269861d12ee5b9625183a94423e323f780
 =======
 				<!-- </field> -->
 >>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
@@ -78,6 +91,7 @@
 			    		</field>
 			    	</page>
 			    </notebook> -->
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 			</field>
 	    </record>
 

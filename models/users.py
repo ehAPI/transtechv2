@@ -3,8 +3,14 @@ from openerp.osv import fields, osv
 class manage_group(osv.osv):
 
 	_inherit="res.groups"
+<<<<<<< HEAD
+	_columns={ 
+	'share_group': fields.boolean('Share Group'),
+	'portal' : fields.boolean('Portal'),
+=======
 	_columns={ 'share_group': fields.boolean('Share Group'),
 				'portal' : fields.boolean('Portal'),
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	}
 	
 manage_group()
@@ -34,7 +40,10 @@ class manage_users(osv.osv):
 	'survey_limit':fields.integer('Limit of Surveys'),
 	'customer_ids':fields.many2one('customer.info','Allowed Customers'),
 	'password1' : fields.char('Password', invisible=True,required=True,size=64),
+<<<<<<< HEAD
+=======
 	'sharing' : fields.selection([('false','False'),('user_id','User')],'Sharing'),
+>>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	}
 
 manage_users()
