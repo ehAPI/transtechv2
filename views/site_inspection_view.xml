@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="view_atm_site_inspection_form"> 
+		    <field name="name">site.inspection.form</field>
+		    <field name="model">site.inspection</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+				<form string="Site Inspection" version="8.0">
+
+				<!-- <sheet> -->
+					<group>
+						<group>
+					
+							<field name="name"/>
+							<field name="site_type"/>
+							<field name="acc_manager"/>
+							<field name="date_assigned"/>
+							<field name="date_of_visit"/>
+							<field name="customer_name"/>
+							<field name="site_address"/>
+							<field name="latitude"/>
+							<field name="longitude"/>
+							<field name="contact"/>
+							<field name="mobile"/>
+							<field name="job_description"/>
+							<field name="atm_brand"/>
+							<group>
+								<field name="hole_height_in"/>
+								<field name="hole_height_cust"/>
+								<field name="hole_height_out"/>
+							</group>	
+						</group>	
+						<group>
+							<field name="access_truck"/>
+							<field name="access_truck_crane"/>
+							<field name="hole_height_in_repeated"/>
+						</group>
+					</group>
+				<!-- </sheet> -->
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_atm_site_inspection_tree"> 
+		    <field name="name">site.inspection.tree</field>
+		    <field name="model">site.inspection</field>
+		    <field name="type">tree</field>
+		    <field name="arch" type="xml">
+				<tree string="Site Inspection" version="8.0">
+
+				<!-- <sheet> -->
+					<!-- <group> -->
+						<!-- <group> -->
+					
+							<field name="name"/>
+							<field name="site_type"/>
+							<field name="date_assigned"/>
+							<field name="date_of_visit"/>
+							<field name="site_address"/>
+							<field name="latitude"/>
+							<field name="longitude"/>
+							<field name="contact"/>
+							<field name="mobile"/>
+
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="action_site_form">
+			<field name="name">Site Inspection</field>
+			<field name="res_model">site.inspection</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management" sequence="3"/>
+		
+		<!-- menu item -->
+		<menuitem name="Site Inspection Form" parent="survey_details_menu" id="site_inspection_menu_mainform" action="action_site_form" sequence="1"/>
+
+	</data>
+</openerp>
+
+						
