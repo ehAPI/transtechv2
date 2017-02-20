@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="atm_details_tree_view">
+			<field name="name">atm.details.tree</field>
+			<field name="model">atm.details</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="ATM Details">
+					<field name='atm_code'/>
+					<field name='atm_branch_details'/>
+					<field name='bank_atm_id'/>
+					<field name='customer'/>
+					<field name='atm_type'/>
+					<field name='state'/>
+					<field name='visits_done'/>
+					<field name='visits_left'/>
+					<field name='visits_required'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="atm_details_form_view">
+			<field name="name">atm.details.form</field>
+			<field name="model">atm.details</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<sheet>
+					<form string="ATM Details">
+						<h3>ATM Image</h3>
+						<field name="atm_image" widget='image' class='oe_left oe_avatar'/>
+						<group>
+							<field name='atm_code'/>
+							<field name='atm_branch_details'/>
+							<field name='bank_atm_id'/>
+							<field name='date'/>
+						</group>
+						<notebook>
+							<page string='Basic Info'>
+								<group>
+									<field name='atm_type'/>
+									<field name='customer'/>
+									<field name='country'/>
+									<field name='state'/>
+									<field name='sla_start_date'/>
+									<field name='sla_end_date'/>
+									<field name='sic'/>
+								</group>
+							</page>
+							<page string='Mapping'>
+								<group>
+									<field name='longitute'/>
+									<field name='latitude'/>
+								</group>
+							</page>
+							<page string='ATM Old Locations'>
+								<field name='child_ids'/>
+							</page>
+							<page string='ATM Inventory'>
+								<group>
+									<group>
+										<field name='atm_id'/>
+										<field name='atm_model'/>
+										<field name='atm_serial_no'/>
+										<field name='atm_make'/>
+										<field name='atm_functionality'/>
+										<field name='base_height'/>
+										<field name='location_category'/>
+										<field name='onsite_category'/>
+										<field name='offsite_category'/>
+									</group>
+									<group>
+										<field name='kiosk_type'/>
+										<field name='branding_details'/>
+										<field name='installation_date'/>
+										<field name='removed_from'/>
+									</group>
+								</group>
+								<group>
+									<group string='Network Equipment Details'>
+										<field name='d1'/>
+										<field name='d2'/>
+										<field name='d3'/>
+										<field name='d4'/>
+										<field name='d5'/>
+									</group>
+									<group string='ATM DVR'>
+										<field name='make'/>
+										<field name='model'/>
+										<field name='capacity'/>
+										<field name='detail1'/>
+										<field name='detail2'/>
+									</group>
+								</group>
+								<group>
+									<field name='escorting_company'/>
+									<field name='ded_no'/>
+								</group>
+							</page>
+						</notebook>
+					</form>
+				</sheet>
+			</field>
+		</record>
+
+		<record model = "ir.ui.view" id = "atm_old_tree_view">
+			<field name="name">atm.old.tree</field>
+			<field name="model">atm.old</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name='parent_id'/>
+					<field name='longitude'/>
+					<field name='latitude'/>
+					<field name='date'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_atm_details_form">
+			<field name="name">ATM Details</field>
+			<field name="res_model">atm.details</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Customer/ATM Setup" id="cust_atm_setup" parent="atm_survey_management" sequence="2"/>
+		
+		<!-- menu item -->
+		<menuitem name="ATM Details" parent="cust_atm_setup" id="atm_details_menu_mainform" action="action_atm_details_form" sequence="2"/>
+
+	</data>
+</openerp>

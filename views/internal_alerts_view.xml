@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="internal_alerts_tree_view">
+			<field name="name">internal.alerts.tree</field>
+			<field name="model">internal.alerts</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Internal Alerts">
+					<field name='alert_id'/>
+					<field name='customer'/>
+					<field name='atm'/>
+					<field name='priority'/>
+					<field name='summary'/>
+					<field name='assigned_to'/>
+					<field name='category'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="internal_alerts_form_view">
+			<field name="name">internal.alerts.form</field>
+			<field name="model">internal.alerts</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Internal Alerts">
+					<group>
+						<group>
+							<field name='alert_id'/>
+							<field name='customer'/>
+							<field name='atm'/>
+							<field name='category'/>
+							<field name='priority'/>
+							<field name='country'/>
+							<field name='state'/>
+							<field name='assigned_to'/>
+						</group>
+						<group string='Alert Categorization Details'>
+							<field name='reason_code_id'/>
+							<field name='reason_description'/>
+						</group>
+					</group>
+					<group string='Summary and Description'>
+						<field name='summary'/>
+						<field name='description'/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_internal_alerts_form">
+			<field name="name">Internal Alerts</field>
+			<field name="res_model">internal.alerts</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="internal_alerts_tree_view"/>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" sequence="5"/>
+		
+		<!-- menu item -->
+		<menuitem name="Internal Alerts" parent="alerts" id="internal_alerts" action="action_internal_alerts_form" sequence="2"/>
+
+	</data>
+</openerp>

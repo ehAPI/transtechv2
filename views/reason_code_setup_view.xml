@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="reason_code_setup_tree_view">
+			<field name="name">reason.code.setup.tree</field>
+			<field name="model">reason.code.setup</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Reason Code Setup">
+					<field name='code'/>
+					<field name='reason_code'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="reason_code_setup_form_view">
+			<field name="name">reason.code.setup.form</field>
+			<field name="model">reason.code.setup</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Reason Code Setup">
+					<group>
+						<field name='code'/>
+						<field name='reason_code'/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_reason_code_setup_form">
+			<field name="name">Reason Code Setup</field>
+			<field name="res_model">reason.code.setup</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management" sequence="6"/>
+		
+		<!-- menu item -->
+		<menuitem name="Reason Code Setup" parent="admin_setup" id="reason_code_setup_menu_mainform" action="action_reason_code_setup_form" sequence="3"/>
+		
+	</data>
+</openerp>
