@@ -26,7 +26,7 @@ class manage_users(osv.osv):
 	'role':fields.char('Role',size=32),
 	'survey_limit':fields.integer('Limit of Surveys'),
 	'customer_ids':fields.many2one('customer.info','Allowed Customers'),
-	'password1' : fields.char('Password', invisible=True,required=True,size=64),
+	# 'password1' : fields.char('Password', invisible=True,required=True,size=64),
 	'sharing' : fields.selection([('false','False'),('user_id','User')],'Sharing'),
 	}
 
