@@ -13,16 +13,11 @@
 			</field>
 		</record> -->
 
-
         <record model="ir.ui.view" id="res_user_tree_view_extend">
     		<field name="name">res.users.tree.inherit</field>
     		<field name="model">res.users</field>
 			<field name="inherit_id" ref="base.view_users_tree"></field>
 			<field name="arch" type="xml">
-<<<<<<< HEAD
-=======
-				<!-- <field name="date" position="replace"/> -->
->>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 				<field name="lang" position="after">
 					<field name="role"/>
 					<field name="contact_num"/>
@@ -38,29 +33,13 @@
 			<field name="arch" type="xml">
 				<field name='login' position='after'>
 					<div class='oe_title'>
-<<<<<<< HEAD
 	    				<label for='password' class='oe_edit_only'/>
     					<h3>
-	    					<field name='password' Password= "True" />
-=======
-<<<<<<< HEAD
-	    				<label for='password' class='oe_edit_only'/>
-    					<h3>
-	    					<field name='password' password="True"/>
-=======
-	    				<label for='password1' class='oe_edit_only'/>
-    					<h3>
-	    					<field name='password1' Password= "True" />
->>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
->>>>>>> d3b3edcb2c18353c24a2e54b2718131d2448e34d
+	    					<field name='password' password= "True" />
 	    				</h3>
     				</div>
     			</field>
     			<group>
-<<<<<<< HEAD
-=======
-				<!-- <field name="active" position="before"> -->
->>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 	    			<group>
     					<field name="company"/>
 						<field name="is_team_leader"/>
@@ -68,39 +47,14 @@
     					<field name="contact_num"/>
     					<field name="joining_date"/>
 					</group>
-<<<<<<< HEAD
-=======
-				<!-- </field> -->
-				<!-- <field name="active" position="after"> -->
->>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 					<group>
     					<field name="survey_limit"/>
     					<field name="customer_ids"/>
     					<field name="comments"/>
 	    			</group>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 				</group>
->>>>>>> d4c3d2269861d12ee5b9625183a94423e323f780
-=======
-				<!-- </field> -->
->>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
-				</group>
-	    		<!-- <notebook>
-	    			<page string='Access Rights'>
-			    		<field name='sel_groups_5' position='after'>
-			    			<group>
-			    		<field name='sel_groups_3_4' position='before'>
-				    			<field name='sharing'/>
-				    		</group>
-			    		</field>
-			    	</page>
-			    </notebook> -->
->>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 			</field>
 	    </record>
-
 
 		 <record id="view_atm_user_tree" model="ir.ui.view">
 			<field name="name">Users Tree</field>
@@ -108,36 +62,32 @@
 			<field name="type">tree</field>
 			 <field name="arch" type="xml">
 				<tree string="Users Information">
-		                    <field name="role"/>
+                    <field name="role"/>
 				</tree>
 			</field>
 		</record>
 
 	<record id="view_user_info_action" model="ir.actions.act_window">
-		  	<field name="name">Manage Users</field>
-			   <field name="type">ir.actions.act_window</field>
-			   <field name="res_model">res.users</field>
-			   <field name="view_type">form</field>
-			   <field name="view_id" ref="view_atm_user_tree"/>
-			   <field name="view_mode">tree,form</field>         
-			   <field name="help" type="html">
-              		<p class="oe_view_nocontent_create">
-                	Click to add new Users......
-              		</p>
+	  	<field name="name">Manage Users</field>
+		   <field name="type">ir.actions.act_window</field>
+		   <field name="res_model">res.users</field>
+		   <field name="view_type">form</field>
+		   <field name="view_id" ref="view_atm_user_tree"/>
+		   <field name="view_mode">tree,form</field>         
+		   <field name="help" type="html">
+          		<p class="oe_view_nocontent_create">
+            	Click to add new Users......
+          		</p>
 
-
-              		<!-- <field name='customer'/>
-              		<field name='team_leader'/>
- -->
-               		</field>
+          		<!-- <field name='customer'/>
+          		<field name='team_leader'/>
+-->
+       		</field>
 		</record>
 
 		<menuitem  id="admin_setup" name="Administration Setup" parent="atm_survey_management"/>		
-<<<<<<< HEAD
 
-=======
 <!-- groups='group_atm_manager' -->
->>>>>>> 5102f8d9270ca85cbcf3e3aab4312ca87f6738ba
 
 		<menuitem  id="transtech_user_management" name="User Management" parent="admin_setup"/>	
 
@@ -155,24 +105,20 @@
 		</record>
 
 	    <record id="view_atm_group_info_action" model="ir.actions.act_window">
-		  	<field name="name">Manage User Groups</field>
-			   <field name="type">ir.actions.act_window</field>
-			   <field name="res_model">res.groups</field>
-			   <field name="view_type">form</field>
-			   <field name="view_id" ref="view_atm_group_tree"/>
-			   <field name="view_mode">tree,form</field>         
-			   <field name="help" type="html">
-              		<p class="oe_view_nocontent_create">
-                	Click to add new Groups......
-              		</p>
-               		</field>
+		    <field name="name">Manage User Groups</field>
+		    <field name="type">ir.actions.act_window</field>
+		    <field name="res_model">res.groups</field>
+		    <field name="view_type">form</field>
+		    <field name="view_id" ref="view_atm_group_tree"/>
+		    <field name="view_mode">tree,form</field>         
+		    <field name="help" type="html">
+          		<p class="oe_view_nocontent_create">
+            	Click to add new Groups......
+          		</p>
+       		</field>
 		</record>
 
-	
 		<menuitem action="base.action_res_groups" id="action_res_groups"  parent="transtech_user_management" sequence="1" />
-
-		
-
 
      </data>
 </openerp>

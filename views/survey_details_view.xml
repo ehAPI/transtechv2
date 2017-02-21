@@ -7,123 +7,111 @@
 		    <field name="model">survey.details</field>
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
-			<form string="Survey Details" version="8.0">
-				<sheet>
-					<group>
+				<form string="Survey Details" version="8.0">
+					<sheet>
 						<group>
-						<field name="name"/>
-						<field name="atm_report"/>
-						<field name="month"/>
-						<field name="remarks_category"/>
-						<field name="atm"/>
-						<field name="customer_name"/>
-						<field name="acc_manager"/>
-						<field name="visit_time"/>
-						<field name="current_longitude"/>
-						<field name= "current_latitude"/>
-						<field name="next_survey_distance"/>
-						<field name="next_task_id"/>
-						<field name="state"/>
-					    </group>
-
-						
-							
-				
-						<div>
-
-						<group string='Before Survey'>
-							<field name="image1_b" widget='image'/>
-							<field name="image2_b" widget='image'/>
-							<field name="image3_b" widget='image'/>
-							<field name="image4_b" widget='image'/>
-							<field name="image5_b" widget='image'/>
-							<field name="image6_b" widget='image'/>
-							<field name="image7_b" widget='image'/>
-							<field name="image8_b" widget='image'/>
-						</group>
-						
-						
-						<group string='After Survey'>
-							<field name="image1_a" widget='image'/>
-							<field name="image2_a" widget='image'/>
-							<field name="image3_a" widget='image'/>
-							<field name="image4_a" widget='image'/>
-							<field name="image5_a" widget='image'/>
-							<field name="image6_a" widget='image'/>
-							<field name="image7_a" widget='image'/>
-							<field name="image8_a" widget='image'/>
-						</group>
-						
-						
-							
-						
-					</div>
-
-					</group>
-					<notebook>
-						<page string='Checklist for ATM XP'>
 							<group>
-								<group>
-									<field name="no_comments"/>
-									<field name="col_cash"/>
-									<field name="col_receipt"/>
-									<field name="ins_card"/>
-									<field name="ins_cheq"/>
+							<field name="name"/>
+							<field name="atm_report"/>
+							<field name="month"/>
+							<field name="remarks_category"/>
+							<field name="atm"/>
+							<field name="customer_name"/>
+							<field name="acc_manager"/>
+							<field name="visit_time"/>
+							<field name="current_longitude"/>
+							<field name= "current_latitude"/>
+							<field name="next_survey_distance"/>
+							<field name="next_task_id"/>
+							<field name="state"/>
+						    </group>
+							<div>
+								<group string='Before Survey'>
+									<field name="image1_b" widget='image'/>
+									<field name="image2_b" widget='image'/>
+									<field name="image3_b" widget='image'/>
+									<field name="image4_b" widget='image'/>
+									<field name="image5_b" widget='image'/>
+									<field name="image6_b" widget='image'/>
+									<field name="image7_b" widget='image'/>
+									<field name="image8_b" widget='image'/>
 								</group>
+								<group string='After Survey'>
+									<field name="image1_a" widget='image'/>
+									<field name="image2_a" widget='image'/>
+									<field name="image3_a" widget='image'/>
+									<field name="image4_a" widget='image'/>
+									<field name="image5_a" widget='image'/>
+									<field name="image6_a" widget='image'/>
+									<field name="image7_a" widget='image'/>
+									<field name="image8_a" widget='image'/>
+								</group>
+							</div>
+						</group>
+						<notebook>
+							<page string='Checklist for ATM XP'>
+								<group>
+									<group>
+										<field name="no_comments"/>
+										<field name="col_cash"/>
+										<field name="col_receipt"/>
+										<field name="ins_card"/>
+										<field name="ins_cheq"/>
+									</group>
 
-								<group>
-									<field name="ins_cash"/>
-									<field name="network_sticker"/>
-									<field name="instruction_sticker"/>
-									<field name="vault_branding"/>
-									<field name="terminal_id"/>
-								</group>
+									<group>
+										<field name="ins_cash"/>
+										<field name="network_sticker"/>
+										<field name="instruction_sticker"/>
+										<field name="vault_branding"/>
+										<field name="terminal_id"/>
+									</group>
 
-								<group>
-									<field name="cables"/>
-									<field name="trash"/>
-									<field name="mach"/>
-								</group>
-								<group> 
-									<field name="spot_lights"/>
-									<field name="machine_surround"/>
-									<field name="canopy"/>
-								</group>
-								<group>
+									<group>
+										<field name="cables"/>
+										<field name="trash"/>
+										<field name="mach"/>
+									</group>
+									<group> 
+										<field name="spot_lights"/>
+										<field name="machine_surround"/>
+										<field name="canopy"/>
+									</group>
+									<group>
 
-									<field name="card_pic"/>
-									<field name="trans_receipt"/>
-									<field name="do_dont"/>
-									<field name="cash_deposit"/>
-									<field name="touch_errors"/>
-									<field name="screen"/>
-									<field name="ac_issues"/>
-								</group>
+										<field name="card_pic"/>
+										<field name="trans_receipt"/>
+										<field name="do_dont"/>
+										<field name="cash_deposit"/>
+										<field name="touch_errors"/>
+										<field name="screen"/>
+										<field name="ac_issues"/>
+									</group>
 
-								<group>
-									<field name="pin_guard"/>
-									<field name="privacy_flap"/>
-									<field name="kiosk_door"/>
-									<field name="kiosk_lights"/>
-									<field name="fascia_light"/>
-									<field name="boom_sign"/>
-									
-								</group>
-								<group>
+									<group>
+										<field name="pin_guard"/>
+										<field name="privacy_flap"/>
+										<field name="kiosk_door"/>
+										<field name="kiosk_lights"/>
+										<field name="fascia_light"/>
+										<field name="boom_sign"/>
+										
+									</group>
+									<group>
 
-									<field name="surround_locks"/>
-									<field name="lights"/>
-									<field name="sec_cam"/>
-									<field name="out_cont"/>
-									<field name="card_reader"/>
-									<field name="side_frames"/>
-									<field name="atm_vault"/>
-									<field name="ded"/>
-									<field name="atm_notices"/>
-									<field name="keypad"/>
-									<field name="atm_status"/>
+										<field name="surround_locks"/>
+										<field name="lights"/>
+										<field name="sec_cam"/>
+										<field name="out_cont"/>
+										<field name="card_reader"/>
+										<field name="side_frames"/>
+										<field name="atm_vault"/>
+										<field name="ded"/>
+										<field name="atm_notices"/>
+										<field name="keypad"/>
+										<field name="atm_status"/>
+									</group>
 								</group>
-							</group>
 								<group>
 									<field name="trashbin_repairs"/>
 									<field name="ttw_branding"/>
@@ -131,16 +119,10 @@
 									<field name="machine_cam"/>
 									<field name="fascia"/>
 								</group>
-							
-
-							
-
-							
-
-						</page>
-					</notebook>
-				</sheet>
-			</form>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
 			</field>
 		</record>
 
@@ -150,21 +132,18 @@
 		    <field name="type">tree</field>
 		    <field name="arch" type="xml">
 			<tree string="Survey Details" version="8.0">
-					
-							<field name="name"/>
-							<field name="atm_report"/>
-							<field name="month"/>
-							
-							<field name="atm"/>
-							<field name="state"/>
+				<field name="name"/>
+				<field name="atm_report"/>
+				<field name="month"/>
+				
+				<field name="atm"/>
+				<field name="state"/>
 
-							<field name="customer_name"/>
-							<field name="acc_manager"/>
+				<field name="customer_name"/>
+				<field name="acc_manager"/>
 
-							<field name="visit_time"/>
-							<field name="status"/>
-						
-
+				<field name="visit_time"/>
+				<field name="status"/>
 			</tree>
 			</field>
 		</record>
