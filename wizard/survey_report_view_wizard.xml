@@ -19,7 +19,7 @@
                     <field name="Bank/Customer"/>            
                   </group>
                   <footer>
-                    <!-- <button name="action_save" string="View Report" type="object" class="oe_highlight"/> -->
+                    <button name="action_save" string="View Report" type="object" class="oe_highlight"/>
                     <button string="Cancel" special="cancel" icon="gtk-cancel" class="oe_link"/>
                   </footer>
               </form>
