@@ -77,9 +77,9 @@
 
 <!-- groups='group_atm_manager' -->
 
-		<menuitem  id="transtech_user_management" name="User Management" parent="admin_setup"/>	
+		<menuitem  id="transtech_user_management" name="User Management" parent="admin_setup" groups="group_atm_manager"/>	
 
-		<menuitem action="base.action_res_users" id="action_res_users"  parent="transtech_user_management"  sequence="2"/>
+		<menuitem action="base.action_res_users" id="action_res_users"  parent="transtech_user_management" sequence="2"/>
 
         <record id="view_atm_group_tree" model="ir.ui.view">
 			<field name="name">Group Tree</field>

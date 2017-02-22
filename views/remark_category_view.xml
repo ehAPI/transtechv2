@@ -42,6 +42,6 @@
 		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management" sequence="6"/>
 		
 		<!-- menu item -->
-		<menuitem name="Manage Remark Category" parent="admin_setup" id="remark_category_menu_mainform" action="action_remark_category_form" sequence="4"/>
+		<menuitem name="Manage Remark Category" parent="admin_setup" id="remark_category_menu_mainform" action="action_remark_category_form" sequence="4" groups="group_atm_manager"/>
 	</data>
 </openerp>
