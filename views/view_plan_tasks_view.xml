@@ -78,7 +78,7 @@
 		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence="4"/>
 		
 		<!-- menu item -->
-		<menuitem name="View and Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="1"/>
+		<menuitem name="View and Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="1" groups="group_atm_user,group_atm_manager"/>
 
 	</data>
 </openerp>
