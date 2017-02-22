@@ -67,6 +67,7 @@
 		
 		<!-- menu item -->
 		<menuitem name="Customer Alerts" parent="alerts" id="cust_alerts" action="action_cust_alerts_form" sequence="1"/>
+		<!-- groups="group_atm_customer,group_atm_manager" -->
 
 
 	</data>

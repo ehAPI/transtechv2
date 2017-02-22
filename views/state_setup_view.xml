@@ -55,6 +55,6 @@
 		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management" sequence="6"/>
 		
 		<!-- menu item -->
-		<menuitem name="State Setup" parent="admin_setup" id="state_setup_menu_mainform" action="action_country_state"  sequence="2"/>
+		<menuitem name="State Setup" parent="admin_setup" id="state_setup_menu_mainform" action="action_country_state"  sequence="2" />
 	</data>
 </openerp>
