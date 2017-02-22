@@ -16,7 +16,9 @@
 				 "views/reason_code_setup_view.xml",
 				 "views/state_setup_view.xml",
 				 "views/remark_category_view.xml",
-				 "security/transtech_atm_updater_security_view.xml"],
+				 "security/transtech_atm_updater_security_view.xml",
+				 "security/ir.model.access.csv",
+				 ],
 	#"customer_details_view.xml",
 			#	 "atm_details_view.xml"],
 	"installable": True
