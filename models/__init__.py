@@ -11,7 +11,5 @@ import public_holidays
 import state_setup
 import reason_code_setup
 import remark_category
-# import res_users
 import customer_details
 import atm_details
-# from.import models

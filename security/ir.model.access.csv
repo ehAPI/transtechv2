@@ -49,14 +49,11 @@ access_internal_alerts,internal.alerts,model_internal_alerts,atm.group_atm_manag
 
 access_internal_alerts_user,internal.alerts,model_internal_alerts,atm.group_atm_user,1,1,1,1
 
-
 access_survey_details_manager,survey.details,model_survey_details,atm.group_atm_manager,1,1,1,1
 
 access_survey_details_surveyor,survey.details,model_survey_details,atm.group_atm_user,1,1,1,0
 
 access_survey_details_customer,survey.details,model_survey_details,atm.group_atm_customer,1,0,0,0
-
-
 
 access_res_users_group_erp_manager,res.users,base.model_res_users,atm.group_atm_manager,1,1,1,1
 
@@ -64,7 +61,6 @@ access_res_users_group_erp_manager,res.users,base.model_res_users,atm.group_atm_
 
 
 access_res_partner_manager,atm.res.partner,base.model_res_partner,atm.group_atm_manager,1,1,1,0
-
 
 access_schedule_tasks_manager,schedule.tasks,model_schedule_tasks,atm.group_atm_manager,1,1,1,1
 
