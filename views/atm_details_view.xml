@@ -25,8 +25,12 @@
 			<field name="model">atm.details</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<sheet>
-					<form string="ATM Details">
+				<form string="ATM Details">
+					<header>
+						<button name="%(action_atm_view_wizard)d" string="Move ATM" type="action" class="oe_highlight"/>
+						<!-- groups="atm.group_atm_manager,atm.group_atm_customer" -->
+					</header>
+					<sheet>
 						<h3>ATM Image</h3>
 						<field name="atm_image" widget='image' class='oe_left oe_avatar'/>
 						<group>
@@ -49,7 +53,7 @@
 							</page>
 							<page string='Mapping'>
 								<group>
-									<field name='longitute'/>
+									<field name='longitude'/>
 									<field name='latitude'/>
 								</group>
 							</page>
@@ -98,8 +102,8 @@
 								</group>
 							</page>
 						</notebook>
-					</form>
-				</sheet>
+					</sheet>
+				</form>
 			</field>
 		</record>
 
@@ -108,7 +112,7 @@
 			<field name="model">atm.old</field>
 			<field name="arch" type="xml">
 				<tree>
-					<field name='parent_id'/>
+					<field name='name'/>
 					<field name='longitude'/>
 					<field name='latitude'/>
 					<field name='date'/>
