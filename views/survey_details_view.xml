@@ -8,6 +8,9 @@
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
 				<form string="Survey Details" version="8.0">
+					<header>
+						<button name="%(action_pics_survey_wizard)d" string="Upload Images" type="action" class="oe_highlight"/>
+					</header>
 					<sheet>
 						<group>
 							<group>
