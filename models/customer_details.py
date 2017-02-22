@@ -19,9 +19,9 @@ class customer_details(osv.osv):
 		'active' : fields.boolean('Active??', size = 5),
 		'sla_start_date' : fields.datetime('SLA Start Date'),
 		'sla_end_date' : fields.datetime('SLA End Date'),
-		'acc_manager' : fields.many2one('res.users', 'Account Manager', ondelete='set null'),
-		'other1' :fields.many2one('res.users', 'Other1', ondelete='set null'),
-		'other2' :fields.many2one('res.users', 'Other2', ondelete='set null'),
+		'acc_manager' : fields.many2one('res.users', 'Account Manager', ondelete='set null', required=True),
+		'other1' :fields.many2one('res.users', 'Other1', ondelete='set null', required=True),
+		'other2' :fields.many2one('res.users', 'Other2', ondelete='set null', required=True),
 	}
 	_defaults ={
 		'active': 1,

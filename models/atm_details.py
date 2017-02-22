@@ -27,9 +27,9 @@ class atm_details(osv.osv):
 	'sla_start_date' : fields.datetime('SLA Start Date'),
 	'sla_end_date' : fields.datetime('SLA End Date'),
 	'sic' : fields.text('Special Instructions/Conditions'),
-	'longitute' : fields.char('Longitute'),
+	'longitude' : fields.char('Longitude'),
 	'latitude' : fields.char('Latitude'),
-	'child_ids' : fields.one2many('atm.old','a', readonly=True),
+	'child_ids' : fields.one2many('atm.old','parent_id', readonly=True),
 	'atm_id' :fields.char('ATM ID'),
 	'atm_model' :fields.char('ATM Model'),
 	'atm_serial_no' :fields.char('ATM Serial No.'),
@@ -71,5 +71,5 @@ class atm_old(osv.osv):
 				'longitude':fields.char('Longitude'),
 				'latitude':fields.char('Latitude'),
 				'date':fields.date('Date'),
-				'a':fields.char("ATM Branch Details"),  
+				'name':fields.char('ATM Branch Details')
 				}
