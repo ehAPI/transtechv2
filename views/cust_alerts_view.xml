@@ -23,6 +23,9 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Customer Alerts">
+					<header>
+						<field name="status" widget="statusbar" statusbar_visible="assigned,resolved,closed"/>
+					</header>
 					<sheet>
 						<group>
 							<group>

@@ -39,9 +39,16 @@ class schedule_tasks(osv.osv):
 			'remarks':fields.text('Remarks'),
 			'next_execution':fields.char('Next Execution',readonly=True),
 			'no_of_visits':fields.integer('No. of visits per month'),
-			'status':fields.char('Status')
+			'status': fields.selection([
+			('assigned','Assigned'),
+			('cancel', 'Cancelled')
+			],'Status',readonly=True, track_visibility='always')
 	
 	}
+
+_defaults={
+	'status':'assigned'
+}
 
 schedule_tasks	()
 

@@ -8,6 +8,11 @@
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
 			<form string="Survey Details" version="8.0">
+				<header>
+				
+					<field name="status" widget="statusbar" statusbar_visible="assigned,cancel"/> 
+
+				</header>
 
 				<sheet>
 					<group>
@@ -62,7 +67,6 @@
 							
 							<field name="no_of_visits"/>
 							
-							<field name="status"/>
 
 						
 			</tree>

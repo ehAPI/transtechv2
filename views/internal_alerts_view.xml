@@ -24,6 +24,9 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Internal Alerts">
+					<header>
+						<field name="status" widget="statusbar" statusbar_visible="assigned,resolved,closed"/>
+					</header>
 					<group>
 						<group>
 							<field name='alert_id'/>
