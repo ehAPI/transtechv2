@@ -1,17 +1,17 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 
-access_view_plan_tasks_customer,atm.view.plan.tasks,model_view_plan_tasks,atm.group_atm_customer,1,0,0,0
+access_view_plan_tasks_customer,view.plan.tasks,model_view_plan_tasks,atm.group_atm_customer,1,0,0,0
 
 access_customer_detials,customer.info,model_customer_info,atm.group_atm_customer,1,0,0,0
 
-access_view_plan_tasks,atm.view.plan.tasks,model_view_plan_tasks,atm.group_atm_user,1,1,0,0
+access_view_plan_tasks,view.plan.tasks,model_view_plan_tasks,atm.group_atm_user,1,1,0,0
 
 access_cust_alerts_cus,cust.alerts,model_cust_alerts,atm.group_atm_customer,1,0,1,0
 
 access_atm_details_cus,atm.details,model_atm_details,atm.group_atm_customer,1,1,0,0
 
-access_project_project_manager,atm.surverys.management,model_view_plan_tasks,atm.group_atm_manager,1,1,1,1
+access_project_project_manager,view.plan.tasks,model_view_plan_tasks,atm.group_atm_manager,1,1,1,1
 
 access_atm_manager,atm.details,model_atm_details,atm.group_atm_manager,1,1,1,1
 
