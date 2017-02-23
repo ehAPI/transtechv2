@@ -41,8 +41,7 @@ class schedule_tasks(osv.osv):
 			'no_of_visits':fields.integer('No. of visits per month'),
 			'status': fields.selection([
 			('assigned','Assigned'),
-			('cancel', 'Cancelled')
-			],'Status',readonly=True, track_visibility='always')
+			('cancel', 'Cancelled')],'Status',readonly=True, track_visibility='always')
 	
 	}
 
@@ -54,7 +53,7 @@ class schedule_tasks(osv.osv):
 	'visit_shift':'day',
 	'bulk_insert': True,
 	'status':'assigned'
-	'country':_default_country,
+	# 'country':_default_country,
 	}
 
 schedule_tasks	()
