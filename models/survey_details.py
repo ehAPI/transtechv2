@@ -32,7 +32,9 @@ class survey_details(osv.osv):
 			'next_survey_distance':fields.integer('Next Survey Distance'),
 			'next_task_id':fields.many2one('view.plan.tasks','Next Task ID'),
 			'state' : fields.many2one('res.country.state', 'State'),
-			'status':fields.char('Status'),
+			'status': fields.selection([
+            ('waiting_approval', 'Waiting for Approval'),
+            ('approved', 'Approved')], 'Status'),
 
 			'no_comments':fields.boolean('No Comments'),
 			'col_cash':fields.selection([('required','Required'),
@@ -171,5 +173,10 @@ class survey_details(osv.osv):
     	_defaults = {
     	    'visit_time': lambda * a: time.strftime('%Y-%m-%d %H:%M:%S'),
     	}
+
+_defaults={
+
+        'status': 'waiting_approval'
+}
 
 survey_details()

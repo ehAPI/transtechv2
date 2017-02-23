@@ -12,6 +12,7 @@ class internal_alerts(osv.osv):
 
 	_defaults = {
         'created_by': lambda obj, cr, uid, context: uid,
+		'status': 'assigned'
 	}
 
 	_order = "name desc"
@@ -23,5 +24,6 @@ class internal_alerts(osv.osv):
 	def status_close(self,cr,uid,ids,context=None):
 		self.write(cr,uid,ids,{'status':'closed'},context=context)
 		return True
+
 
 internal_alerts()
