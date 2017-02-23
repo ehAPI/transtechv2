@@ -1,4 +1,6 @@
 from openerp.osv import fields, osv
+import datetime
+import time
 
 class survey_details(osv.osv):
 
@@ -19,7 +21,7 @@ class survey_details(osv.osv):
 				('Oct', 'October'),
 				('Nov','November'),
 				('Dec','December')],'Month'),
-            'remarks_category' : fields.many2one('remarks.category','Remarks Category'),
+            'remarks_category' : fields.many2one('remark.category','Remarks Category'),
 			'atm' : fields.many2one('atm.details', 'ATM'),
 			'customer_name':fields.many2one('customer.info','Customer'),
 			'acc_manager' : fields.many2one('res.users', 'Surveyor'),

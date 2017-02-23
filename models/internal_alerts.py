@@ -15,7 +15,7 @@ class internal_alerts(osv.osv):
 		'status': 'assigned'
 	}
 
-	_order = "name desc"
+	# _order = "name desc"
 
 	def status_resolve(self,cr,uid,ids,context=None):
 		self.write(cr,uid,ids,{'status':'resolved'},context=context)

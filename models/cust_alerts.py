@@ -38,13 +38,22 @@ class cust_alerts(osv.osv):
 
 		return cid
 
+	def status_resolve(self,cr,uid,ids,context=None):
+		self.write(cr,uid,ids,{'status':'resolved'},context=context)
+		return True
+
+	def status_close(self,cr,uid,ids,context=None):
+		self.write(cr,uid,ids,{'status':'closed'},context=context)
+		return True
+		
+
 	_defaults = {
 		'status':'assigned',
 		'country_id':_default_country,
 		'customer':_default_customer,
-		'status':'assigned'
          	
 	}
+
 	_order = "alert_id desc"
 
 cust_alerts()
