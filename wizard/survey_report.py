@@ -1,39 +1,41 @@
 from openerp.osv import fields, osv
-import time
-import openerp
 from openerp.tools.translate import _
-from openerp import api
+import time
 
 
-class pricing_wizard_selection(osv.TransientModel):
 
-    _name = 'survey.report'
+class survey_report(osv.osv):
+
+    _name = "survey.report"
 
     _columns = {
-
-        'from_date': fields.date('From Date'),
-        'to_date': fields.date('To Date'),
-        'Bank/Customer': fields.many2one('customer.info', 'Bank/Customer'),
+    "from_date": fields.date("From Date"),
+    "to_date": fields.date("To Date"),
+    "Bank/Customer": fields.many2one("customer.info","Bank/Customer"),
     }
+    
+    def action_survey_details(self,cr,uid,ids,context=None):
 
-    # def action_save(self, cr, uid, ids, context=None):
-    #     survey_report_obj = self.pool.get('atm.details').browse(cr, uid, context['active_id'])
-    #     input_data = self.read(cr, uid, ids[0])
-    #     message = input_data['cancel_message']
+        data = self.read(cr, uid, ids)[0]
+        survey_ids = self.pool.get("survey.details").search(cr,uid,[("visit_time",">=",data["from_date"]),("visit_time","<=",data["to_date"])])       
+        print survey_ids
+        models_data = self.pool.get("ir.model.data")
+        survey_report_tree = models_data._get_id(cr, uid, "atm", "view_atm_survey_details_tree")
+        return{"name":"Survey Info","view_type":"form","view_mode":"tree,form","res_model":"survey.details","type": "ir.actions.act_window",
+		"search_view_id": survey_report_tree,'domain':"[('id', 'in',%s)]" %(survey_ids),
 
-    #     user_obj = self.pool.get('res.users').browse(cr, uid, uid)
+		}
 
-    #     # Logging the message in chatter
-    #     msg_vals = {
-    #     'author_id': user_obj.partner_id.id,
-    #     'type':'comment',
-    #     'model':'atm.details',
-    #     'res_id':context['active_id'],
-    #     'sub_type_id':1,
-    #     'body': message,
-    #     }
-    #     self.pool.get('mail.message').create(cr, uid,msg_vals)
-
-    #     self.pool.get('atm.details').write(cr, uid, context['active_id'], {'status':'cancelled'})
-
-    #     return True
+		# return {
+	 #    "name": "Survey Info",
+		# "view_type": "form",
+		# "view_mode": "tree,form",
+		# "res_model": "survey.details",
+		# "type": "ir.actions.act_window",
+		# "search_view_id": survey_report_tree,
+		# "domain":"[("id", "in",%s)]" %(survey_ids),
+		# }
+        
+	 
+ 
+survey_report()  

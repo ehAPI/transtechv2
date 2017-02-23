@@ -45,7 +45,7 @@ class schedule_tasks(osv.osv):
 	
 	}
 
-	def _default_country(self, cr, uid, context=None):
+	def default_country(self, cr, uid, context=None):
 		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
 		return cid[0]
 

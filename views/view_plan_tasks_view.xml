@@ -70,7 +70,7 @@
 		</record>
 
 		<record model="ir.actions.act_window" id="action_view_plan_tasks_form">
-			<field name="name">View Plan Tasks</field>
+			<field name="name">View &amp; Plan Tasks</field>
 			<field name="res_model">view.plan.tasks</field>
 			<field name="view_mode">tree,form</field>
 		</record>
@@ -82,7 +82,9 @@
 		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence="4"/>
 		
 		<!-- menu item -->
-		<menuitem name="View and Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="1" groups="group_atm_user,group_atm_manager"/>
+
+		<menuitem name="View &amp; Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="1" groups="group_atm_user,group_atm_manager"/>
+
 
 	</data>
 </openerp>

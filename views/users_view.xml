@@ -25,7 +25,9 @@
 					<div class='oe_title'>
 	    				<label for='password' class='oe_edit_only'/>
     					<h3>
+
 	    					<field name='password' password= "True" />
+
 	    				</h3>
     				</div>
     			</field>
