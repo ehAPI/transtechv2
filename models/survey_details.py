@@ -3,6 +3,7 @@ from openerp.osv import fields, osv
 class survey_details(osv.osv):
 
 	_name = 'survey.details'
+	
 	_columns = {
 	        'name':fields.char('Survey id', readonly=True),
 	        'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
@@ -168,6 +169,10 @@ class survey_details(osv.osv):
 
 
 	}
+        _order = "visit_time desc"
+    	_defaults = {
+    	    'visit_time': lambda * a: time.strftime('%Y-%m-%d %H:%M:%S'),
+    	}
 
 _defaults={
 

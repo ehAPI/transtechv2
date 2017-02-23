@@ -23,9 +23,16 @@ class customer_details(osv.osv):
 		'other1' :fields.many2one('res.users', 'Other1', ondelete='set null', required=True),
 		'other2' :fields.many2one('res.users', 'Other2', ondelete='set null', required=True),
 	}
+	def _default_country(self, cr, uid, context=None):
+		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
+		return cid[0]
+	
 	_defaults ={
 		'active': 1,
+		'country':_default_country,
 	}
+	
+
 
 customer_details()
 

@@ -8,7 +8,11 @@
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
 			<form string="Survey Details" version="8.0">
-
+				<header>
+					<button name="status_done" type="object" String="Done" class="oe_highlight" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+					<button name="status_cancel" type="object" String="Cancel" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+					<field name="status" widget='statusbar' statusbar_visible='assigned,pending,cancel,progress,waiting_approve,done'/>
+				</header>
 				<sheet>
 					<group>
 						<group>
