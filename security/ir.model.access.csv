@@ -3,7 +3,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_view_plan_tasks_customer,view.plan.tasks,model_view_plan_tasks,atm.group_atm_customer,1,0,0,0
 
-access_customer_detials,customer.info,model_customer_info,atm.group_atm_customer,1,0,0,0
+access_customer_info,customer.info,model_customer_info,atm.group_atm_customer,1,0,0,0
 
 access_view_plan_tasks,view.plan.tasks,model_view_plan_tasks,atm.group_atm_user,1,1,0,0
 

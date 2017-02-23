@@ -7,7 +7,7 @@ class atm_localization(osv.osv):
                 'longitude':fields.char('Longitude'),
                 'latitude':fields.char('Latitude'),
                 'date':fields.date('Date',readonly=True),
-                'name':fields.char("ATM Branch Details"),  
+                'atm_branch_details':fields.char("ATM Branch Details"),  
                 }
     _defaults = {
         'date': lambda *a: time.strftime('%Y-%m-%d')
@@ -17,9 +17,14 @@ class atm_localization(osv.osv):
         atm_id = context['active_ids']
         data = self.read(cr, uid, ids)[0]
         atm_obj = self.pool.get('atm.details').browse(cr,uid,atm_id)[0]
-        self.pool.get('atm.details').write(cr,uid,atm_id[0],{'child_ids':[[0, False, {'latitude': atm_obj.latitude, 'name': atm_obj.atm_branch_details, 'longitude': atm_obj.longitude,'date':atm_obj.date}]]},context=context)
+        self.pool.get('atm.details').write(cr,uid,atm_id[0],
+            {'child_ids':[[0, False, 
+            {'latitude': atm_obj.latitude,
+         'name': atm_obj.atm_branch_details, 
+         'longitude': atm_obj.longitude,
+         'date':atm_obj.date}]]},context=context)
         self.pool.get('atm.details').write(cr,uid,atm_id[0],data,context=context)
-        #res = super(atm_localization,self).create(cr,uid,vals,context=None)
+        # res = super(atm_localization,self).create(cr,uid,context=context)
         return True
 
 

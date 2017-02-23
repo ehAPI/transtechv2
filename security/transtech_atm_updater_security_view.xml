@@ -76,28 +76,28 @@
     <record id="portal_atm_customer_rule" model="ir.rule">
             <field name="name">Customer: read access his docs</field>
             <field name="model_id" ref="model_view_plan_tasks"/>
-            <field name="domain_force">[('customer.name', '=', user.name)]</field>
+            <field name="domain_force">[('customer_name', '=', user.name)]</field>
             <field name="groups" eval="[(4, ref('group_atm_customer'))]"/>
         </record>
         
       <record id="survey_atm_customer_rule" model="ir.rule">
             <field name="name">Customer: read access his docs</field>
             <field name="model_id" ref="model_survey_details"/>
-            <field name="domain_force">[('customer_surv.name', '=', user.name),('status','=','approved')]</field>
+            <field name="domain_force">[('customer_name', '=', user.name),('status','=','approved')]</field>
             <field name="groups" eval="[(4, ref('group_atm_customer'))]"/>
         </record>
 
      <record id="portal_atm_customer_info_rule" model="ir.rule">
             <field name="name">Customer: read access his docs1</field>
             <field name="model_id" ref="model_customer_info"/>
-            <field name="domain_force">[('name', '=', user.name)]</field>
+            <field name="domain_force">[('cust_name', '=', user.name)]</field>
             <field name="groups" eval="[(4, ref('group_atm_customer'))]"/>
         </record>
 
      <record id="portal_atm_customer_alert_rule" model="ir.rule">
             <field name="name">Customer: read access his docs2</field>
             <field name="model_id" ref="model_cust_alerts"/>
-            <field name="domain_force">[('customer.name', '=', user.name)]</field>
+            <field name="domain_force">[('customer', '=', user.name)]</field>
             <field name="groups" eval="[(4, ref('group_atm_customer'))]"/>
         </record>
 
@@ -105,7 +105,7 @@
     <record id="portal_atm_customer_atm_rule" model="ir.rule">
             <field name="name">Customer: read access his docs3</field>
             <field name="model_id" ref="model_atm_details"/>
-            <field name="domain_force">[('customer.name', '=', user.name)]</field>
+            <field name="domain_force">[('customer', '=', user.name)]</field>
             <field name="groups" eval="[(4, ref('group_atm_customer'))]"/>
         </record>
 

@@ -4,28 +4,38 @@ import time
 
 
 
-class survey_report(osv.TransientModel):
+class survey_report(osv.osv):
 
-    _name = 'survey.report'
+    _name = "survey.report"
 
     _columns = {
-
-        'from_date': fields.date('From Date'),
-        'to_date': fields.date('To Date'),
-        'Bank/Customer': fields.many2one('customer.info','Bank/Customer'),
-
+    "from_date": fields.date("From Date"),
+    "to_date": fields.date("To Date"),
+    "Bank/Customer": fields.many2one("customer.info","Bank/Customer"),
     }
+    
+    def action_survey_details(self,cr,uid,ids,context=None):
 
-    _defaults = {
-        'date': lambda *a: time.strftime('%Y-%m-%d')
-    }
-    def action_survey_details(self,cr,uid,ids,values,context=None):
-    	from_date = values.get('from_date')
-    	to_date = values.get('to_date')
-    	
-    	return True
+        data = self.read(cr, uid, ids)[0]
+        survey_ids = self.pool.get("survey.details").search(cr,uid,[("visit_time",">=",data["from_date"]),("visit_time","<=",data["to_date"])])       
+        print survey_ids
+        models_data = self.pool.get("ir.model.data")
+        survey_report_tree = models_data._get_id(cr, uid, "atm", "view_atm_survey_details_tree")
+        return{"name":"Survey Info","view_type":"form","view_mode":"tree,form","res_model":"survey.details","type": "ir.actions.act_window",
+		"search_view_id": survey_report_tree,'domain':"[('id', 'in',%s)]" %(survey_ids),
 
+		}
 
-
+		# return {
+	 #    "name": "Survey Info",
+		# "view_type": "form",
+		# "view_mode": "tree,form",
+		# "res_model": "survey.details",
+		# "type": "ir.actions.act_window",
+		# "search_view_id": survey_report_tree,
+		# "domain":"[("id", "in",%s)]" %(survey_ids),
+		# }
+        
+	 
  
 survey_report()  

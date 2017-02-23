@@ -27,8 +27,7 @@
 			<field name="arch" type="xml">
 				<form string="ATM Details">
 					<header>
-						<button name="%(action_atm_view_wizard)d" string="Move ATM" type="action" class="oe_highlight"/>
-						<!-- groups="atm.group_atm_manager,atm.group_atm_customer" -->
+						<button name="%(action_atm_view_wizard)d" string="Move ATM" type="action" class="oe_highlight" groups="atm.group_atm_manager,atm.group_atm_customer"/>
 					</header>
 					<sheet>
 						<h3>ATM Image</h3>

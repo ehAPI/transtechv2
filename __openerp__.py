@@ -6,8 +6,10 @@
 	"category":"Tools",
 	"depends":["base"],
 	"description":"Transtech ATM Survey Management",
+
 	"data": ["wizard/atm_move_view.xml",
 			 "wizard/survey_report_view.xml",
+	         "wizard/upload_images_view.xml",
 			 "wizard/survey_report_view_wizard.xml",
 			 "views/schedule_tasks_view.xml",
 			 "security/transtech_atm_updater_security_view.xml",

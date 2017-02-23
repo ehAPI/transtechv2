@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+              <record model="ir.ui.view" id="wizard_upload_pics_form">
+                      <field name="name">Upload Images</field>
+                      <field name="model">upload.images</field>
+                      <field name="type">form</field>
+                      <field name="arch" type="xml">
+                        <form string="Survey Images" version="8.0">
+                                      <p class="oe_grey">
+                                          This wizard helps you to edit survey images.</p>
+              
+                                          <p class="oe_grey">If you want to quit click on Cancel.
+                                     </p>    
+                      <group>       
+                            <group string="Before Survey">
+                              <field name="image1_b"/>
+                              <field name="image2_b"/>
+                              <field name="image3_b"/>
+                              <field name="image4_b"/>
+                              <field name="image5_b"/>
+                              <field name="image6_b"/>
+                              <field name="image7_b"/>
+                              <field name="image8_b"/>
+                            </group>
+              
+                            <group string="After Survey">
+                              <field name="image1_a"/>
+                              <field name="image2_a"/>
+                              <field name="image3_a"/>
+                              <field name="image4_a"/>
+                              <field name="image5_a"/>
+                              <field name="image6_a"/>
+                              <field name="image7_a"/>
+                              <field name="image8_a"/>              
+                            </group>
+                        </group>
+                            <footer>
+                              <button name="action_upload" string="Upload" type="object" class="oe_highlight"/>
+                              <button string="Cancel" class="oe_link" special="cancel"/>
+                            </footer>
+              
+                        </form>
+                      </field>
+                     </record>
+
+              <record id="action_pics_survey_wizard" model="ir.actions.act_window">
+                  <field name="name">Survey Images</field>
+                  <field name="type">ir.actions.act_window</field>
+                  <field name="res_model">upload.images</field>
+                  <field name="view_type">form</field>
+                  <field name="view_mode">form</field>
+                  <field name="view_id" ref="wizard_upload_pics_form"/>
+                  <field name="target">new</field>
+              </record> 
+
+  </data>
+</openerp>
