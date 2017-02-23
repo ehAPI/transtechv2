@@ -21,6 +21,10 @@ class manage_users(osv.osv):
 	'role':fields.char('Role',size=32),
 	'survey_limit':fields.integer('Limit of Surveys'),
 	'customer_ids':fields.many2one('customer.info','Allowed Customers'),
+	'status': fields.selection([('never_connected','Never Connected'),('activated','Activated')],'Status'),
+	
 	}
-
+_defaults={
+	'status':'never_connected'
+}
 manage_users()

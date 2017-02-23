@@ -12,7 +12,7 @@ class cust_alerts(osv.osv):
 	'country' : fields.many2one('res.country', 'Country', ondelete='set null'),
 	'state' : fields.many2one('res.country.state', 'State', ondelete='set null'),
 	'submitted_by' : fields.many2one('res.users','Submitted by', readonly=True, ondelete='set null'),
-	'status': fields.selection([('assigned','Assigned'),('resolved','Resolved'),('closed','Closed')]),
+	'status': fields.selection([('assigned','Assigned'),('resolved','Resolved'),('closed','Closed')],'Status'),
 	'reason_code_id' : fields.many2one('reason.code.setup','Reason Code', ondelete='set null'),
 	'reason_description' : fields.text('Reason Descriptions'),
 	'summary' : fields.char('Summary', size=100),
@@ -21,6 +21,10 @@ class cust_alerts(osv.osv):
 	'img2' : fields.binary('Image', widget='image'),
 	'img3' : fields.binary('Image', widget='image'),
 	}
+
+_defaults={
+	'status':'assigned'
+}
 
 cust_alerts()
 

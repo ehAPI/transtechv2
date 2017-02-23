@@ -20,4 +20,8 @@ class internal_alerts(osv.osv):
 	'description' : fields.text('Description'),
 	}
 
+_defaults={
+	'status': 'assigned'
+}
+
 internal_alerts()
