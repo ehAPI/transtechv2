@@ -49,8 +49,31 @@ class view_plan_tasks(osv.osv):
 			'remarks_category' : fields.many2one('remarks.category','Remarks Category'),
 			'remarks':fields.text('Remarks'),
 			'act_date_time':fields.datetime('Actual Date Time'),
-			'status':fields.char('Status')
-	
+			'status':fields.selection([('assigned','Assigned'),
+									   ('pending','Pending'),
+									   ('cancel','Cancelled'),
+									   ('progress','Progess'),
+									   ('waiting_approve','Waiting for Approval'),
+									   ('done','Done')],'Status')
+
 	}
+	def _default_country(self, cr, uid, context=None):
+		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
+		return cid[0]
+
+	_defaults = {
+	'status':'assigned',
+	'visit_shift':'day',
+	'country':_default_country,
+	}
+
+	def status_done(self,cr,uid,ids,context=None):
+		self.write(cr,uid,ids,{'status':'done'},context=context)
+		return True
+
+	def status_cancel(self,cr,uid,ids,context=None):
+		self.write(cr,uid,ids,{'status':'cancel'},context=context)
+		return True		
+
 
 view_plan_tasks	()

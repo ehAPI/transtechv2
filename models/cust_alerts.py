@@ -22,5 +22,29 @@ class cust_alerts(osv.osv):
 	'img3' : fields.binary('Image', widget='image'),
 	}
 
+	def _default_country(self, cr, uid, context=None):
+		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
+		return cid[0]
+
+	def _default_customer(self, cr, uid, context=None):
+
+		cid = []
+
+		user = self.pool.get('res.users').browse(cr,uid,uid)
+		cid = self.pool.get('customer.info').search(cr,uid,[('cust_name','=',user.name)])
+
+		if cid:
+			return cid[0]
+
+		return cid
+
+	_defaults = {
+		'status':'assigned',
+		'country_id':_default_country,
+		'customer':_default_customer,
+         	
+	}
+	_order = "alert_id desc"
+
 cust_alerts()
 

@@ -61,6 +61,16 @@ class atm_details(osv.osv):
 	'detail1' :fields.char('Detail 1'),
 	'detail2' :fields.char('Detail 2'),
 	}
+	def _default_country(self, cr, uid, context=None):
+		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
+		return cid[0]
+
+	_defaults = {
+		'date': lambda *a: time.strftime('%Y-%m-%d'),
+		'country':_default_country,
+	}
+	_order = 'atm_code'
+	
 
 atm_details()
 

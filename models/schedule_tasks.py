@@ -35,7 +35,7 @@ class schedule_tasks(osv.osv):
 				('16_times','16 times')],'Visit Type/ No. of Visits to be done',required=True),
 			'visit_details':fields.char('Visit Details',readonly=True),
 
-            'remarks_category' : fields.many2one('remarks.category','Remarks Category'),
+            'remarks_category' : fields.many2one('remark.category','Remarks Category'),
 			'remarks':fields.text('Remarks'),
 			'next_execution':fields.char('Next Execution',readonly=True),
 			'no_of_visits':fields.integer('No. of visits per month'),
@@ -43,11 +43,15 @@ class schedule_tasks(osv.osv):
 	
 	}
 
+	def _default_country(self, cr, uid, context=None):
+		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
+		return cid[0]
+
+	_defaults = {
+	'visit_shift':'day',
+	'bulk_insert': True,
+	'country':_default_country,
+	}
+
 schedule_tasks	()
 
-class remarks_category(osv.osv):
-	_name = 'remarks.category'
-	_columns = {
-	'remarks_cat' : fields.char('Remark Category ID Remark Description',required=True)
-	
-	}
