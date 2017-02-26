@@ -1,5 +1,5 @@
 from openerp.osv import fields, osv
-
+import time 
 # atm details class
 
 class atm_details(osv.osv):
