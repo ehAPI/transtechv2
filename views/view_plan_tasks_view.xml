@@ -79,11 +79,11 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence="4"/>
+		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence="12"/>
 		
 		<!-- menu item -->
 
-		<menuitem name="View &amp; Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="1" groups="group_atm_user,group_atm_manager"/>
+		<menuitem name="View &amp; Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="13" groups="group_atm_user,group_atm_manager"/>
 
 
 	</data>

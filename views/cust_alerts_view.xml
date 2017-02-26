@@ -69,10 +69,10 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" sequence="5"/>
+		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" sequence="15"/>
 		
 		<!-- menu item -->
-		<menuitem name="Customer Alerts" parent="alerts" id="cust_alerts" action="action_cust_alerts_form" sequence="1" groups="group_atm_manager,group_atm_customer"/>
+		<menuitem name="Customer Alerts" parent="alerts" id="cust_alerts" action="action_cust_alerts_form" sequence="16" groups="group_atm_manager,group_atm_customer"/>
 
 
 	</data>

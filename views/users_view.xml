@@ -85,9 +85,9 @@
 
 <!-- groups='group_atm_manager' -->
 
-		<menuitem  id="transtech_user_management" name="User Management" parent="admin_setup" groups="group_atm_manager"/>	
+		<menuitem  id="transtech_user_management" name="User Management" parent="admin_setup" groups="group_atm_manager" sequence="22"/>	
 
-		<menuitem action="base.action_res_users" id="action_res_users"  parent="transtech_user_management" sequence="2"/>
+		<menuitem action="base.action_res_users" id="action_res_users"  parent="transtech_user_management" sequence="24"/>
 
         <record id="view_atm_group_tree" model="ir.ui.view">
 			<field name="name">Group Tree</field>
@@ -114,7 +114,7 @@
        		</field>
 		</record>
 
-		<menuitem action="base.action_res_groups" id="action_res_groups"  parent="transtech_user_management" sequence="1"/>
+		<menuitem action="base.action_res_groups" id="action_res_groups"  parent="transtech_user_management" sequence="23"/>
 
      </data>
 </openerp>

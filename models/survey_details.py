@@ -170,11 +170,19 @@ class survey_details(osv.osv):
 			'image8_a':fields.binary('image8',filters='*.png,*.gif', widget = 'image'),
 
 
-	}
-        _order = "visit_time desc"
-    	_defaults = {
-    	    'visit_time': lambda * a: time.strftime('%Y-%m-%d %H:%M:%S'),
-	        'status': 'waiting_approval'
-    	}
+		}
 
+        _order = "visit_time desc"
+
+	_defaults={
+
+        'status': 'waiting_approval',
+        'visit_time': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+
+        }
+
+	def status_approve(self,cr,uid,ids,context=None):
+		self.write(cr,uid,ids,{'status':'approved'},context=context)
+		return True   
+		
 survey_details()

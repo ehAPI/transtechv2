@@ -9,7 +9,8 @@
 		    <field name="arch" type="xml">
 			<form string="Survey Details" version="8.0">
 				<header>
-				
+					<button name="status_cancel" type="object" String="Cancel" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+
 					<field name="status" widget="statusbar" statusbar_visible="assigned,cancel"/> 
 
 				</header>
@@ -83,10 +84,10 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence = "4"/>
+		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management"/>
 		
 		<!-- menu item -->
-		<menuitem name="Schedule Tasks" parent="tasks_management_menu" id="schedule_tasks_menu_mainform" action="action_schedule_tasks_form" sequence="2" groups="group_atm_user,group_atm_manager"/>
+		<menuitem name="Schedule Tasks" parent="tasks_management_menu" id="schedule_tasks_menu_mainform" action="action_schedule_tasks_form" sequence="14" groups="group_atm_user,group_atm_manager"/>
 
 	</data>
 </openerp>
