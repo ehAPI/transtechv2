@@ -66,7 +66,7 @@ class atm_details(osv.osv):
 		return cid[0]
 
 	_defaults = {
-		'date': lambda *a: time.strftime('%Y-%m-%d'),
+		# 'date': lambda *a: time.strftime('%Y-%m-%d'),
 		'country':_default_country,
 	}
 	_order = 'atm_code'
