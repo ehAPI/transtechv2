@@ -12,6 +12,7 @@
 					<field name='atm'/>
 					<field name='priority'/>
 					<field name='summary'/>
+					<field name='status'/>
 					<field name='assigned_to'/>
 					<field name='category'/>
 				</tree>
