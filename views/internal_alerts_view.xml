@@ -12,6 +12,7 @@
 					<field name='atm'/>
 					<field name='priority'/>
 					<field name='summary'/>
+					<field name='status'/>
 					<field name='assigned_to'/>
 					<field name='category'/>
 				</tree>
@@ -64,10 +65,10 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" sequence="5"/>
+		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" />
 		
 		<!-- menu item -->
-		<menuitem name="Internal Alerts" parent="alerts" id="internal_alerts" action="action_internal_alerts_form" sequence="2" groups="group_atm_user,group_atm_manager"/>
+		<menuitem name="Internal Alerts" parent="alerts" id="internal_alerts" action="action_internal_alerts_form" sequence="17" groups="group_atm_user,group_atm_manager"/>
 
 	</data>
 </openerp>

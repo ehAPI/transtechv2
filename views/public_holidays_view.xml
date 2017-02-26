@@ -45,9 +45,9 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management" sequence="6"/>
+		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management" sequence="17"/>
 		
 		<!-- menu item -->
-		<menuitem name="Public Holidays" parent="admin_setup" id="public_holidays_menu_mainform" action="action_public_holidays_form" sequence="1"/>
+		<menuitem name="Public Holidays" parent="admin_setup" id="public_holidays_menu_mainform" action="action_public_holidays_form" sequence="18"/>
 	</data>
 </openerp>

@@ -83,10 +83,10 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management" sequence="3"/>
+		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management" sequence="8"/>
 		
 		<!-- menu item -->
-		<menuitem name="Site Inspection Form" parent="survey_details_menu" id="site_inspection_menu_mainform" action="action_site_form" sequence="1" groups="group_atm_manager"/>
+		<menuitem name="Site Inspection Form" parent="survey_details_menu" id="site_inspection_menu_mainform" action="action_site_form" sequence="9" groups="group_atm_manager"/>
 
 	</data>
 </openerp>

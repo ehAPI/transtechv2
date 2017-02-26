@@ -174,9 +174,6 @@ class survey_details(osv.osv):
 
         _order = "visit_time desc"
 
-    	# _defaults = {
-    	#     'visit_time': lambda * a: time.strftime('%Y-%m-%d %H:%M:%S')
-    	# }
 
 
 	_defaults={

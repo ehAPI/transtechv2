@@ -39,9 +39,9 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management" sequence="6"/>
+		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management"/>
 		
 		<!-- menu item -->
-		<menuitem name="Manage Remark Category" parent="admin_setup" id="remark_category_menu_mainform" action="action_remark_category_form" sequence="4" groups="group_atm_manager"/>
+		<menuitem name="Manage Remark Category" parent="admin_setup" id="remark_category_menu_mainform" action="action_remark_category_form" sequence="21" groups="group_atm_manager"/>
 	</data>
 </openerp>
