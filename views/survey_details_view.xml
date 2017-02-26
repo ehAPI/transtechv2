@@ -9,9 +9,28 @@
 		    <field name="arch" type="xml">
 				<form string="Survey Details" version="8.0">
 					<header>
-						<button name="%(action_pics_survey_wizard)d" string="Upload Images" type="action" class="oe_highlight"/>
-						<field name="status" widget="statusbar" statusbar_visible="waiting_approval,approved"/>
+					<header>
+
+						<button name="status_approve" string="Approve" type="object" class="oe_highlight"/>
+
+						<field name="status" widget="statusbar" 
+	                     	statusbar_visible="waiting_approval,approved"/>
+
 					</header>
+
+					<header>	
+	
+						<button name="%(action_pics_survey_wizard)d" string="Upload Images" type="action" class="oe_highlight"/>
+					</header>
+				
+					
+<!-- 
+	                    <button name="status_approve" type="object" String="Approve" groups="atm.group_atm_manager, atm.group_atm_user"  
+	                     attrs="{'invisible':[('status','in',('waiting_approval','approved'))]}" 
+	                     class="oe_highlight"/> -->
+
+				</header>
+
 					<sheet>
 						<group>
 							<group>
@@ -147,6 +166,7 @@
 				<field name="acc_manager"/>
 
 				<field name="visit_time"/>
+				<field name="status"/>
 			</tree>
 			</field>
 		</record>
