@@ -161,10 +161,10 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management" sequence = "3"/>
+		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management"/>
 		
 		<!-- menu item -->
-		<menuitem name="Survey Details" parent="survey_details_menu" id="survey_details_menu_mainform" action="action_survey_form" sequence = "2"/>
+		<menuitem name="Survey Details" parent="survey_details_menu" id="survey_details_menu_mainform" action="action_survey_form" sequence = "10"/>
 
 	</data>
 </openerp>
