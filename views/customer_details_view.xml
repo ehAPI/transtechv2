@@ -86,10 +86,10 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Customer/ATM Setup" id="cust_atm_setup" parent="atm_survey_management" sequence="5"/>
+		<menuitem name="Customer/ATM Setup" id="cust_atm_setup" parent="atm_survey_management" />
 		
 		<!-- menu item -->
-		<menuitem name="Customer Details" parent="cust_atm_setup" id="cust_details_menu_mainform1" action="action_cust_details_form" sequence="16"/>
+		<menuitem name="Customer Details" parent="cust_atm_setup" id="cust_details_menu_mainform1" action="action_cust_details_form" sequence="4"/>
 
 	</data>
 </openerp>
