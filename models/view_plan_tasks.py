@@ -45,7 +45,7 @@ class view_plan_tasks(osv.osv):
 				('13_times','13 times'),
 				('16_times','16 times')],'Visit Type'),
 			'visit_details':fields.char('Visit Details',readonly=True),
-			
+			'assigned_by':fields.many2one('res.users','Assigned By' ,readonly=True),
 			'remarks_category' : fields.many2one('remarks.category','Remarks Category'),
 			'remarks':fields.text('Remarks'),
 			'act_date_time':fields.datetime('Actual Date Time'),

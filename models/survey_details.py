@@ -174,8 +174,6 @@ class survey_details(osv.osv):
 
         _order = "visit_time desc"
 
-
-
 	_defaults={
 
         'status': 'waiting_approval',
@@ -186,6 +184,5 @@ class survey_details(osv.osv):
 	def status_approve(self,cr,uid,ids,context=None):
 		self.write(cr,uid,ids,{'status':'approved'},context=context)
 		return True   
-
-
+		
 survey_details()

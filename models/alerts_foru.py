@@ -5,7 +5,7 @@ class Alerts_for_you(osv.osv):
 	_name = 'alerts.dashboard'
 
 	_columns = {
-		'name':fields.char('Alert ID'),
+		'names':fields.char('Alert ID'),
 		'customer':fields.many2one('customer.info','Customer'),
 		'created_by':fields.many2one('res.users','Created By'),
 		'atm_id':fields.many2one('atm.info','ATM'),

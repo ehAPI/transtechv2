@@ -1,4 +1,5 @@
 from openerp.osv import fields, osv
+import time
 
 import time
 
@@ -84,5 +85,6 @@ class atm_old(osv.osv):
 				'longitude':fields.char('Longitude'),
 				'latitude':fields.char('Latitude'),
 				'date':fields.date('Date'),
-				'name':fields.char('ATM Branch Details')
+				'name':fields.char('ATM Branch Details'),
 				}
+

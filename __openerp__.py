@@ -4,7 +4,7 @@
 	"author":"ehAPI Technologies LLC",
 	"website":"http://www.techanipr.com",
 	"category":"Tools",
-	"depends":["base"],
+	"depends":["base",'board'],
 	"description":"Transtech ATM Survey Management",
 
 	"data": ["wizard/atm_move_view.xml",
