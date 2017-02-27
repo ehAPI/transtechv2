@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="public_holidays_tree_view">
+			<field name="name">public.holidays.tree</field>
+			<field name="model">public.holidays</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Public Holidays">
+					<field name='cal_year'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="public_holidays_form_view">
+			<field name="name">public.holidays.form</field>
+			<field name="model">public.holidays</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Public Holidays">
+					<group>
+						<field name='cal_year'/>
+					</group>
+					<newline/>
+					<h2>Public Holidays</h2>
+					<field name='public_holiday'>
+						<tree string='Public Holidays' editable='bottom'>
+							<field name='date'/>
+							<field name='name'/>
+							<field name='date_may_change'/>
+						</tree>
+					</field>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_public_holidays_form">
+			<field name="name">Public Holidays</field>
+			<field name="res_model">public.holidays</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management" sequence="17"/>
+		
+		<!-- menu item -->
+		<menuitem name="Public Holidays" parent="admin_setup" id="public_holidays_menu_mainform" action="action_public_holidays_form" sequence="18"/>
+	</data>
+</openerp>

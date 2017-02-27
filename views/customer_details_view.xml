@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="cust_details_tree_view1">
+			<field name="name">customer.info.tree</field>
+			<field name="model">customer.info</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Customer Details">
+					<field name='cust_code'/>
+					<field name='cust_name'/>
+					<field name='country'/>
+					<field name='cont_per'/>
+					<field name='cont_no'/>
+					<field name='active'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="cust_details_form_view">
+			<field name="name">customer.info.form</field>
+			<field name="model">customer.info</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Customer Details">
+					<sheet>
+						<div>
+							<field name="cust_image" widget='image' class='oe_left oe_avatar'/>
+						</div>
+						<div class='oe_title'>
+							<h2>
+	                            <field name="cust_code" string='Customer Code'/>
+	                            <field name="cust_name" string='Customer Name' placeholder='Customer Name'/>
+						    </h2>
+						</div>
+						<group>
+							<group>
+								<field name='address'/>
+								<field name='country'/>
+								<field name='cont_per' widget='email'/>
+								<field name='cont_per_e1' widget='email'/>
+								<field name='cont_per_e2' widget='email'/>
+								<field name='cont_per_e3' widget='email'/>
+								<field name='cont_no'/>
+								<field name='active'/>
+								<field name='sla_start_date'/>
+								<field name='sla_end_date'/>
+							</group>
+							<group string='Escalation Levels'>
+								<field name='acc_manager'/>
+								<field name='other1'/>
+								<field name='other2'/>
+							</group>
+						</group>
+						<!-- <notebook>
+							<page string='List of Tasks for You'>
+								<tree string='ATM Surveys tree'>
+									<field name='cust_name'/>
+									<field name='country'/>
+								</tree>
+							</page>
+						</notebook> -->
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="date_rate_tree_view">
+			<field name="name">date.rate.form</field>
+			<field name="model">date.rate</field>
+			<field name="arch" type="xml">
+				<tree string="Other Rates" editable='bottom'>
+						<field name='dates'/>
+						<field name='rates'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_cust_details_form">
+			<field name="name">Customer Details</field>
+			<field name="res_model">customer.info</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Customer/ATM Setup" id="cust_atm_setup" parent="atm_survey_management" sequence="5"/>
+		
+		<!-- menu item -->
+		<menuitem name="Customer Details" parent="cust_atm_setup" id="cust_details_menu_mainform1" action="action_cust_details_form" sequence="16"/>
+
+	</data>
+</openerp>

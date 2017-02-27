@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+
+			<record model="ir.ui.view" id="alerts_dashboard_tree">
+				<field name="name">alerts.dashboard.tree</field>
+				<field name="model">alerts.dashboard</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="Alert Information">
+						<field name="name"/>
+						<field name="customer"/>
+						<field name="atm_id"/>
+						<field name="priority"/>
+						<field name="summary"/>
+						<field name="status"/>
+						<field name="category"/>
+					</tree>
+				</field>
+			</record>
+	
+			<record model="ir.ui.view" id="alerts_dashboard_form">
+				<field name="name">alerts.dashboard.form</field>
+				<field name="model">alerts.dashboard</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="Alert Details">
+						<header>
+						<button name="status_resolve" type="object" String="Resolve" class="oe_highlight"/>
+						<button name="status_close" type="object" String="Close"  class="oe_highlight"/>
+						<field name="status" widget="statusbar" statusbar_visible="assigned,resolved,closed"/> 
+						</header>
+						<sheet>
+							<group>
+								<group>
+									<field name="name" readonly="1"/>
+									<field name="customer" required="1"/>
+									<field name="created_by"/>
+									<field name="atm_id" required="1"/>
+									<field name="category" required="1"/>
+									<field name="priority" required="1"/>
+									<field name="country_id" />
+									<field name="state_id" />
+									<field name="assign_to"/>
+								</group>
+								<group string="Alert Categorization Details">
+									<field name="reason_id"/>
+									<field name="reason_disc"/>
+								</group>
+								<group string="Summary &amp; Description">
+									<field name="summary" />
+									<field name="description"/>
+								</group>
+							</group>
+						</sheet>
+					</form>
+				</field>
+			</record>
+
+			<record model='ir.actions.act_window' id='alerts_dashboard_action'>
+				<field name="name">Tasks in Queue</field>
+				<field name='res_model'>alerts.dashboard</field>
+				<field name="view_mode">tree,form</field>
+			</record>
+
+			<!-- Top menu -->
+			<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+			<!-- sub menu -->
+			<menuitem name="ATM Dashboard" id="atm_dashboard" parent="atm_survey_management"/>
+			 
+
+			<menuitem name="Alerts for You" parent='atm_dashboard' id='alerts_dashboard_left' action='alerts_dashboard_action' sequence="3"/>
+		
+
+
+			
+
+		</data>
+	</openerp>
+		

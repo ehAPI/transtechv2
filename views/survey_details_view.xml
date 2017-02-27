@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="view_atm_survey_details_form"> 
+		    <field name="name">survey.details.form</field>
+		    <field name="model">survey.details</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+				<form string="Survey Details" version="8.0">
+					<header>
+					<header>
+
+						<button name="status_approve" string="Approve" type="object" class="oe_highlight"/>
+
+						<field name="status" widget="statusbar" 
+	                     	statusbar_visible="waiting_approval,approved"/>
+
+					</header>
+
+					<header>	
+	
+						<button name="%(action_pics_survey_wizard)d" string="Upload Images" type="action" class="oe_highlight"/>
+					</header>
+				
+					
+<!-- 
+	                    <button name="status_approve" type="object" String="Approve" groups="atm.group_atm_manager, atm.group_atm_user"  
+	                     attrs="{'invisible':[('status','in',('waiting_approval','approved'))]}" 
+	                     class="oe_highlight"/> -->
+
+				</header>
+
+					<sheet>
+						<group>
+							<group>
+							<field name="name"/>
+							<field name="atm_report"/>
+							<field name="month"/>
+							<field name="remarks_category"/>
+							<field name="atm"/>
+							<field name="customer_name"/>
+							<field name="acc_manager"/>
+							<field name="visit_time"/>
+							<field name="current_longitude"/>
+							<field name= "current_latitude"/>
+							<field name="next_survey_distance"/>
+							<field name="next_task_id"/>
+							<field name="state"/>
+						    </group>
+							<div>
+								<group string='Before Survey'>
+									<field name="image1_b" widget='image'/>
+									<field name="image2_b" widget='image'/>
+									<field name="image3_b" widget='image'/>
+									<field name="image4_b" widget='image'/>
+									<field name="image5_b" widget='image'/>
+									<field name="image6_b" widget='image'/>
+									<field name="image7_b" widget='image'/>
+									<field name="image8_b" widget='image'/>
+								</group>
+								<group string='After Survey'>
+									<field name="image1_a" widget='image'/>
+									<field name="image2_a" widget='image'/>
+									<field name="image3_a" widget='image'/>
+									<field name="image4_a" widget='image'/>
+									<field name="image5_a" widget='image'/>
+									<field name="image6_a" widget='image'/>
+									<field name="image7_a" widget='image'/>
+									<field name="image8_a" widget='image'/>
+								</group>
+							</div>
+						</group>
+						<notebook>
+							<page string='Checklist for ATM XP'>
+								<group>
+									<group>
+										<field name="no_comments"/>
+										<field name="col_cash"/>
+										<field name="col_receipt"/>
+										<field name="ins_card"/>
+										<field name="ins_cheq"/>
+									</group>
+
+									<group>
+										<field name="ins_cash"/>
+										<field name="network_sticker"/>
+										<field name="instruction_sticker"/>
+										<field name="vault_branding"/>
+										<field name="terminal_id"/>
+									</group>
+
+									<group>
+										<field name="cables"/>
+										<field name="trash"/>
+										<field name="mach"/>
+									</group>
+									<group> 
+										<field name="spot_lights"/>
+										<field name="machine_surround"/>
+										<field name="canopy"/>
+									</group>
+									<group>
+
+										<field name="card_pic"/>
+										<field name="trans_receipt"/>
+										<field name="do_dont"/>
+										<field name="cash_deposit"/>
+										<field name="touch_errors"/>
+										<field name="screen"/>
+										<field name="ac_issues"/>
+									</group>
+
+									<group>
+										<field name="pin_guard"/>
+										<field name="privacy_flap"/>
+										<field name="kiosk_door"/>
+										<field name="kiosk_lights"/>
+										<field name="fascia_light"/>
+										<field name="boom_sign"/>
+										
+									</group>
+									<group>
+
+										<field name="surround_locks"/>
+										<field name="lights"/>
+										<field name="sec_cam"/>
+										<field name="out_cont"/>
+										<field name="card_reader"/>
+										<field name="side_frames"/>
+										<field name="atm_vault"/>
+										<field name="ded"/>
+										<field name="atm_notices"/>
+										<field name="keypad"/>
+										<field name="atm_status"/>
+									</group>
+								</group>
+								<group>
+									<field name="trashbin_repairs"/>
+									<field name="ttw_branding"/>
+									<field name="protective_box"/>
+									<field name="machine_cam"/>
+									<field name="fascia"/>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_atm_survey_details_tree"> 
+		    <field name="name">survey.details.tree</field>
+		    <field name="model">survey.details</field>
+		    <field name="type">tree</field>
+		    <field name="arch" type="xml">
+			<tree string="Survey Details" version="8.0">
+				<field name="name"/>
+				<field name="atm_report"/>
+				<field name="month"/>
+				
+				<field name="atm"/>
+				<field name="state"/>
+
+				<field name="customer_name"/>
+				<field name="acc_manager"/>
+
+				<field name="visit_time"/>
+				<field name="status"/>
+			</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_survey_form">
+			<field name="name">Survey Details</field>
+			<field name="res_model">survey.details</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management"/>
+		
+		<!-- menu item -->
+		<menuitem name="Survey Details" parent="survey_details_menu" id="survey_details_menu_mainform" action="action_survey_form" sequence = "10"/>
+
+	</data>
+</openerp>
+
+						

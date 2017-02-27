@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [![Build Status](http://runbot.odoo.com/runbot/badge/flat/1/8.0.svg)](http://runbot.odoo.com/runbot)
 [![Tech Doc](http://img.shields.io/badge/8.0-docs-8f8f8f.svg?style=flat)](http://www.odoo.com/documentation/8.0) 
 [![Help](http://img.shields.io/badge/8.0-help-8f8f8f.svg?style=flat)](https://www.odoo.com/forum/help-1)
@@ -37,3 +38,7 @@ To fetch odoo merge pull requests refs use this command:
 
     $ ./odoo.py setup_git_review
 
+=======
+# transtechv2
+Transtech Odoo
+>>>>>>> c81037817cdd10b621aa0c7973d9c2dda6f99729

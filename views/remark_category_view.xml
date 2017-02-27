@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="remark_category_tree_view">
+			<field name="name">remark.category.tree</field>
+			<field name="model">remark.category</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Manage Remark Category">
+					<field name='remark_category_id'/>
+					<field name='remark_description'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="remark_category_form_view">
+			<field name="name">remark.category.form</field>
+			<field name="model">remark.category</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Manage Remark Category">
+					<group>
+						<field name='remark_category_id'/>
+						<newline/>
+						<field name='remark_description'/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_remark_category_form">
+			<field name="name">Manage Remark Category</field>
+			<field name="res_model">remark.category</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management"/>
+		
+		<!-- menu item -->
+		<menuitem name="Manage Remark Category" parent="admin_setup" id="remark_category_menu_mainform" action="action_remark_category_form" sequence="21" groups="group_atm_manager"/>
+	</data>
+</openerp>

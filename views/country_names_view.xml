@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="country_names_form_view">
+			<field name="name">country.names.form</field>
+			<field name="model">country.names</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Country">
+					<field name='country_name'/>
+					<field name='country_code'/>
+					<field name='currency_id' action='action_country_currency_form'/>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_country_names_form">
+			<field name="name">Country</field>
+			<field name="res_model">country.names</field>
+			<field name="view_mode">form</field>
+		</record>
+		
+	</data>
+</openerp>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="view_atm_view_plan_tasks_form"> 
+		    <field name="name">view.plan.tasks.form</field>
+		    <field name="model">view.plan.tasks</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+			<form string="Survey Details" version="8.0">
+				<header>
+					<button name="status_done" type="object" String="Done" class="oe_highlight" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+					<button name="status_cancel" type="object" String="Cancel" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+					<field name="status" widget='statusbar' statusbar_visible='assigned,pending,cancel,progress,waiting_approve,done'/>
+				</header>
+				<sheet>
+					<group>
+						<group>
+				
+							<field name="name"/>
+							<field name="month"/>
+							<field name="customer_name"/>
+							<field name="state"/>
+							<field name="atm"/>
+
+							<field name="visit_shift"/>
+							<field name="country"/>
+							<field name="surveyor"/>
+							<field name="visit_date_time"/>
+							<field name= "add_instr"/>
+							<field name="bulk_insert"/>
+							<field name="visit_type"/>
+						</group>
+						<group string='Visit Details'>
+							<field name="remarks_category"/>
+							<field name="remarks"/>
+							<field name="act_date_time"/>
+						</group>
+
+						
+					</group>
+				</sheet>
+			</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_atm_view_plan_tasks_tree"> 
+		    <field name="name">view.plan.tasks.tree</field>
+		    <field name="model">view.plan.tasks</field>
+		    <field name="type">tree</field>
+		    <field name="arch" type="xml">
+			<tree string="Survey Details" version="8.0">
+					
+							<field name="name"/>
+							<field name="month"/>
+						    <field name="customer_name"/>
+						    <field name="atm"/>
+
+
+						    <field name="country"/>
+						    <field name="state"/>
+						    <field name="surveyor"/>
+
+							<field name="visit_date_time"/>
+							<field name= "add_instr"/>
+							<field name="status"/>
+						
+			</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_view_plan_tasks_form">
+			<field name="name">View &amp; Plan Tasks</field>
+			<field name="res_model">view.plan.tasks</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence="12"/>
+		
+		<!-- menu item -->
+
+		<menuitem name="View &amp; Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="13" groups="group_atm_user,group_atm_manager"/>
+
+
+	</data>
+</openerp>
+
+						
