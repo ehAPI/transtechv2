@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+	
+			<!-- <record model="ir.ui.view" id="tasks_inqueue_form">
+				<field name="name">tasks.queue.form</field>
+				<field name="model">tasks.queue</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="ATM Surverys form">	
+						<header>
+							<button name="status_done" type="object" String="Done" class="oe_highlight"  attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+							<button name="status_cancel" type="object" String="Cancel" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+							<field name="status" widget="statusbar" statusbar_visible="assigned,pending,cancel,progress,waitnig_approve,done"/> 
+			
+							<button name="create_task" type="object" String="Test"/>
+						</header>
+						<sheet>
+							<group>
+								<group>
+									<field name="name" readonly="1"/>
+									<field name="task_month" />
+									<field name="customer" required="1"/>
+									<field name="state" required="1"/>
+									<field name="atm" />
+									<field name='visit_shift' required="1"/>
+									<field name="country" required="1"/>
+									<field name="surveyor" required="1"/>
+									<field name="visit_time" required="1"/>
+									<field name="additional_info"/>
+									<field name="status" />
+									<field name="bulk_insert" />
+								
+									<field name="visit_type" />
+								</group>
+								<group string="Visit Details" >
+									<field name="remarks_id" />
+									<field name="remarks" />
+									<field name="act_visit_time"/>
+								</group>
+							
+							</group>
+						</sheet>
+				
+					</form>
+				</field>
+			</record> -->
+
+			<!-- <record model="ir.ui.view" id="tasks_inqueue_tree">
+				<field name="name">tasks.queue.tree</field>
+				<field name="model">tasks.queue</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="ATM Surveys tree" colors="red:status=='cancel';blue:status=='done'">
+						<field name="name" />
+						<field name="task_month" />
+						<field name="customer"/>
+						<field name="atm"/>
+						<field name="country"/>
+						<field name="state" />
+						<field name="surveyor"/>
+						<field name="visit_time"/>
+						<field name="additional_info"/>
+						<field name="assigned_by"/>
+						<field name="status"/>
+					</tree>
+				</field>
+			</record> -->
+
+
+			<!-- <record model='ir.actions.act_window' id='tasks_inqueue_action'>
+				<field name="name">Tasks in Queue</field>
+				<field name='res_model'>tasks.queue</field>
+				<field name="view_mode">tree,form</field>
+			</record> -->
+
+	        <record id="view_task_dashboard_tree" model="ir.ui.view">
+	            <field name="name">atm.task.tree</field>
+	            <field name="model">view.plan.tasks</field>
+	            <field eval="50" name="priority"/>
+	            <field name="arch" type="xml">
+	                <tree string="ATM Task Tree">
+	                    <field name="name"/>
+					    <field name="month" />
+	                    <field name="customer_name"/>
+	                    <field name="atm"/>
+	                    <field name="country"/>
+	                    <field name="state" />
+	                    <field name="surveyor" />
+	                    <field name="visit_date_time"/>
+	                    <field name="add_instr"/>
+	                    <field name="assigned_by"/>
+	                    <field name="status"/>
+	                </tree>
+	            </field>
+	        </record>
+
+			<record id="my_open_atm_tasks_action" model="ir.actions.act_window">
+			    <field name="name">Tasks in Queue</field>
+			    <field name="res_model">view.plan.tasks</field>
+			    <field name="view_type">form</field>
+			    <field name="limit">80</field>
+			    <field name="view_mode">tree,form</field>
+			    <field name="domain">['|',('surveyor','=',uid),('assigned_by','=',uid),('status','in',('assigned','progress','pending'))]</field>
+			    <field name="view_id" ref="view_task_dashboard_tree"/>
+			</record>
+
+			<record id="board_atm_form" model="ir.ui.view">
+			    <field name="name">board.atm.form</field>
+			    <field name="model">board.board</field>
+			    <field name="arch" type="xml">
+			        <form string="My Board ATM" version="7.0">
+			            <board style="2-1">
+			                <column>
+			                    <action name="%(my_open_atm_tasks_action)d" string="Tasks in Queue"/>
+			                </column>
+			            </board>
+			        </form>
+			    </field>
+			</record>
+
+	        <record id="open_board_atm" model="ir.actions.act_window">
+	            <field name="name">Tasks in Queue</field>
+	            <field name="res_model">board.board</field>
+	            <field name="view_type">form</field>
+			    <field name="limit">80</field>
+	            <field name="view_mode">form</field>
+	            <field name="usage">menu</field>
+	            <field name="view_id" ref="board_atm_form"/>
+	        </record>
+			 
+			<menuitem id="atm_survey_management" name="ATM Survey Management"/>
+
+			<menuitem id="atm_dashboard" name="ATM Dashboard" parent="atm_survey_management" sequence="1"/>
+
+			<menuitem id="menu_atm_task_dashboard" sequence="1" parent="atm_dashboard" action="open_board_atm"/>
+
+			<!-- <menuitem name="Tasks in Queue" parent='atm_dashboard' id='vehicles_menu_id' sequence="2" action='tasks_inqueue_action' /> -->
+
+		</data>
+	</openerp>
+		
