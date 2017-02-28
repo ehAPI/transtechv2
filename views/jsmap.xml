@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="unique_template_id" name="String value" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/atm/static/src/js/gmap.js"></script>
+
+                <link rel="stylesheet" href="/atm/static/src/css/gmap.css"/>
+ 
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh2fW4YfEesHtvzykhLBvQbSu8QtlxLE4&amp;callback=initMap"></script>
+		<!--These links will be called when loading your Odoo -->
+                <!-- <link rel="stylesheet" href="/atm/static/src/css/gmap.css"/> -->
+
+
+            </xpath>
+        </template>
+    </data>
+</openerp>
+
