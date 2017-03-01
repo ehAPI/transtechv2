@@ -1,4 +1,7 @@
 from openerp.osv import fields, osv
+
+import time
+
 from openerp.tools.translate import _
 import datetime
 import time
@@ -41,7 +44,9 @@ class atm_details(osv.osv):
 	'atm_make' :fields.char('ATM Make'),
 	'atm_functionality' :fields.char('ATM Functionality'),
 	'base_height' :fields.char('Base Height'),
+
 	'no_tasks':fields.integer('No. of Tasks',readonly=True),
+
 	'location_category' :fields.selection([('offsite','Offsite'),('onsite','Onsite')],'Location Category'),
 	'onsite_category' :fields.selection([('branch','Branch'),
 										 ('csu','CSU'),

@@ -30,7 +30,9 @@
 			 "views/reason_code_setup_view.xml",
 			 "views/state_setup_view.xml",
 			 "security/ir.model.access.csv",
-			 "views/remark_category_view.xml"],
+
+			 "views/remark_category_view.xml",
+			 "data/mail_data.xml"],
 
     'qweb': ['static/src/xml/base.xml',],
 

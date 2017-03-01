@@ -50,11 +50,16 @@
 									<field name='sic'/>
 								</group>
 							</page>
+
+
 							<!-- <page string='Mapping'>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 								<group>
 									<field name='longitude'/>
 									<field name='latitude'/>
 								</group>
+<<<<<<< HEAD
+=======
 							</page> -->
 							<page string="Mapping">
 								<table border="0" cellpadding="0" cellspacing="0">
