@@ -57,8 +57,7 @@ class cust_alerts(osv.osv):
 		'status':'assigned',
 		'country_id':_default_country,
 		'customer':_default_customer,
-         	
-	}
+   	}
 
 	_order = "alert_id desc"
 
@@ -109,38 +108,38 @@ class cust_alerts(osv.osv):
 
 		return True
 
-    def action_alert_send(self, cr, uid, ids, context=None):
-        # assert len(ids) == 1, 'This option should only be used for a single id at a time.'
-		text = ('<p><h2>Dear %s,</h2><p><p>An error alert is recorded in TransTech portal. Details are as follows:</p><p><b>Alert Category</b>: %s</p><p><b>Priority</b>: %s</p><p><b>ATM Location</b>: %s</p><p><b>ATM ID</b>: %s</p><p><b>Subject</b>: %s</p>\n <p><b>Description</b>: %s</p>\n Thanks')%(customer_id.cust_name,str(alert_obj.category).title(),str(alert_obj.priority).title(),affectedATM.atm_branch_details,affectedATM.bank_atm_id,alert_obj.summary,alert_obj.description)
-        ir_model_data = self.pool.get('ir.model.data')
-        try:
-            template_id = ir_model_data.get_object_reference(cr, uid, 'atm', text)[1]
-        except ValueError:
-            template_id = False
-        try:
-            compose_form_id = ir_model_data.get_object_reference(cr, uid, 'mail', 'email_compose_message_wizard_form')[1]
-        except ValueError:
-            compose_form_id = False 
-        ctx = dict()
-        ctx.update({
-            'default_model': 'cust.alerts',
-            'default_res_id': ids[0],
-            'default_use_template': bool(template_id),
-            'default_template_id': template_id,
-            'default_composition_mode': 'summary',
-            # 'default_composition_mode': 'comment',
-            'mark_so_as_sent': True
-        })
-        return {
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'mail.compose.message',
-            'views': [(compose_form_id, 'form')],
-            'view_id': compose_form_id,
-            'target': 'new',
-            'context': ctx,
-        }
+	# def action_alert_send(self, cr, uid, ids, context=None):
+	# 	# assert len(ids) == 1, 'This option should only be used for a single id at a time.'
+ #    	text = ('<p><h2>Dear %s,</h2><p><p>An error alert is recorded in TransTech portal. Details are as follows:</p><p><b>Alert Category</b>: %s</p><p><b>Priority</b>: %s</p><p><b>ATM Location</b>: %s</p><p><b>ATM ID</b>: %s</p><p><b>Subject</b>: %s</p>\n <p><b>Description</b>: %s</p>\n Thanks')%(customer_id.cust_name,str(alert_obj.category).title(),str(alert_obj.priority).title(),affectedATM.atm_branch_details,affectedATM.bank_atm_id,alert_obj.summary,alert_obj.description)
+ #    	ir_model_data = self.pool.get('ir.model.data')
+ #    	try:
+ #    		template_id = ir_model_data.get_object_reference(cr, uid, 'atm', text)[1]
+ #    	except ValueError:
+ #    		template_id = False
+ #    		try:
+ #            compose_form_id = ir_model_data.get_object_reference(cr, uid, 'mail', 'email_compose_message_wizard_form')[1]
+ #        except ValueError:
+ #            compose_form_id = False 
+ #        ctx = dict()
+ #        ctx.update({
+ #            'default_model': 'cust.alerts',
+ #            'default_res_id': ids[0],
+ #            'default_use_template': bool(template_id),
+ #            'default_template_id': template_id,
+ #            'default_composition_mode': 'summary',
+ #            # 'default_composition_mode': 'comment',
+ #            'mark_so_as_sent': True
+ #        })
+ #        return {
+ #            'type': 'ir.actions.act_window',
+ #            'view_type': 'form',
+ #            'view_mode': 'form',
+ #            'res_model': 'mail.compose.message',
+ #            'views': [(compose_form_id, 'form')],
+ #            'view_id': compose_form_id,
+ #            'target': 'new',
+ #            'context': ctx,
+ #        }
 
 	def send_alert_invitation_teamleader(self,cr,uid,ids,context=None):
 		alert_obj = self.browse(cr,uid,ids,context=None)[0]
