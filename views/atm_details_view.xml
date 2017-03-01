@@ -50,9 +50,8 @@
 									<field name='sic'/>
 								</group>
 							</page>
-<<<<<<< HEAD
-							<page string='Mapping'>
-=======
+
+
 							<!-- <page string='Mapping'>
 >>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 								<group>
@@ -85,7 +84,6 @@
 								<group>
 									<field name="no_tasks" groups="atm.group_atm_manager"/>
 								</group>
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 							</page>
 							<page string='ATM Old Locations'>
 								<field name='child_ids'/>

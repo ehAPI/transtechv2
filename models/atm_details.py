@@ -1,16 +1,12 @@
 from openerp.osv import fields, osv
-<<<<<<< HEAD
-import time
 
 import time
 
-=======
 from openerp.tools.translate import _
 import datetime
 import time
 import urllib
 import random
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 
 # atm details class
 
@@ -48,10 +44,9 @@ class atm_details(osv.osv):
 	'atm_make' :fields.char('ATM Make'),
 	'atm_functionality' :fields.char('ATM Functionality'),
 	'base_height' :fields.char('Base Height'),
-<<<<<<< HEAD
-=======
+
 	'no_tasks':fields.integer('No. of Tasks',readonly=True),
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
+
 	'location_category' :fields.selection([('offsite','Offsite'),('onsite','Onsite')],'Location Category'),
 	'onsite_category' :fields.selection([('branch','Branch'),
 										 ('csu','CSU'),
@@ -86,9 +81,6 @@ class atm_details(osv.osv):
 		'country':_default_country,
 	}
 	_order = 'atm_code'
-<<<<<<< HEAD
-	
-=======
 
 	def open_map(self, cr, uid, ids, context=None):
 		address_obj= self.pool.get('atm.details')
@@ -128,7 +120,6 @@ class atm_details(osv.osv):
 			   # //name for contact_id field                     
 				res.append((object.id,object.atm_branch_details+', '+object.bank_atm_id))
 		return res
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 
 atm_details()
 

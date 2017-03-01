@@ -13,11 +13,8 @@
 	         "wizard/upload_images_view.xml",
 			 "views/schedule_tasks_view.xml",
 			 "views/tasks_status_view.xml",
-<<<<<<< HEAD
-=======
 			 "views/jsmap.xml",
 			 # "static/src/xml/base.xml",
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 			 "views/alerts_foru_view.xml",
 			 "views/tasks_inqueue_view.xml",
 			 "security/transtech_atm_updater_security_view.xml",
@@ -33,18 +30,15 @@
 			 "views/reason_code_setup_view.xml",
 			 "views/state_setup_view.xml",
 			 "security/ir.model.access.csv",
-<<<<<<< HEAD
+
 			 "views/remark_category_view.xml",
 			 "data/mail_data.xml"],
-=======
-			 "views/remark_category_view.xml"],
 
     'qweb': ['static/src/xml/base.xml',],
 
 	
           
      
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 	"installable": True
 
 }

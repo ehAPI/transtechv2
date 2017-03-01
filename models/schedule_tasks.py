@@ -1,5 +1,5 @@
 from openerp.osv import fields, osv
-<<<<<<< HEAD
+
 from openerp.tools.translate import _
 import datetime
 import time
@@ -20,19 +20,14 @@ class schedule_tasks(osv.Model):
 
 
 		return result
-=======
 
-class schedule_tasks(osv.osv):
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 
 	_name = 'schedule.tasks'
 	_columns = {
 	        'name':fields.char('Scheduled Task ID', readonly=True),
-<<<<<<< HEAD
+
 	        'customer':fields.many2one('customer.info','Customer',required=True),
-=======
-	        'customer_name':fields.many2one('customer.info','Customer',required=True),
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
+
 			'state' : fields.many2one('res.country.state', 'State', required=True),
 			'atm' : fields.many2one('atm.details', 'ATM', required=True),
 		
@@ -41,21 +36,14 @@ class schedule_tasks(osv.osv):
 				('night','Night')],'Visit Shift',required=True),
 
 			'country' : fields.many2one('res.country','Country',required=True),
-<<<<<<< HEAD
+
 			'surveyor' : fields.many2one('res.users', 'Surveyor', required=True),
 			'visit_date':fields.date('Start Date', required=True),
 			#'customer':fields.many2one('customer.info','Customer Name'),
 			'add_instr':fields.text('Additional instructions'),
 			'bulk_insert' : fields.boolean('Bulk Insert',size=5),
 			'visit_type': fields.selection([
-=======
-			'acc_manager' : fields.many2one('res.users', 'Surveyor', required=True),
-			'start_date':fields.datetime('Start Date', required=True),
-			#'customer':fields.many2one('customer.info','Customer Name'),
-			'add_instr':fields.text('Additional instructions'),
-			'bulk_insert' : fields.boolean('Bulk Insert',size=5),
-			'visit_type/': fields.selection([
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
+
 				('monthly/1','Monthly/1 visit'),
 				('twice','Twice'),
 				('3_times','3 times'),
@@ -73,16 +61,13 @@ class schedule_tasks(osv.osv):
 
             'remarks_category' : fields.many2one('remark.category','Remarks Category'),
 			'remarks':fields.text('Remarks'),
-<<<<<<< HEAD
+
 			'next_exec':fields.date('Next Execution',readonly=True),
 			# 'next_exec':fields.char('Next Execution',readonly=True),
 			# 'no_of_visits':fields.integer('No. of visits per month'),
 		'visits_count':fields.function(__count_visits,type='char',string="No.of visits per Month",method=True, store=True, multi=False),
 
-=======
-			'next_execution':fields.char('Next Execution',readonly=True),
-			'no_of_visits':fields.integer('No. of visits per month'),
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
+
 			'status': fields.selection([
 			('assigned','Assigned'),
 			('cancel', 'Cancelled')],'Status',readonly=True, track_visibility='always')
@@ -94,7 +79,7 @@ class schedule_tasks(osv.osv):
 		return cid[0]
 
 	_defaults = {
-<<<<<<< HEAD
+
 	# 'country':_default_country,
 	'assigned_by': lambda obj, cr, uid, ctx=None: uid,
 	'status':'assigned',
@@ -406,13 +391,6 @@ class schedule_tasks(osv.osv):
 
 		return True
 
-=======
-	'visit_shift':'day',
-	'bulk_insert': True,
-	'status':'assigned'
-	# 'country':_default_country,
-	}
 
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 schedule_tasks	()
 
