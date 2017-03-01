@@ -7,7 +7,11 @@
 		    <field name="model">schedule.tasks</field>
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
-			<form string="Survey Details" version="8.0">
+
+			<form string="Survey Details" >
+
+			<!-- <form string="Survey Details" version="8.0"> -->
+
 				<header>
 					<button name="status_cancel" type="object" String="Cancel" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
 
@@ -20,24 +24,29 @@
 						<group>
 				
 							<field name="name"/>
-							
-							<field name="customer_name"/>
+
+							<field name="customer"/>
+
 							<field name="state"/>
 							<field name="atm"/>
 
 							<field name="visit_shift"/>
 							<field name="country"/>
-							<field name="acc_manager"/>
+
+							<field name="surveyor"/>
 							
-							<field name="start_date"/>
+							<field name="visit_date"/>
 							<field name= "add_instr"/>
 							<field name="bulk_insert"/>
-							<field name="visit_type/"/>
+							<field name="visit_type"/>
+
 						</group>
 						<group string='Visit Details'>
 							<field name="remarks_category"/>
 							<field name="remarks"/>
-							<field name="next_execution"/>
+
+							<field name="next_exec"/>
+
 						</group>
 
 						
@@ -52,21 +61,29 @@
 		    <field name="model">schedule.tasks</field>
 		    <field name="type">tree</field>
 		    <field name="arch" type="xml">
-			<tree string="Schedule Tasks" version="8.0">
+
+			<tree string="Schedule Tasks">
 					
 							<field name="name"/>
 
-							<field name="customer_name"/>
+							<field name="customer"/>
+
+			<!-- <tree string="Schedule Tasks" version="8.0"> -->
+					
+						
 						
 							<field name="atm"/>
 
 							
 							<field name="country"/>
 							<field name="state"/>
-							<field name="acc_manager"/>
+
+							<field name="surveyor"/>
+							<field name="visits_count"/>
 							
 							
-							<field name="no_of_visits"/>
+							<field name="status"/>
+
 							
 
 						
