@@ -1,8 +1,16 @@
 from openerp.osv import fields, osv
+<<<<<<< HEAD
 import time
 
 import time
 
+=======
+from openerp.tools.translate import _
+import datetime
+import time
+import urllib
+import random
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 
 # atm details class
 
@@ -40,6 +48,10 @@ class atm_details(osv.osv):
 	'atm_make' :fields.char('ATM Make'),
 	'atm_functionality' :fields.char('ATM Functionality'),
 	'base_height' :fields.char('Base Height'),
+<<<<<<< HEAD
+=======
+	'no_tasks':fields.integer('No. of Tasks',readonly=True),
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 	'location_category' :fields.selection([('offsite','Offsite'),('onsite','Onsite')],'Location Category'),
 	'onsite_category' :fields.selection([('branch','Branch'),
 										 ('csu','CSU'),
@@ -74,7 +86,49 @@ class atm_details(osv.osv):
 		'country':_default_country,
 	}
 	_order = 'atm_code'
+<<<<<<< HEAD
 	
+=======
+
+	def open_map(self, cr, uid, ids, context=None):
+		address_obj= self.pool.get('atm.details')
+		partner = address_obj.browse(cr, uid, ids, context=context)[0]
+		url="http://maps.google.com/maps?oi=map&q="
+		if partner.longitude:
+			url+=partner.longitude.replace(' ','+')
+		if partner.latitude:
+			url+= ',' + partner.latitude.replace(' ','+')
+		return {
+			'type': 'ir.actions.act_url','url':url,'target': 'new'}
+	
+	def geo_localize(self, cr, uid, ids, context=None):
+
+		partner = self.browse(cr,uid,ids)
+		latitude = partner[0].latitude
+		longitude = partner[0].longitude
+		geo = {}
+		if latitude or longitude:
+			geo['lat'] = latitude
+			geo['lng'] = longitude
+			return float(geo['lat']), float(geo['lng'])
+		return True
+
+	def name_get(self,cr,uid,ids,context=None):
+		if context is None:
+			context ={}
+		res=[]
+		record_name=self.browse(cr,uid,ids,context)
+		for object in record_name:
+
+			# if object.name:
+			if object.latitude and object.longitude:
+				  # name for contact_address_id field
+				res.append((object.id,object.atm_branch_details+', '+object.bank_atm_id+', '+'%%'+object.latitude+'%%'+object.longitude))
+			else:
+			   # //name for contact_id field                     
+				res.append((object.id,object.atm_branch_details+', '+object.bank_atm_id))
+		return res
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 
 atm_details()
 

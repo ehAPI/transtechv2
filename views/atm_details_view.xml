@@ -50,11 +50,42 @@
 									<field name='sic'/>
 								</group>
 							</page>
+<<<<<<< HEAD
 							<page string='Mapping'>
+=======
+							<!-- <page string='Mapping'>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 								<group>
 									<field name='longitude'/>
 									<field name='latitude'/>
 								</group>
+<<<<<<< HEAD
+=======
+							</page> -->
+							<page string="Mapping">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<td>
+										<group>
+											<field name="longitude"/>
+											<field name="latitude"/>
+											 <!-- <field name="id" widget="location_map" nolabel="1"></field> -->
+										</group>
+									</td>
+											<td style="padding-left: 15px; padding-top: 15px" width="100%%">
+									<field name="id"
+									 widget="location_map" nolabel="1"></field>
+								</td>
+								</tr>
+								</tbody>
+							</table>
+							
+								<button name="geo_localize" string="View Map" type="object" icon="gtk-zoom-in"/>
+								<group>
+									<field name="no_tasks" groups="atm.group_atm_manager"/>
+								</group>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 							</page>
 							<page string='ATM Old Locations'>
 								<field name='child_ids'/>

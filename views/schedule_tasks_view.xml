@@ -7,7 +7,11 @@
 		    <field name="model">schedule.tasks</field>
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
+<<<<<<< HEAD
 			<form string="Survey Details" >
+=======
+			<form string="Survey Details" version="8.0">
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 				<header>
 					<button name="status_cancel" type="object" String="Cancel" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
 
@@ -21,23 +25,40 @@
 				
 							<field name="name"/>
 							
+<<<<<<< HEAD
 							<field name="customer"/>
+=======
+							<field name="customer_name"/>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 							<field name="state"/>
 							<field name="atm"/>
 
 							<field name="visit_shift"/>
 							<field name="country"/>
+<<<<<<< HEAD
 							<field name="surveyor"/>
 							
 							<field name="visit_date"/>
 							<field name= "add_instr"/>
 							<field name="bulk_insert"/>
 							<field name="visit_type"/>
+=======
+							<field name="acc_manager"/>
+							
+							<field name="start_date"/>
+							<field name= "add_instr"/>
+							<field name="bulk_insert"/>
+							<field name="visit_type/"/>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 						</group>
 						<group string='Visit Details'>
 							<field name="remarks_category"/>
 							<field name="remarks"/>
+<<<<<<< HEAD
 							<field name="next_exec"/>
+=======
+							<field name="next_execution"/>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 						</group>
 
 						
@@ -52,22 +73,37 @@
 		    <field name="model">schedule.tasks</field>
 		    <field name="type">tree</field>
 		    <field name="arch" type="xml">
+<<<<<<< HEAD
 			<tree string="Schedule Tasks">
 					
 							<field name="name"/>
 
 							<field name="customer"/>
+=======
+			<tree string="Schedule Tasks" version="8.0">
+					
+							<field name="name"/>
+
+							<field name="customer_name"/>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 						
 							<field name="atm"/>
 
 							
 							<field name="country"/>
 							<field name="state"/>
+<<<<<<< HEAD
 							<field name="surveyor"/>
 							<field name="visits_count"/>
 							
 							
 							<field name="status"/>
+=======
+							<field name="acc_manager"/>
+							
+							
+							<field name="no_of_visits"/>
+>>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
 							
 
 						
