@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>    
+
+    <record model="ir.ui.view" id="wizard_print_survey_form">
+            <field name="name">Print Survey</field>
+            <field name="model">print.survey</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Survey Reports" version="7.0">
+                            <!-- <p class="oe_grey">
+                                This is the 1st wizard. If you want to go to next wizard fill the details below and click on Next button.</p>
+
+                                <p class="oe_grey">If you want to quit click on Cancel.
+                            </p> -->           
+                  <group>
+                    <field name="customer_id" widget="selection" style="width:30%%;" required="1"/>             
+                    <field name="month" style="width:30%%;" required="1"/>             
+                  </group>
+                  <footer>
+                    <!-- <button name="action_print" string="Print" type="object" class="oe_highlight"/> -->
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                  </footer>
+
+              </form>
+            </field>
+           </record>
+
+<record id="action_print_survey_wizard" model="ir.actions.act_window">
+        <field name="name">Survey Reports Full</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">print.survey</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_print_survey_form"/>
+        <field name="target">new</field>
+    </record>
+
+  </data>
+</openerp>
