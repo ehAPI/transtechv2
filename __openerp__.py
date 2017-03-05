@@ -32,6 +32,7 @@
 			 "security/ir.model.access.csv",
 			 "edi/atm_cust_alert_data.xml",
 			 "views/remark_category_view.xml",
+			 "views/atm_sequence.xml",
 			 "data/mail_data.xml"],
 
     'qweb': ['static/src/xml/base.xml',], 
