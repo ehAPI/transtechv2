@@ -4,7 +4,7 @@
 	"author":"ehAPI Technologies LLC",
 	"website":"http://www.techanipr.com",
 	"category":"Tools",
-	"depends":["base",'board'],
+	"depends":["base",'board','mail','email_template'],
 	"description":"Transtech ATM Survey Management",
 
 	"data": ["wizard/atm_move_view.xml",
@@ -30,14 +30,11 @@
 			 "views/reason_code_setup_view.xml",
 			 "views/state_setup_view.xml",
 			 "security/ir.model.access.csv",
-
+			 "edi/atm_cust_alert_data.xml",
 			 "views/remark_category_view.xml",
 			 "data/mail_data.xml"],
 
-    'qweb': ['static/src/xml/base.xml',],
-
-	
-          
+    'qweb': ['static/src/xml/base.xml',], 
      
 	"installable": True
 
