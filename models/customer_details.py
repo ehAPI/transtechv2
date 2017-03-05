@@ -40,7 +40,11 @@ class customer_details(osv.osv):
 		'active': 1,
 		'country':_default_country,
 	}
-	
+
+	def create(self, cr, uid, vals, context=None):
+		if vals.get('cust_code','/')=='/':
+			vals['cust_code']=self.pool.get('ir.sequence').get(cr,uid,'customer.info') or '/'	
+		return super(customer_details,self).create(cr, uid, vals, context=context)
 
 customer_details()
 

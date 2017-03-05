@@ -10,14 +10,9 @@ class reason_code_setup(osv.osv):
 	}
 
 	def create(self, cr, uid, vals, context=None):
-		if vals.get('reason_code','/')== '/':
-			vals['reason_code'] = self.pool.get('ir.sequence').get(cr, uid, 'reason.code.setup') or '/'
-		return super(reason_code_setup, self).create(cr, uid, vals, context=context)
-
-
-	# def create(self, cr, uid, values, context=None):
-	# 	code = values.get('code',0)
-	# 	code = code + 1
-	# 	values.update({'code' : code})
+		if vals.get('code','/')== '/':
+			vals['code'] = self.pool.get('ir.sequence').get(cr, uid, 'reason.code.setup') or '/'
+		code = super(reason_code_setup, self).create(cr, uid, vals, context=context)
+		return code
 
 reason_code_setup()

@@ -73,7 +73,12 @@ class view_plan_tasks(osv.osv):
 
 	def status_cancel(self,cr,uid,ids,context=None):
 		self.write(cr,uid,ids,{'status':'cancel'},context=context)
-		return True		
+		return True
+
+	def create(self, cr, uid, vals, context=None):
+		if vals.get('name','/')== '/':
+			vals['name']=self.pool.get('ir.sequence').get(cr,uid,'view.plan.tasks') or '/'
+		return super(view_plan_tasks,self).create(cr, uid, vals, context=context)		
 
 
 view_plan_tasks	()

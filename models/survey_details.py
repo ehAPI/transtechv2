@@ -7,8 +7,8 @@ class survey_details(osv.osv):
 	_name = 'survey.details'
 	
 	_columns = {
-	        'name':fields.char('Survey id', readonly=True),
-	        'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
+			'name':fields.char('Survey id', readonly=True),
+			'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
 			'month':fields.selection([('Jan','January'),
 				('Feb','February'),
 				('March','March'),
@@ -21,7 +21,7 @@ class survey_details(osv.osv):
 				('Oct', 'October'),
 				('Nov','November'),
 				('Dec','December')],'Month'),
-            'remarks_category' : fields.many2one('remark.category','Remarks Category'),
+			'remarks_category' : fields.many2one('remark.category','Remarks Category'),
 			'atm' : fields.many2one('atm.details', 'ATM'),
 			'customer_name':fields.many2one('customer.info','Customer'),
 			'acc_manager' : fields.many2one('res.users', 'Surveyor'),
@@ -35,8 +35,8 @@ class survey_details(osv.osv):
 			'next_task_id':fields.many2one('view.plan.tasks','Next Task ID'),
 			'state' : fields.many2one('res.country.state', 'State'),
 			'status': fields.selection([
-            ('waiting_approval', 'Waiting for Approval'),
-            ('approved', 'Approved')], 'Status'),
+			('waiting_approval', 'Waiting for Approval'),
+			('approved', 'Approved')], 'Status'),
 
 			'no_comments':fields.boolean('No Comments'),
 			'col_cash':fields.selection([('required','Required'),
@@ -74,24 +74,24 @@ class survey_details(osv.osv):
 			'lights':fields.selection([('off','Off'),('on','On')],'Main Board Lights'),
 			'sec_cam':fields.selection([('exp','Exposed')],'Security Camera Cables'),
 			'out_cont':fields.selection([('yes','Yes'),('no','No')],'OUtdated Contact no.on the Surround'),
-            'card_reader':fields.selection([('required','Required'),
+			'card_reader':fields.selection([('required','Required'),
 				('damaged','Damaged'),
 				('replaced','Replaced')],'Card Reader'),
-            'side_frames':fields.selection([('required','Required'),
+			'side_frames':fields.selection([('required','Required'),
 				('damaged','Damaged'),
 				('replaced','Replaced')],'Side Frames/Posters on the Surround'),
 
-            'atm_vault':fields.selection([('open','Open'),('damaged','Damaged')],'ATM Vault Door'),
-            'ded':fields.selection([('required','Required'),
+			'atm_vault':fields.selection([('open','Open'),('damaged','Damaged')],'ATM Vault Door'),
+			'ded':fields.selection([('required','Required'),
 				('damaged','Damaged'),
 				('replaced','Replaced')],'DED Number'),
-            'atm_notices':fields.selection([('required','Required'),
+			'atm_notices':fields.selection([('required','Required'),
 				('damaged','Damaged'),
 				('replaced','Replaced')],'ATM Notices'),
-            'keypad':fields.selection([('displaced','Displaced'),
+			'keypad':fields.selection([('displaced','Displaced'),
 				('damaged','Damaged'),
 				('faded','Number Faded')],'Keypad Condition'),
-            'atm_status':fields.selection([('offline','Offline'),
+			'atm_status':fields.selection([('offline','Offline'),
 				('off','Powered Off'),
 				('out_of_service','Out of Service')],'ATM Status'),
 			'atm_screen_protector':fields.selection([('damaged','Damaged')],'ATM Screen Protector'),
@@ -172,17 +172,59 @@ class survey_details(osv.osv):
 
 		}
 
-        _order = "visit_time desc"
+	_order = "visit_time desc"
 
 	_defaults={
 
-        'status': 'waiting_approval',
-        'visit_time': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+		'status': 'waiting_approval',
+		'visit_time': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
 
-        }
+		}
 
 	def status_approve(self,cr,uid,ids,context=None):
 		self.write(cr,uid,ids,{'status':'approved'},context=context)
-		return True   
+		return True 
+
+	def write(self, cr, uid, ids, vals, context=None):
+		return super(survey_details, self).write(cr, uid, ids, vals, context)
+
+	def create(self, cr, uid, vals, context=None):
+
+		if vals.get('name', '/') == '/':
+			vals['name'] = self.pool.get('ir.sequence').get(
+				cr, uid, 'survey.details') or '/'
+
+		vals['visit_time'] = datetime.datetime.now()
+		s_ids = self.search(cr, uid, [('month', '=', vals['month']), ('atm', '=', vals[
+							'atm']), ('atm_report', '=', vals['atm_report'])], context=None)
+
+		if s_ids:
+			self.unlink(cr, uid, s_ids, context=None)
+
+		survey_id = super(survey_details, self).create(
+			cr, uid, vals, context=context)
+
+		values = {}
+
+		part = self.pool.get('view.plan.tasks').browse(
+			cr, uid, vals['atm_report'], context)
+
+		self.pool.get('view.plan.tasks').write(cr, uid, vals['atm_report'], {'status': 'done'}, context)
+
+		approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
 		
+		values.update({'state': part.state.id})
+
+		if vals['current_longitude'] and vals['current_latitude']:
+			self.pool.get('atm.details').write(cr, uid, vals['atm'], {
+				'latitude': vals['current_latitude'], 'longitude': vals['current_longitude']})
+
+		self.write(cr, uid, survey_id, values)
+		return survey_id  
+		
+	# def create(self, cr, uid, vals, context=None):
+	# 	if vals.get('name','/')=='/':
+	# 		vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.details') or '/'
+	# 	return super(survey_details,self).create(cr, uid, vals, context=context)
+
 survey_details()
