@@ -1,4 +1,3 @@
-
 import schedule_tasks
 import site_inspection
 import survey_details
@@ -14,6 +13,3 @@ import reason_code_setup
 import remark_category
 import customer_details
 import atm_details
-import alerts_foru
-import tasks_inqueue
-import tasks_status

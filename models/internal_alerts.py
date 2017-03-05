@@ -10,6 +10,7 @@ from email.MIMEText import MIMEText
 class internal_alerts(osv.osv):
 	_name = 'internal.alerts'
 	_inherit="cust.alerts"
+	_rec_name = 'alert_id'
 	_description = 'Internal Alerts'
 	_columns = {
 	'customer' : fields.many2one('customer.info', 'Customer', ondelete='set null'),

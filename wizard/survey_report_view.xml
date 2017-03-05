@@ -2,12 +2,6 @@
 <openerp>
 	<data>
 
-
-		<!-- <footer>
-						<button name="%(action_atm_view_wizard)d" string="View Report" type="action" class="oe_highlight"/>
-					</footer>
-						 -->
-
 		<!-- Top menu -->
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
@@ -17,10 +11,6 @@
 		<!-- menu item -->
 		<menuitem name="Survey Report" parent="survey_details_menu" id="survey_report_menu_mainform" action="action_survey_report_view_wizard" sequence="11"/>
 
-<!-- 
-		<footer>
-						<button name="%(action_survey_report_view_wizard)d" string="View Report" type="action" class="oe_highlight"/>
-					</footer> -->
 
 						
 
