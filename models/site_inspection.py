@@ -34,6 +34,11 @@ class site_inspection(osv.osv):
             'hole_height_in_repeated':fields.char('Hole Height from inside'),
 	}
 
+	def create(self, cr, uid, vals, context=None):
+		if vals.get('name','/')=='/':
+			vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'site.inspection') or '/'
+		return super(site_inspection,self).create(cr, uid, vals, context=context)
+
 site_inspection()
 
 

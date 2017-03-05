@@ -121,6 +121,15 @@ class atm_details(osv.osv):
 				res.append((object.id,object.atm_branch_details+', '+object.bank_atm_id))
 		return res
 
+	def create(self, cr, uid, vals, context=None):
+		atms = self.search(cr,uid,[('bank_atm_id','=',vals['bank_atm_id']),('customer','=',vals['customer'])])
+		if atms:
+			raise osv.except_osv(_('This ATM ID has already been Used .'),_("Please Use new Id !") )
+		if vals.get('atm_code','/')== '/':
+			vals['atm_code'] = self.pool.get('ir.sequence').get(cr, uid, 'atm.details') or '/'
+		return super(atm_details, self).create(cr, uid, vals, context=context)
+
+
 atm_details()
 
 class atm_old(osv.osv):

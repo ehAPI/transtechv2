@@ -112,136 +112,136 @@ class cust_alerts(osv.osv):
 			'context': ctx,
 		}
 
-	# def send_alert_invitation_customer(self,cr,uid,ids,context=None):
-	# 	alert_obj = self.browse(cr,uid,ids,context=None)[0]
-	# 	customer_id =  self.pool.get('customer.info').browse(cr,uid,alert_obj.customer.id)
-	# 	customer_name = customer_id.cust_name
-	# 	affectedATM =self.pool.get('atm.details').browse(cr,uid,alert_obj.atm.id)
-	# 	atm_name = affectedATM.atm_branch_details
-	# 	if not customer_id.cont_per:
-	# 		raise osv.except_osv(_('No Email Provided for this customer'),_("Please give a Valid email address !") )
-	# 		return False
-	# 	# mail_ids = self.pool.get('ir.mail_server').search(cr,uid,[('active','=','True')])
-	# 	# mail_obj = self.pool.get('ir.mail_server').browse(cr,uid,mail_ids)[0]
-	# 	# username = mail_obj.smtp_user
-	# 	# pwd = 'd2dddaf6-caea-4d61-90e0-90aa58d88b98'
-	# 	# host = mail_obj.smtp_host
-	# 	# port = mail_obj.smtp_port
-	# 	# fromaddr = username
-	# 	# server = smtplib.SMTP(host+':'+'2525')
-	# 	# server.ehlo()
-	# 	# server.starttls()
-	# 	# server.ehlo()
-	# 	# server.login(username, pwd)
-	# 	# SMTP
-	# 	msg = MIMEMultipart()
-	# 	TO = customer_id.cont_per
-	# 	msg['To'] = TO
-	# 	FROM = 'info@transtech.ae'
-	# 	msg['From'] = FROM
-	# 	# msg['Subject'] = 'email subject'
-	# 	send = smtplib.SMTP('smtp.elasticemail.com', 2525)
-	# 	send.starttls()
-	# 	send.login('rethish.kumar@transtech.ae', 'd2dddaf6-caea-4d61-90e0-90aa58d88b98')
+	def send_alert_invitation_customer(self,cr,uid,ids,context=None):
+		alert_obj = self.browse(cr,uid,ids,context=None)[0]
+		customer_id =  self.pool.get('customer.info').browse(cr,uid,alert_obj.customer.id)
+		customer_name = customer_id.cust_name
+		affectedATM =self.pool.get('atm.details').browse(cr,uid,alert_obj.atm.id)
+		atm_name = affectedATM.atm_branch_details
+		if not customer_id.cont_per:
+			raise osv.except_osv(_('No Email Provided for this customer'),_("Please give a Valid email address !") )
+			return False
+		# mail_ids = self.pool.get('ir.mail_server').search(cr,uid,[('active','=','True')])
+		# mail_obj = self.pool.get('ir.mail_server').browse(cr,uid,mail_ids)[0]
+		# username = mail_obj.smtp_user
+		# pwd = 'd2dddaf6-caea-4d61-90e0-90aa58d88b98'
+		# host = mail_obj.smtp_host
+		# port = mail_obj.smtp_port
+		# fromaddr = username
+		# server = smtplib.SMTP(host+':'+'2525')
+		# server.ehlo()
+		# server.starttls()
+		# server.ehlo()
+		# server.login(username, pwd)
+		# SMTP
+		msg = MIMEMultipart()
+		TO = customer_id.cont_per
+		msg['To'] = TO
+		FROM = 'info@transtech.ae'
+		msg['From'] = FROM
+		# msg['Subject'] = 'email subject'
+		send = smtplib.SMTP('smtp.elasticemail.com', 2525)
+		send.starttls()
+		send.login('rethish.kumar@transtech.ae', 'd2dddaf6-caea-4d61-90e0-90aa58d88b98')
 		
-	# 	# msg['From'] = fromaddr
-	# 	msg['Subject'] = 'Regarding Alert in TransTech Portal'
-	# 	toaddr = customer_id.cont_per
-	# 	msg['To'] = toaddr
-	# 	text = ('<p><h2>Dear %s,</h2><p>\
-	# 		<p>An error alert is recorded in TransTech portal. Details are as follows:</p>\
-	# 		<p><b>Alert Category</b>: %s</p>\
-	# 		<p><b>Priority</b>: %s</p>\
-	# 		<p><b>ATM Location</b>: %s</p>\
-	# 		<p><b>ATM ID</b>: %s</p>\
-	# 		<p><b>Subject</b>: %s</p>\n \
-	# 		<p><b>Description</b>: %s</p>\n Thanks')\
-	# 	%(customer_id.cust_name,
-	# 		str(alert_obj.category).title(),
-	# 		str(alert_obj.priority).title(),
-	# 		affectedATM.atm_branch_details,
-	# 		affectedATM.bank_atm_id,
-	# 		alert_obj.summary,
-	# 		alert_obj.description)
-	# 	body = MIMEText(text,_subtype='html')
-	# 	msg.attach(body)
-	# 	# res = server.sendmail(fromaddr, toaddr, msg.as_string())
-	# 	# server.quit()
-	# 	send.sendmail(FROM, TO, msg.as_string())
-	# 	send.quit()
-	# 	return True
+		# msg['From'] = fromaddr
+		msg['Subject'] = 'Regarding Alert in TransTech Portal'
+		toaddr = customer_id.cont_per
+		msg['To'] = toaddr
+		text = ('<p><h2>Dear %s,</h2><p>\
+			<p>An error alert is recorded in TransTech portal. Details are as follows:</p>\
+			<p><b>Alert Category</b>: %s</p>\
+			<p><b>Priority</b>: %s</p>\
+			<p><b>ATM Location</b>: %s</p>\
+			<p><b>ATM ID</b>: %s</p>\
+			<p><b>Subject</b>: %s</p>\n \
+			<p><b>Description</b>: %s</p>\n Thanks')\
+		%(customer_id.cust_name,
+			str(alert_obj.category).title(),
+			str(alert_obj.priority).title(),
+			affectedATM.atm_branch_details,
+			affectedATM.bank_atm_id,
+			alert_obj.summary,
+			alert_obj.description)
+		body = MIMEText(text,_subtype='html')
+		msg.attach(body)
+		# res = server.sendmail(fromaddr, toaddr, msg.as_string())
+		# server.quit()
+		send.sendmail(FROM, TO, msg.as_string())
+		send.quit()
+		return True
 
-	# def send_alert_invitation_teamleader(self,cr,uid,ids,context=None):
-	# 	alert_obj = self.browse(cr,uid,ids,context=None)[0]
-	# 	customer_id =  self.pool.get('customer.info').browse(cr,uid,alert_obj.customer.id)
-	# 	customer_name = customer_id.cust_name
-	# 	affectedATM =self.pool.get('atm.details').browse(cr,uid,alert_obj.atm_id.id)
-	# 	atm_name = affectedATM.atm_branch_details
-	# 	user_ids = self.pool.get('res.users').browse(cr,uid,customer_id.acc_manager.id)
-	# 	temail_id = user_ids.email
-	# 	if not temail_id:
-	# 		raise osv.except_osv(_('No Email Provided for this Team Leader'),_("Please give a Valid email address !") )
-	# 		return False
-	# 	tname= user_ids.name
-	# 	# mail_ids = self.pool.get('ir.mail_server').search(cr,uid,[('active','=','True')])
-	# 	# mail_obj = self.pool.get('ir.mail_server').browse(cr,uid,mail_ids)[0]
-	# 	# username = mail_obj.smtp_user
-	# 	# pwd = mail_obj.smtp_pass
-	# 	# host = mail_obj.smtp_host
-	# 	# port = mail_obj.smtp_port
-	# 	# fromaddr = username
-	# 	# server = smtplib.SMTP(host+':'+'2525')
-	# 	# server.ehlo()
-	# 	# server.starttls()`
-	# 	# server.ehlo()
-	# 	# server.login(username, pwd)
-	# 	send = smtplib.SMTP('smtp.elasticemail.com', 2525)
-	# 	send.starttls()
-	# 	send.login('rethish.kumar@transtech.ae', 'd2dddaf6-caea-4d61-90e0-90aa58d88b98')
-	# 	msg = MIMEMultipart()
-	# 	FROM = 'info@transtech.ae'
-	# 	msg['From'] = FROM
-	# 	# msg['From'] = 'info@transtech.ae'
-	# 	msg['Subject'] = 'New Customer Alert in Transtech Portal'
-	# 	TO = temail_id
-	# 	msg['To'] = TO
-	# 	text = ('<p><h2>Hello %s,</h2>\
-	# 	 One Customer Alert has been recorded in Transtech Portal</p>\
-	# 	 <p><b>Details of generated alert is given below:</b></p>\
-	# 	 <p><b>Genrated By </b>: %s</p>\
-	# 	 <p><b>Alert ID</b> :  %s</p>\
-	# 	 <p><b>Alert Category </b> : %s</p>\
-	# 	 <p><b>Priority </b>: %s</p>\
-	# 	 <p><b>ATM </b>: %s,%s</p>\
-	# 	 <p><b>Summary </b>: %s</p>\
-	# 	 <p><b>Description </b>: %s</p>')\
-	# 	%(tname,
-	# 		customer_id.name,
-	# 		alert_obj.name,
-	# 		alert_obj.category,
-	# 		alert_obj.priority,
-	# 		atm_name,
-	# 		affectedATM.atm_id,
-	# 		alert_obj.summary,
-	# 		alert_obj.description)
-	# 	body = MIMEText(text, _subtype='html')
-	# 	msg.attach(body)
-	# 	# res = server.sendmail(fromaddr, toaddr, msg.as_string())
-	# 	# server.quit()
-	# 	send.sendmail(FROM, TO, msg.as_string())
-	# 	send.quit()
+	def send_alert_invitation_teamleader(self,cr,uid,ids,context=None):
+		alert_obj = self.browse(cr,uid,ids,context=None)[0]
+		customer_id =  self.pool.get('customer.info').browse(cr,uid,alert_obj.customer.id)
+		customer_name = customer_id.cust_name
+		affectedATM =self.pool.get('atm.details').browse(cr,uid,alert_obj.atm.id)
+		atm_name = affectedATM.atm_branch_details
+		user_ids = self.pool.get('res.users').browse(cr,uid,customer_id.acc_manager.id)
+		temail_id = user_ids.email
+		if not temail_id:
+			raise osv.except_osv(_('No Email Provided for this Team Leader'),_("Please give a Valid email address !") )
+			return False
+		tname= user_ids.name
+		# mail_ids = self.pool.get('ir.mail_server').search(cr,uid,[('active','=','True')])
+		# mail_obj = self.pool.get('ir.mail_server').browse(cr,uid,mail_ids)[0]
+		# username = mail_obj.smtp_user
+		# pwd = mail_obj.smtp_pass
+		# host = mail_obj.smtp_host
+		# port = mail_obj.smtp_port
+		# fromaddr = username
+		# server = smtplib.SMTP(host+':'+'2525')
+		# server.ehlo()
+		# server.starttls()`
+		# server.ehlo()
+		# server.login(username, pwd)
+		send = smtplib.SMTP('smtp.elasticemail.com', 2525)
+		send.starttls()
+		send.login('rethish.kumar@transtech.ae', 'd2dddaf6-caea-4d61-90e0-90aa58d88b98')
+		msg = MIMEMultipart()
+		FROM = 'info@transtech.ae'
+		msg['From'] = FROM
+		# msg['From'] = 'info@transtech.ae'
+		msg['Subject'] = 'New Customer Alert in Transtech Portal'
+		TO = temail_id
+		msg['To'] = TO
+		text = ('<p><h2>Hello %s,</h2>\
+		 One Customer Alert has been recorded in Transtech Portal</p>\
+		 <p><b>Details of generated alert is given below:</b></p>\
+		 <p><b>Genrated By </b>: %s</p>\
+		 <p><b>Alert ID</b> :  %s</p>\
+		 <p><b>Alert Category </b> : %s</p>\
+		 <p><b>Priority </b>: %s</p>\
+		 <p><b>ATM </b>: %s,%s</p>\
+		 <p><b>Summary </b>: %s</p>\
+		 <p><b>Description </b>: %s</p>')\
+		%(tname,
+			customer_id.cust_name,
+			alert_obj.alert_id,
+			alert_obj.category,
+			alert_obj.priority,
+			atm_name,
+			affectedATM.bank_atm_id,
+			alert_obj.summary,
+			alert_obj.description)
+		body = MIMEText(text, _subtype='html')
+		msg.attach(body)
+		# res = server.sendmail(fromaddr, toaddr, msg.as_string())
+		# server.quit()
+		send.sendmail(FROM, TO, msg.as_string())
+		send.quit()
 
-	# 	return True
+		return True
 
 cust_alerts()
 
-# class mail_compose_message(osv.Model):
-# 	_inherit = 'mail.compose.message'
+class mail_compose_message(osv.Model):
+	_inherit = 'mail.compose.message'
 
-# 	def send_mail(self, cr, uid, ids, context=None):
-# 		context = context or {}
-# 		if context.get('default_model') == 'cust.alerts' and context.get('default_res_id') and context.get('mark_so_as_sent'):
-# 			context = dict(context, mail_post_autofollow=True)
-# 			self.pool.get('cust.alerts').signal_workflow(cr, uid, [context['default_res_id']], 'quotation_sent')
-# 		return super(mail_compose_message, self).send_mail(cr, uid, ids, context=context)
+	def send_mail(self, cr, uid, ids, context=None):
+		context = context or {}
+		if context.get('default_model') == 'cust.alerts' and context.get('default_res_id') and context.get('mark_so_as_sent'):
+			context = dict(context, mail_post_autofollow=True)
+			self.pool.get('cust.alerts').signal_workflow(cr, uid, [context['default_res_id']], 'quotation_sent')
+		return super(mail_compose_message, self).send_mail(cr, uid, ids, context=context)
 
