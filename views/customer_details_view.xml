@@ -33,8 +33,6 @@
 	                            <field name="cust_name" string='Customer Name' placeholder='Customer Name'/>
 						    </h2>
 
-						    <button name="send_invitation" type="object" String="Portal Access"  confirm="Are you sure? want to make this customer as your portal user??" help="Sends the invitation mail to the customer with login credentials &amp; Makes this customer as your portal User" groups="atm.group_atm_manager"/>
-
 						</div>
 						<group>
 							<group>
