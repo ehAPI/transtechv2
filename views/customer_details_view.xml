@@ -32,6 +32,7 @@
 	                            <field name="cust_code" string='Customer Code'/>
 	                            <field name="cust_name" string='Customer Name' placeholder='Customer Name'/>
 						    </h2>
+
 						</div>
 						<group>
 							<group>

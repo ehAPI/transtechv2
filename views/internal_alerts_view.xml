@@ -27,6 +27,7 @@
 				<form string="Internal Alerts">
 					<header>
 						<button name="status_resolve" type="object" String="Resolve" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('resolved','closed'))]}" class="oe_highlight"/>
+						<!-- <button name="send_alert_invitation" type="object" String="Send" groups="atm.group_atm_manager, atm.group_atm_user" class="oe_highlight"/> -->
 						<button name="status_close" type="object" String="Close" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('assigned','closed'))]}" class="oe_highlight"/>
 						<field name="status" widget="statusbar" statusbar_visible="assigned,resolved,closed"/>
 					</header>

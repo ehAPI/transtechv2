@@ -9,6 +9,9 @@
 		    <field name="arch" type="xml">
 				<form string="Survey Details" version="8.0">
 					<header>
+
+						<button name="print_survey" string="Print Survey" type="object" states="draft" class="oe_highlight" groups="atm.group_atm_manager"/>
+						<button name="print_survey" string="Print Survey" type="object" states="sent,progress,manual" groups="atm.group_atm_manager"/>
 					<header>
 
 						<button name="status_approve" string="Approve" type="object" class="oe_highlight" groups="atm.group_atm_manager" confirm="Are you sure you want to approve this survey??" attrs="{'invisible': [('status','=','approved')]}"/>
