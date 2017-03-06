@@ -14,6 +14,7 @@
 			 "views/schedule_tasks_view.xml",
 			 "views/tasks_status_view.xml",
 			 "views/jsmap.xml",
+			 "views/survey_report.xml",
 			 # "static/src/xml/base.xml",
 			 "views/alerts_foru_view.xml",
 			 "views/tasks_inqueue_view.xml",
@@ -33,6 +34,7 @@
 			 "edi/atm_cust_alert_data.xml",
 			 "views/remark_category_view.xml",
 			 "views/atm_sequence.xml",
+			 "reports/print_survey_report.xml",
 			 "data/mail_data.xml"],
 
     'qweb': ['static/src/xml/base.xml',], 

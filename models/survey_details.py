@@ -1,6 +1,8 @@
 from openerp.osv import fields, osv
 import datetime
 import time
+from openerp import workflow
+
 
 class survey_details(osv.osv):
 
@@ -152,22 +154,22 @@ class survey_details(osv.osv):
 			'boom_sign':fields.selection([('off','Off'),
 				('damaged','Damaged'),
 				('replaced','Replaced')],'Boom Sign'),
-			'image1_b':fields.binary('image1',filters='*.png,*.gif', widget = 'image'),
-			'image2_b':fields.binary('image2',filters='*.png,*.gif', widget = 'image'),
-			'image3_b':fields.binary('image3',filters='*.png,*.gif', widget = 'image'),
-			'image4_b':fields.binary('image4',filters='*.png,*.gif', widget = 'image'),
-			'image5_b':fields.binary('image5',filters='*.png,*.gif', widget = 'image'),
-			'image6_b':fields.binary('image6',filters='*.png,*.gif', widget = 'image'),
-			'image7_b':fields.binary('image7',filters='*.png,*.gif', widget = 'image'),
-			'image8_b':fields.binary('image8',filters='*.png,*.gif', widget = 'image'),
-			'image1_a':fields.binary('image1',filters='*.png,*.gif', widget = 'image'),
-			'image2_a':fields.binary('image2',filters='*.png,*.gif', widget = 'image'),
-			'image3_a':fields.binary('image3',filters='*.png,*.gif', widget = 'image'),
-			'image4_a':fields.binary('image4',filters='*.png,*.gif', widget = 'image'),
-			'image5_a':fields.binary('image5',filters='*.png,*.gif', widget = 'image'),
-			'image6_a':fields.binary('image6',filters='*.png,*.gif', widget = 'image'),
-			'image7_a':fields.binary('image7',filters='*.png,*.gif', widget = 'image'),
-			'image8_a':fields.binary('image8',filters='*.png,*.gif', widget = 'image'),
+			'image1_b':fields.binary('image1'),
+			'image2_b':fields.binary('image2'),
+			'image3_b':fields.binary('image3'),
+			'image4_b':fields.binary('image4'),
+			'image5_b':fields.binary('image5'),
+			'image6_b':fields.binary('image6'),
+			'image7_b':fields.binary('image7'),
+			'image8_b':fields.binary('image8'),
+			'image1_a':fields.binary('image1'),
+			'image2_a':fields.binary('image2'),
+			'image3_a':fields.binary('image3'),
+			'image4_a':fields.binary('image4'),
+			'image5_a':fields.binary('image5'),
+			'image6_a':fields.binary('image6'),
+			'image7_a':fields.binary('image7'),
+			'image8_a':fields.binary('image8'),
 
 
 		}
@@ -221,6 +223,14 @@ class survey_details(osv.osv):
 
 		self.write(cr, uid, survey_id, values)
 		return survey_id  
+
+	def print_survey(self, cr, uid, ids, context=None):
+	    '''
+	    This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
+	    '''
+	    assert len(ids) == 1, 'This option should only be used for a single id at a time'
+	    self.signal_workflow(cr, uid, ids, 'quotation_sent')
+	    return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
 		
 	# def create(self, cr, uid, vals, context=None):
 	# 	if vals.get('name','/')=='/':
