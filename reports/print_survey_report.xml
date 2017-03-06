@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+	<template id="report_survey_document">
+		<t t-call="report.external_layout">
+			<div class="page">
+				<div class="oe_structure"/>
+				<div class="row">
+				<h2>Transtech</h2>
+					<div class="col-xs-6">
+						<group>
+							<div>
+								<b>
+									<h2>
+										<span t-field='o.atm.atm_branch_details'/>-<span t-field='o.customer_name.cust_name'/>-<span t-field='o.atm.bank_atm_id'/>
+									</h2>
+								</b>
+								<p>
+									Coordinates:<span t-field='o.current_longitude'/>-<span t-field='o.current_latitude'/>
+								</p>
+							</div>
+							<div>
+								<p>
+									Visit:<span t-field='o.name'/>
+								</p>
+								<p>	
+									Time:<span t-field='o.visit_time'/>
+								</p>
+							</div>
+						</group>
+						<span t-field = 'o.image1_b'/>
+						<span t-field = 'o.image2_b'/>
+						<span t-field = 'o.image3_b'/>
+						<span t-field = 'o.image1_a'/>
+						<span t-field = 'o.image2_a'/>
+						<span t-field = 'o.image3_a'/>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+	<template id="report_survey_print">
+	<t t-call="report.html_container">
+		<t t-foreach="doc_ids" t-as="doc_id">
+			<t t-raw="translate_doc(doc_id, doc_model, 'acc_manager.lang', 
+			'atm.report_survey_document')"/>
+		</t>
+	</t>
+</template>
+</data>
+</openerp>

@@ -1,4 +1,13 @@
 from openerp.osv import fields, osv
+from openerp.tools.translate import _
+import datetime
+import time
+import random
+import re
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+from openerp import  tools
 
 # customer details class
 class customer_details(osv.osv):
@@ -36,7 +45,6 @@ class customer_details(osv.osv):
 		if vals.get('cust_code','/')=='/':
 			vals['cust_code']=self.pool.get('ir.sequence').get(cr,uid,'customer.info') or '/'	
 		return super(customer_details,self).create(cr, uid, vals, context=context)
-
 
 customer_details()
 
