@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+   <data>
+
+      <template id="new_survey_report_document">
+          <t t-call="report.external_layout"/>
+      </template>
+
+
+   
+
+
+      <template id="new_survey_report">
+
+         <t t-call="report.html_container">
+               <div class="page">
+
+                <div align="center"><br/><br/><br/><img src='/transtech/static/img/Transtech-logo.png' style="max-height: 75px;"/><br/><br/><br/><br/></div>
+                  <div class="oe_structure"/>
+                  <div class="row">
+                    <h2>Transtech</h2>
+
+                    <t t-foreach="docs" t-as="o">
+                        <table style="width:100%;">
+                          <tr style="font-size: 20px;" align="center">
+                            <td align="center"><b><span t-field='o.atm.atm_branch_details'/>-<span t-field='o.customer_name.cust_name'/>-<span t-field='o.atm.bank_atm_id'/></b></td>
+                            <td align="center"><b>Visit: <span t-field="o.name"/></b></td>
+                          </tr>
+                           <tr style="font-size: 20px;" align="center">
+                            <td align="center">Coordinates: <span t-field="o.current_longitude"/> - <span t-field="o.current_latitude"/>  </td>
+                            <td align="center"><b>Time: <span t-field="o.visit_time"/></b></td>
+                          </tr>
+                        </table>
+
+                        <br/><br/><br/>
+
+                        <table style="width:100%;">
+                          <tr style="font-size: 20px;" align="center">
+                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image1_b" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image3_b" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image2_b" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                          </tr>
+                          <tr style="font-size: 20px;" align="center">
+                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image6_a" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image8_a" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image7_a" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                          </tr>
+                        </table>
+
+                       <br/><br/><br/>
+
+                        <table style="width:100%;">
+                          <p style="font-size: 20px;" align="left"> <b>Comments:</b><br/><br/></p>
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Collect Cash - </b><span t-field="o.col_cash"/></td>
+                            <td align="center"><b>Cables Securing - </b><span t-field="o.cables"/></td>
+                          </tr>
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Collect Receipt - </b><span t-field="o.col_receipt"/></td>
+                             <td align="center"><b>Trash bin Keys - </b><span t-field="o.trash"/></td>
+                          </tr>
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Insert Card - </b><span t-field="o.ins_card"/></td>
+                             <td align="center"><b>Machine Surround Maintenance - </b><span t-field="o.mach"/></td>
+                          </tr>
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Insert Cheque - </b><span t-field="o.ins_cheq"/></td>
+                             <td align="center"><b>Spot Lights - </b><span t-field="o.spot_lights"/></td>
+                          </tr> 
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Insert Cash - </b><span t-field="o.ins_cash"/></td>
+                             <td align="center"><b>Machine Surround Branding - </b><span t-field="o.machine_surround"/></td>
+                          </tr>  
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Network Sticker - </b><span t-field="o.network_sticker"/></td>
+                             <td align="center"><b>Canopy branding - </b><span t-field="o.canopy"/></td>
+                          </tr> 
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Instruction Sticker - </b><span t-field="o.instruction_sticker"/></td>
+                             <td align="center"><b>Surround Locks - </b><span t-field="o.surround_locks"/></td>
+                          </tr>  
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Vault Branding - </b><span t-field="o.vault_branding"/></td>
+                             <td align="center"><b>Main board Lights - </b><span t-field="o.lights"/></td>
+                          </tr>  
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Terminal ID - </b><span t-field="o.terminal_id"/></td>
+                             <td align="center"><b>Security Camera Cables - </b><span t-field="o.sec_cam"/></td>
+                          </tr> 
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Outdated Contact no on the Surround - </b><span t-field="o.out_cont"/></td>
+                             <td align="center"><b>ATM Status - </b><span t-field="o.atm_status"/></td>
+                          </tr>  
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Card Reader - </b><span t-field="o.card_reader"/></td>
+                             <td align="center"><b>ATM Screen Protector - </b><span t-field="o.atm_screen_protector"/></td>
+                          </tr>  
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Side Frames/Posters on the Surround - </b><span t-field="o.atm"/></td>
+                             <td align="center"><b>Trash Bin repairs/ replacement to be completed ( as per the agreed contract) - </b><span t-field="o.trashbin_repairs"/></td>
+                          </tr> 
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>ATM Vault Door - </b><span t-field="o.atm_vault"/></td>
+                             <td align="center"><b>TTW Branding - </b><span t-field="o.ttw_branding"/></td>
+                          </tr> 
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>DED Number - </b><span t-field="o.ded"/></td>
+                             <td align="center"><b>Protective Box for Power Circuit - </b><span t-field="o.protective_box"/></td>
+                          </tr>  
+                          <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>ATM Notices - </b><span t-field="o.atm_notices"/></td>
+                             <td align="center"><b>Machine Security Camera - </b><span t-field="o.machine_cam"/></td>
+                          </tr> 
+                           <tr style="font-size: 18px;" align="center">
+                             <td align="center"><b>Keypad Condition - </b><span t-field="o.keypad"/></td>
+                             <td align="center"><b>Fascia Condition - </b><span t-field="o.fascia"/></td>
+                          </tr>
+                        </table>
+
+                    </t>
+                  </div>
+                </div>
+         </t>
+      </template>
+
+  </data>
+</openerp>
+            

@@ -142,7 +142,7 @@ class survey_details(osv.osv):
 			('replaced','Replaced')],'TTW Branding'),
 		'protective_box':fields.selection([('required','Required'),
 			('damaged','Damaged'),
-			('replaced','Replaced')],'Protective Box for Power Circuit'),
+			('replaced','Replaced')],'Protective Box for Power Crcuit'),
 		'machine_cam':fields.selection([('glass_mining','Glass Mining'),
 			('glass_broken','Glass Broken'),
 			('out_of_focus','Out of Focus')],'Machine Security Camera'),
