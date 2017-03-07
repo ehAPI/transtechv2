@@ -51,46 +51,46 @@
 							<field name="next_task_id"/>
 							<field name="state"/>
 						    </group>
-							<div><!-- 
+							<div>
 								<group string="Before Survey">
 									<div id="thumbwrap">
-										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_b" widget='image'/></span></a>
 								
-										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_b" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_b" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_b" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_b" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_b" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_b" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_bfr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_b" widget='image'/></span></a>
 										</div>
 									</group>
 								
 								<group string="After Survey">
 									<div id="thumbwrap">
 								
-										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_afr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_a" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_afr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_a" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_afr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_a" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_afr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_a" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_afr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_a" widget='image'/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_afr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_a" widget='image'/></span></a>
 								
-										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_afr" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_a" widget='image'/></span></a>
 								
-										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_afr" widget='image'/></span></a> -->
-								<group string='Before Survey'>
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_a" widget='image'/></span></a>
+								<!-- <group string='Before Survey'>
 									<field name="image1_b" widget='image'/>
 									<field name="image2_b" widget='image'/>
 									<field name="image3_b" widget='image'/>
@@ -109,9 +109,15 @@
 									<field name="image6_a" widget='image'/>
 									<field name="image7_a" widget='image'/>
 									<field name="image8_a" widget='image'/>
-								</group>
+								</group> -->
 							    </div>
 							</group>
+						</div>
+					</group>
+				
+
+
+
 
 						<notebook>
 							<page string='Checklist for ATM XP'>
