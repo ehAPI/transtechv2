@@ -59,11 +59,18 @@ class cust_alerts(osv.osv):
 
 	_defaults = {
 		'status':'assigned',
-		'country_id':_default_country,
+		'country':_default_country,
 		'customer':_default_customer,
 	}
 
 	_order = "alert_id desc"
+
+	def unlink(self, cr, uid, ids, context=None):
+        	alert_obj = self.pool.get('cust.alerts').browse(cr,uid,ids[0])
+		if alert_obj.status in ('resolved','closed'):
+			raise osv.except_osv(_('Invalid Action!'), _("You can't delete an Alert which is either in 'Resolved state' or in 'Closed state' "))
+        	
+        	return super(alert_section, self).unlink(cr, uid, ids, context=context)
 
 	def create(self,cr,uid,vals,context=None):
 		if vals.get('alert_id','/') == '/': 
@@ -170,6 +177,22 @@ class cust_alerts(osv.osv):
 		send.sendmail(FROM, TO, msg.as_string())
 		send.quit()
 		return True
+
+	def copy(self, cr, uid, id, default=None, context=None):
+		if not default:
+			default = {}
+		default.update({
+			'name': self.pool.get('ir.sequence').get(cr, uid, 'cust.alerts'),
+			})
+
+		return super(alert_section, self).copy(cr, uid, id, default, context=context)
+
+	def _login_customer(self,cr,uid,ids,name,arg,context=None):
+		customerid = self.pool.get('res.users').search(cr, uid, [('id', '=', uid)], context=context)
+		customerid_name =self.pool.get('res.users').browse(cr, uid, customerid, context=context)
+		customer_info = self.pool.get('customer.info').search(cr, uid, [('name', '=', customerid_name[0].name)], context=context)
+		customer_info_name = self.pool.get('customer.info').browse(cr, uid,customer_info, context=context)
+		return customer_info_name[0].id
 
 	def send_alert_invitation_teamleader(self,cr,uid,ids,context=None):
 		alert_obj = self.browse(cr,uid,ids,context=None)[0]

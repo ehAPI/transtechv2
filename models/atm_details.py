@@ -1,7 +1,4 @@
 from openerp.osv import fields, osv
-
-import time
-
 from openerp.tools.translate import _
 import datetime
 import time
@@ -129,6 +126,9 @@ class atm_details(osv.osv):
 			vals['atm_code'] = self.pool.get('ir.sequence').get(cr, uid, 'atm.details') or '/'
 		return super(atm_details, self).create(cr, uid, vals, context=context)
 
+	_sql_constraints = [
+			('atm_id_uniq', 'Check(1=1)','ATM ID must be Unique !'),
+		]
 
 atm_details()
 
