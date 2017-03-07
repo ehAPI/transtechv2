@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+            id="report_survey_details"
+            string="All survey Info"
+            model="survey.details" 
+            report_type="qweb-pdf"
+            file="atm.report_survey_document" 
+            name="atm.report_survey_document" 
+        />
+    </data>
+</openerp>
