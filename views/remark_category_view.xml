@@ -33,6 +33,12 @@
 			<field name="name">Manage Remark Category</field>
 			<field name="res_model">remark.category</field>
 			<field name="view_mode">tree,form</field>
+			 <field name="help" type="html">
+	              		<p class="oe_view_nocontent_create">
+	                	Click to add new Remark Categories......
+	              		</p>
+						
+	               		</field>
 		</record>
 
 		<!-- Top menu -->
