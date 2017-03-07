@@ -34,7 +34,9 @@
 			 "edi/atm_cust_alert_data.xml",
 			 "views/remark_category_view.xml",
 			 "views/atm_sequence.xml",
-			 "reports/print_survey_report.xml",
+			 "reports/all_survey_info.xml",
+			 "reports/all_survey_info_template.xml",
+			 # "reports/print_survey_report.xml",
 			 "data/mail_data.xml"],
 
     'qweb': ['static/src/xml/base.xml',], 

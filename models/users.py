@@ -28,4 +28,7 @@ class manage_users(osv.osv):
 _defaults={
 	'status':'never_connected'
 }
+
+
+	
 manage_users()
