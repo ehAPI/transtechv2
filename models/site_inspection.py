@@ -1,8 +1,22 @@
 from openerp.osv import fields, osv
+from openerp.tools.translate import _
+import datetime
+import time
+from dateutil.relativedelta import relativedelta
+from openerp import SUPERUSER_ID
 
 class site_inspection(osv.osv):
 
 	_name = 'site.inspection'
+
+	def copy(self, cr, uid, id, default=None, context=None):
+		if not default:
+			default = {}
+		default.update({
+            'name': self.pool.get('ir.sequence').get(cr, uid, 'site.inspection'),
+        })
+		return super(view_plan_tasks, self).copy(cr, uid, id, default, context=context)
+
 	_columns = {
 			'name':fields.char('Inspection ID', readonly=True),
 			'site_type':fields.selection([('ttw','TTW'),
@@ -32,7 +46,13 @@ class site_inspection(osv.osv):
             'access_truck_crane':fields.selection([('yes','Yes'),
 				('no','No')],'Access For Truck'),
             'hole_height_in_repeated':fields.char('Hole Height from inside'),
+            'inside_outside':fields.char("Hole Height from inside"),
+            'hole_height':fields.char("Hole Height from Customer standing area"),
+            'hole_height_outside':fields.char("Hole height from Outside"),
+            
 	}
+
+	_order = "name desc"
 
 	def create(self, cr, uid, vals, context=None):
 		if vals.get('name','/')=='/':

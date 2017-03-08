@@ -15,3 +15,5 @@ class state_setup(osv.osv):
 	_defaults = {
 	'country_id':_default_country,
 	}
+
+state_setup()

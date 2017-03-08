@@ -24,13 +24,16 @@
 					</group>
 					<newline/>
 					<h2>Public Holidays</h2>
-					<field name='public_holiday'>
-						<tree string='Public Holidays' editable='bottom'>
-							<field name='date'/>
-							<field name='name'/>
-							<field name='date_may_change'/>
-						</tree>
-					</field>
+					<newline/>
+					<group string='Public Holidays' colspan='4' col='1'>
+						<field name='public_holiday' nolabel='1'>
+							<tree string='Public Holidays' editable='bottom'>
+								<field name='date'/>
+								<field name='name'/>
+								<field name='date_may_change'/>
+							</tree>
+						</field>
+					</group>
 				</form>
 			</field>
 		</record>

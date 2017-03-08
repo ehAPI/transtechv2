@@ -44,18 +44,18 @@ class schedule_tasks(osv.Model):
 			'visit_type': fields.selection([
 
 				('monthly/1','Monthly/1 visit'),
-				('twice','Twice'),
-				('3_times','3 times'),
-				('4_times','4 times'),
-				('5_times','5 times'),
-				('6_times','6 times'),
-				('7_times','7 times'),
-				('8_times','8 times'),
-				('9_times','9 times'),
-				('10_times','10 times'),
-				('12_times','12 times'),
-				('13_times','13 times'),
-				('16_times','16 times')],'Visit Type/ No. of Visits to be done',required=True),
+				('2','Twice'),
+				('3','3 times'),
+				('4','4 times'),
+				('5','5 times'),
+				('6','6 times'),
+				('7','7 times'),
+				('8','8 times'),
+				('9','9 times'),
+				('10','10 times'),
+				('12','12 times'),
+				('13','13 times'),
+				('16','16 times')],'Visit Type/ No. of Visits to be done',required=True),
 			'visit_details':fields.char('Visit Details',readonly=True),
 
             'remarks_category' : fields.many2one('remark.category','Remarks Category'),
@@ -64,7 +64,7 @@ class schedule_tasks(osv.Model):
 			'next_exec':fields.date('Next Execution',readonly=True),
 			# 'next_exec':fields.char('Next Execution',readonly=True),
 			# 'no_of_visits':fields.integer('No. of visits per month'),
-		'visits_count':fields.function(__count_visits,type='char',string="No.of visits per Month",method=True, store=True, multi=False),
+			'visits_count':fields.function(__count_visits,type='char',string="No.of visits per Month",method=True, store=True, multi=False),
 
 
 			'status': fields.selection([
@@ -73,13 +73,12 @@ class schedule_tasks(osv.Model):
 	
 	}
 
-	def default_country(self, cr, uid, context=None):
+	def _default_country(self, cr, uid, context=None):
 		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
 		return cid[0]
 
 	_defaults = {
-
-	# 'country':_default_country,
+	'country':_default_country,
 	'assigned_by': lambda obj, cr, uid, ctx=None: uid,
 	'status':'assigned',
 	'visit_shift':'day',
@@ -109,53 +108,53 @@ class schedule_tasks(osv.Model):
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(months=1)
 
-		if vals['visit_type'] == 'twice':
+		if vals['visit_type'] == '2':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=15)
 
-		if vals['visit_type'] == '3_times':
+		if vals['visit_type'] == '3':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=9)
 
-		if vals['visit_type'] == '4_times':
+		if vals['visit_type'] == '4':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=7.5)
 
 
-		if vals['visit_type'] == '5_times':
+		if vals['visit_type'] == '5':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=6)
 
-		if vals['visit_type'] == '6_times':
+		if vals['visit_type'] == '6':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=5)
 
-		if vals['visit_type'] == '7_times':
+		if vals['visit_type'] == '7':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=4)
 
-		if vals['visit_type'] == '8_times':
+		if vals['visit_type'] == '8':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=3.75)
 
-		if vals['visit_type'] == '9_times':
+		if vals['visit_type'] == '9':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=3.333)
 
-		if vals['visit_type'] == '10_times':
+		if vals['visit_type'] == '10':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=3)
 
-		if vals['visit_type'] == '12_times':
+		if vals['visit_type'] == '12':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=2.5)
 
 
-		if vals['visit_type'] == '13_times':
+		if vals['visit_type'] == '13':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=2.30)
 
-		if vals['visit_type'] == '16_times':
+		if vals['visit_type'] == '16':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=1.875)
 
@@ -194,53 +193,53 @@ class schedule_tasks(osv.Model):
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(months=1)
 
-			if t_obj.visit_type == 'twice':
+			if t_obj.visit_type == '2':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=15)
 
-			if t_obj.visit_type == '3_times':
+			if t_obj.visit_type == '3':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=9)
 
-			if t_obj.visit_type == '4_times':
+			if t_obj.visit_type == '4':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=7.5)
 
 
-			if t_obj.visit_type == '5_times':
+			if t_obj.visit_type == '5':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=6)
 
-			if t_obj.visit_type == '6_times':
+			if t_obj.visit_type == '6':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=5)
 
-			if t_obj.visit_type == '8_times':
+			if t_obj.visit_type == '8':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=3.75)
 
-			if t_obj.visit_type == '7_times':
+			if t_obj.visit_type == '7':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=4)
 
-			if t_obj.visit_type == '9_times':
+			if t_obj.visit_type == '9':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=3.333)
 
-			if t_obj.visit_type == '10_times':
+			if t_obj.visit_type == '10':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=3)
 
-			if t_obj.visit_type == '12_times':
+			if t_obj.visit_type == '12':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=2.5)
 
 
-			if t_obj.visit_type == '13_times':
+			if t_obj.visit_type == '13':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=2.30)
 
-			if t_obj.visit_type == '16_times':
+			if t_obj.visit_type == '16':
 				visit_date = today
 				vals['next_exec'] = visit_date+ relativedelta(days=1.875)
 
@@ -292,42 +291,42 @@ class schedule_tasks(osv.Model):
 				if i.visit_type == 'monthly/1':
 					vals['next_visit'] = visit_date+ relativedelta(months=1)
 
-				if i.visit_type == 'twice':
+				if i.visit_type == '2':
 					vals['next_visit'] = visit_date+ relativedelta(days=15)
 
-				if i.visit_type == '3_times':
+				if i.visit_type == '3':
 					vals['next_visit'] = visit_date+ relativedelta(days=9)
 
-				if i.visit_type == '4_times':
+				if i.visit_type == '4':
 					vals['next_visit'] = visit_date+ relativedelta(days=7.5)
 
 
-				if i.visit_type == '5_times':
+				if i.visit_type == '5':
 					vals['next_visit'] = visit_date+ relativedelta(days=6)
 
-				if i.visit_type == '6_times':
+				if i.visit_type == '6':
 					vals['next_visit'] = visit_date+ relativedelta(days=5)
 
-				if i.visit_type == '7_times':
+				if i.visit_type == '7':
 					vals['next_visit'] = visit_date+ relativedelta(days=4)
 
-				if i.visit_type == '8_times':
+				if i.visit_type == '8':
 					vals['next_visit'] = visit_date+ relativedelta(days=3.75)
 
-				if i.visit_type == '9_times':
+				if i.visit_type == '9':
 					vals['next_visit'] = visit_date+ relativedelta(days=3.333)
 
-				if i.visit_type == '10_times':
+				if i.visit_type == '10':
 					vals['next_visit'] = visit_date+ relativedelta(days=3)
 
-				if i.visit_type == '12_times':
+				if i.visit_type == '12':
 					vals['next_visit'] = visit_date+ relativedelta(days=2.5)
 
 
-				if i.visit_type == '13_times':
+				if i.visit_type == '13':
 					vals['next_visit'] = visit_date+ relativedelta(days=2.30)
 
-				if i.visit_type == '16_times':
+				if i.visit_type == '16':
 					vals['next_visit'] = visit_date+ relativedelta(days=1.875)
 
 				if visit_date.month == 1:
