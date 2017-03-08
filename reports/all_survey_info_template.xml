@@ -4,8 +4,8 @@
 		 <report 
 	            id="all_survey_info_report_id"
 	            model="survey.details"
-	            string="All Survey Info"
-	            report_type="qweb-pdf"
+	            string="Survey report"
+	            report_type="qweb-html"
 	            name="atm.all_survey_info_report"
 	            attachment_use="False"
 	            file="atm.all_survey_info_report"
