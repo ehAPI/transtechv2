@@ -2,16 +2,15 @@ from openerp.osv import fields, osv
 from openerp.tools.translate import _
 import datetime
 import time
-# from openerp import tools
-# import random
-# import smtplib
-# import os
-# import base64
-# from PIL import Image
-# from os.path import expanduser
-# from lxml import etree
-# from openerp import workflow
-
+from openerp import tools
+import random
+import smtplib
+import os
+import base64
+from PIL import Image
+from os.path import expanduser
+from lxml import etree
+from openerp import workflow
 
 class survey_details(osv.osv):
 
@@ -441,3 +440,4 @@ survey_details()
 
 # 	}
 # images_calss()
+
