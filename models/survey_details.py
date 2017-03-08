@@ -231,6 +231,7 @@ class survey_details(osv.osv):
 			res['value'].update({'atm': part.atm.id})
 			res['value'].update({'acc_manager': part.surveyor.id})
 
+
 			res['value'].update({'customer_name': part.customer.id})
 			res['value'].update({'visit_time': part.visit_time})
 			res['value'].update({'state': part.state.id})
@@ -297,6 +298,7 @@ class survey_details(osv.osv):
 		return full_path
 
 	def add_line(self, cr, uid, ids, context):
+
 
 		this = self.browse(cr, uid, ids, context=context)[0]
 		# tree_id = self.pool.get('ir.model.data').get_object_reference(
@@ -370,6 +372,7 @@ class survey_details(osv.osv):
 
 		self.pool.get('view.plan.tasks').write(cr, uid, vals['atm_report'], {'status': 'done'}, context)
 
+
 		approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
 		
 		values.update({'state': part.state.id})
@@ -392,6 +395,7 @@ class survey_details(osv.osv):
 	# 	return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
 	 
 	
+
 
 	def create(self, cr, uid, vals, context=None):
 		if vals.get('name','/')=='/':
