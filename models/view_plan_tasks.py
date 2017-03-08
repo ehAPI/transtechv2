@@ -1,4 +1,9 @@
 from openerp.osv import fields, osv
+from openerp.tools.translate import _
+import datetime
+import time
+from dateutil.relativedelta import relativedelta
+from openerp import SUPERUSER_ID
 
 class view_plan_tasks(osv.osv):
 
@@ -62,10 +67,13 @@ class view_plan_tasks(osv.osv):
 		return cid[0]
 
 	_defaults = {
+	'assigned_by':lambda obj, cr, uid, ctx=None: uid,
 	'status':'assigned',
 	'visit_shift':'day',
 	'country':_default_country,
 	}
+
+	_order = "name desc"
 
 	def status_done(self,cr,uid,ids,context=None):
 		self.write(cr,uid,ids,{'status':'done'},context=context)
@@ -76,6 +84,7 @@ class view_plan_tasks(osv.osv):
 		return True
 
 	def create(self, cr, uid, vals, context=None):
+		visit_date = vals['visit_date_time']
 		if vals.get('name','/')== '/':
 			vals['name']=self.pool.get('ir.sequence').get(cr,uid,'view.plan.tasks') or '/'
 		return super(view_plan_tasks,self).create(cr, uid, vals, context=context)		

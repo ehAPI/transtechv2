@@ -10,6 +10,14 @@ class remark_category(osv.osv):
 	'remark_description' : fields.char('Remark Description', required=True),
 	}
 
+	def copy(self, cr, uid, id, default=None, context=None):
+		if not default:
+			default = {}
+		default.update({
+            'remark_description': self.pool.get('ir.sequence').get(cr, uid, 'remark.category'),
+        })
+		return super(remarks_category, self).copy(cr, uid, id, default, context=context)
+
 	def create(self, cr, uid, vals, context=None):
 		if vals.get('remark_category_id','/')== '/':
 			vals['remark_category_id'] = self.pool.get('ir.sequence').get(cr, uid, 'remark.category') or '/'

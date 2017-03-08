@@ -1,7 +1,4 @@
 from openerp.osv import fields, osv
-
-import time
-
 from openerp.tools.translate import _
 import datetime
 import time
@@ -11,9 +8,108 @@ import random
 # atm details class
 
 class atm_details(osv.osv):
+
+	def CurrentMonth(self,cr,uid,context=None):
+
+		visit_date = datetime.datetime.now().date()
+
+		if visit_date.month == 1:
+				month = 'dec'
+		if visit_date.month == 2:
+				month = 'jan'
+		if visit_date.month == 3:
+				month = 'feb'
+		if visit_date.month == 4:
+				month = 'mar'
+		if visit_date.month == 5:
+				month = 'apr'
+		if visit_date.month == 6:
+				month = 'may'
+		if visit_date.month == 7:
+				month = 'june'
+		if visit_date.month == 8:
+				month = 'jul'
+		if visit_date.month == 9:
+				month = 'aug'
+		if visit_date.month == 10:
+				month = 'sep'
+		if visit_date.month == 11:
+				month = 'oct'
+		if visit_date.month == 12:
+				month = 'nov'
+
+		return month
+
+	def __count_visits1(self, cr, uid, ids, name, arg, context=None):
+
+		result = {}
+		mnth = self.CurrentMonth(cr,uid,context=None)
+
+		for obj in self.browse(cr, uid, ids, context=context):
+			survey_ids = self.pool.get('survey.details').search(cr,uid,[('month','=',mnth),('atm','=',obj.id),('status','=','approved')])
+			result[obj.id] = len(survey_ids)
+
+		return result
+
+	def __count_visits2(self, cr, uid, ids, name, arg, context=None):
+
+		result = {}
+		mnth = self.CurrentMonth(cr,uid,context=None)
+		for obj in self.browse(cr, uid, ids, context=context):
+			survey_ids = self.pool.get('survey.details').search(cr,uid,[('month','=',mnth),('atm','=',obj.id),('status','=','approved')])
+
+			sct_ids = self.pool.get('schedule.tasks').search(cr,uid,[('atm','=',obj.id),('status','!=','cancel')])
+			if sct_ids:
+				sct_obj = self.pool.get('schedule.tasks').browse(cr,uid,sct_ids[0])
+
+				if sct_obj.visit_type == 'monthly/1':
+					total = 1
+				else:
+					total = int(sct_obj.visit_type)
+				survey_ids = self.pool.get('survey.details').search(cr,uid,[('month','=',mnth),('atm','=',obj.id),('status','=','approved')])
+				result[obj.id] = total - len(survey_ids)
+				if result[obj.id] < 0:
+					result[obj.id] = 0
+			else:
+
+				result[obj.id] = 0
+
+		return result
+
+	def __count_visits3(self, cr, uid, ids, name, arg, context=None):
+
+		result = {}
+		mnth = self.CurrentMonth(cr,uid,context=None)
+		for obj in self.browse(cr, uid, ids, context=context):
+			survey_ids = self.pool.get('survey.details').search(cr,uid,[('month','=',mnth),('atm','=',obj.id),('status','=','approved')])
+
+			sct_ids = self.pool.get('schedule.tasks').search(cr,uid,[('atm','=',obj.id),('status','!=','cancel')])
+			if sct_ids:
+				sct_obj = self.pool.get('schedule.tasks').browse(cr,uid,sct_ids[0])
+
+				if sct_obj.visit_type == 'monthly/1':
+					result[obj.id] = 1
+				else:
+					result[obj.id] = sct_obj.visit_type
+			else:
+
+				survey_ids = self.pool.get('survey.details').search(cr,uid,[('month','=',mnth),('atm','=',obj.id),('status','=','approved')])
+				result[obj.id] = len(survey_ids)
+
+		return result
+
 	_name = 'atm.details'
 	_rec_name = 'atm_branch_details'
 	_description = 'ATM Details'
+
+	def copy(self, cr, uid, id, default=None, context=None):
+		if not default:
+			default = {}
+		default.update({
+			'atm_code': self.pool.get('ir.sequence').get(cr, uid, 'atm.details'),
+		})
+		return super(atm_details, self).copy(cr, uid, id, default, context=context)
+
 	_columns = {
 	'atm_image' : fields.binary('ATM Image', widget='image'),
 	'atm_code' : fields.char('ATM Code', readonly=True),
@@ -26,9 +122,6 @@ class atm_details(osv.osv):
 								  ('walk', 'Walk Through'),
 								  ('lobby', 'Lobby'),
 								  ('ttw', 'TTW')],'ATM Type',required=True),
-	'visits_done' :fields.integer('Visits Done'),
-	'visits_left' :fields.integer('Visits Left'),
-	'visits_required' :fields.integer('Required Visits', ondelete='set null'),
 	'date' : fields.date('Date'),
 	'country' : fields.many2one('res.country','Country', ondelete='set null'),
 	'state' : fields.many2one('res.country.state', 'State', required=True, ondelete='set null'),
@@ -44,9 +137,7 @@ class atm_details(osv.osv):
 	'atm_make' :fields.char('ATM Make'),
 	'atm_functionality' :fields.char('ATM Functionality'),
 	'base_height' :fields.char('Base Height'),
-
 	'no_tasks':fields.integer('No. of Tasks',readonly=True),
-
 	'location_category' :fields.selection([('offsite','Offsite'),('onsite','Onsite')],'Location Category'),
 	'onsite_category' :fields.selection([('branch','Branch'),
 										 ('csu','CSU'),
@@ -71,16 +162,28 @@ class atm_details(osv.osv):
 	'capacity' :fields.char('Capacity'),
 	'detail1' :fields.char('Detail 1'),
 	'detail2' :fields.char('Detail 2'),
+	'visits_done':fields.function(__count_visits1,type='integer',string="Visits Done",method=True, store = False, multi=False),
+	'visits_left':fields.function(__count_visits2,type='integer',string="Visits Left",method=True, store=False, multi=False),
+	'visits_total':fields.function(__count_visits3,type='integer',string="Required Visits",method=True, store=False, multi=False),
+	'total_visits':fields.integer('Required Visits',readonly=True),
+	'no_of_visits':fields.integer('Number of Visits'),
+	
 	}
 	def _default_country(self, cr, uid, context=None):
 		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
 		return cid[0]
+
+
 
 	_defaults = {
 		'date': lambda *a: time.strftime('%Y-%m-%d'),
 		'country':_default_country,
 	}
 	_order = 'atm_code'
+
+	_sql_constraints = [
+		('atm_id_uniq', 'Check(1=1)','ATM ID must be Unique !'),
+	]
 
 	def open_map(self, cr, uid, ids, context=None):
 		address_obj= self.pool.get('atm.details')
@@ -123,11 +226,126 @@ class atm_details(osv.osv):
 
 	def create(self, cr, uid, vals, context=None):
 		atms = self.search(cr,uid,[('bank_atm_id','=',vals['bank_atm_id']),('customer','=',vals['customer'])])
+	
 		if atms:
 			raise osv.except_osv(_('This ATM ID has already been Used .'),_("Please Use new Id !") )
 		if vals.get('atm_code','/')== '/':
 			vals['atm_code'] = self.pool.get('ir.sequence').get(cr, uid, 'atm.details') or '/'
 		return super(atm_details, self).create(cr, uid, vals, context=context)
+
+	def write(self,cr,uid,ids,vals,context=None):
+
+		if 'bank_atm_id' in vals and 'customer' in vals:
+			atms = self.search(cr,uid,[('bank_atm_id','=',vals['bank_atm_id']),('customer','=',vals['customer'])])
+			if atms:
+				raise osv.except_osv(_('This ATM ID has already been Used .'),_("Please Use new Id !") )
+
+		return super(atm_details,self).write(cr,uid,ids,vals,context=None)
+
+	def onchange_customer(self,cr,uid,ids,customer,context=None):
+		res={'value':{}}
+		cust_obj = self.pool.get('customer.info').browse(cr,uid,customer)
+		res['value'].update({'sla_start_date':cust_obj.sla_start_date,
+			'sla_end_date':cust_obj.sla_end_date,
+			'country':cust_obj.country.id})
+
+		return res
+
+	def count_tasks(self,cr,uid,context=None):
+		# cur_month = datetime.datetime.now()
+		vals = {}
+		if datetime.datetime.now().month == 1:
+				cur_month = 'jan'
+		if datetime.datetime.now().month == 2:
+				cur_month = 'feb'
+		if datetime.datetime.now().month == 3:
+				cur_month = 'mar'
+		if datetime.datetime.now().month == 4:
+				cur_month = 'apr'
+		if datetime.datetime.now().month == 5:
+				cur_month = 'may'
+		if datetime.datetime.now().month == 6:
+				cur_month = 'june'
+		if datetime.datetime.now().month == 7:
+				cur_month = 'jul'
+		if datetime.datetime.now().month == 8:
+				cur_month = 'aug'
+		if datetime.datetime.now().month == 9:
+				cur_month = 'sep'
+		if datetime.datetime.now().month == 10:
+				cur_month = 'oct'
+		if datetime.datetime.now().month == 11:
+				cur_month = 'nov'
+		if datetime.datetime.now().month == 12:
+				cur_month = 'dec'
+
+		tsk_ids = self.pool.get('view.plan.tasks').search(cr,uid,[('status','=','done'),('month','=','aug')])
+		t_obj = self.pool.get('view.plan.tasks').browse(cr,uid,tsk_ids)
+		atm_list = []
+		
+		for i in t_obj:
+			# if i.status=='done':
+			atm_list.append(i.atm.id)
+			tsk_ids1 = self.pool.get('schedule.tasks').search(cr,uid,[('atm','=',i.atm.id)])
+			survey_ids = self.pool.get('survey.details').search(cr,uid,[('month','=','aug'),('atm','=',i.atm.id),('status','=','approved')])
+			
+			if survey_ids:
+				vals.update({'no_tasks':len(survey_ids)})
+			else:
+				vals.update({'no_tasks':0})
+
+			if tsk_ids1:
+				sct_obj = self.pool.get('schedule.tasks').read(cr,uid,tsk_ids1[0],['visit_type'])
+
+				if sct_obj['visit_type'] == 'monthly/1':
+					sct_obj['visit_type'] = '1'
+				
+				if sct_obj['visit_type'] == 'daily':
+					sct_obj['visit_type'] = '30'
+
+				if sct_obj['visit_type'] == 'weekly':
+					sct_obj['visit_type'] = '4'
+				# print sct_obj
+				done = self.pool.get('view.plan.tasks').search(cr,uid,[('status','=','done'),('month','=','aug'),('atm','=',i.atm.id)])
+				vals.update({'total_visits':int(sct_obj['visit_type'])})
+				vals.update({'no_of_visits':vals['total_visits']-vals['no_tasks']})
+				if vals['no_of_visits'] < 0:
+						vals.update({'no_of_visits':0})
+				# print vals
+			else:
+				# done = self.pool.get('view.plan.tasks').search(cr,uid,[('status','=','done'),('month','=','jul'),('atm','=',i.atm.id)])
+				vals.update({'total_visits':len(survey_ids)})
+				vals.update({'no_of_visits':vals['total_visits']-vals['no_tasks']})
+				if vals['no_of_visits'] < 0:
+						vals.update({'no_of_visits':0})
+
+			self.pool.get('atm.details').write(cr,uid,i.atm.id,vals)
+		untouched_atms =  self.search(cr,uid,[('id','not in',atm_list)])
+
+		if untouched_atms:
+			for j in untouched_atms:
+
+				tsk_ids1 = self.pool.get('schedule.tasks').search(cr,uid,[('atm','=',j)])
+				if tsk_ids1:
+					sct_obj = self.pool.get('schedule.tasks').read(cr,uid,tsk_ids1,['visit_type','atm'])
+					for i in sct_obj:
+						values = {}
+						if i['visit_type'] == 'monthly/1':
+							i['visit_type'] = '1'
+						
+						if i['visit_type'] == 'daily':
+							i['visit_type'] = '30'
+
+						if i['visit_type'] == 'weekly':
+							i['visit_type'] = '4'
+						values.update({'total_visits':int(i['visit_type'])})
+				else:
+					values.update({'total_visits':0})
+				values.update({'no_tasks':0})
+				values.update({'no_of_visits':0})
+				self.pool.get('atm.details').write(cr,uid,j,values)
+		return True
+
 
 
 atm_details()

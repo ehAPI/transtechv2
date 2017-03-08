@@ -1,6 +1,15 @@
 from openerp.osv import fields, osv
+from openerp.tools.translate import _
 import datetime
 import time
+from openerp import tools
+import random
+import smtplib
+import os
+import base64
+from PIL import Image
+from os.path import expanduser
+from lxml import etree
 from openerp import workflow
 
 
@@ -232,9 +241,4 @@ class survey_details(osv.osv):
 	    self.signal_workflow(cr, uid, ids, 'quotation_sent')
 	    return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
 		
-	# def create(self, cr, uid, vals, context=None):
-	# 	if vals.get('name','/')=='/':
-	# 		vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.details') or '/'
-	# 	return super(survey_details,self).create(cr, uid, vals, context=context)
-
 survey_details()

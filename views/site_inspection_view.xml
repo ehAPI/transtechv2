@@ -9,7 +9,7 @@
 		    <field name="arch" type="xml">
 				<form string="Site Inspection" version="8.0">
 
-				<!-- <sheet> -->
+				<sheet>
 					<group>
 						<group>
 					
@@ -37,8 +37,13 @@
 							<field name="access_truck_crane"/>
 							<field name="hole_height_in_repeated"/>
 						</group>
+						<group>
+							<field name="inside_outside" />
+							<field name="hole_height" />
+							<field name="hole_height_outside" />
+						</group>
 					</group>
-				<!-- </sheet> -->
+				</sheet>
 				</form>
 			</field>
 		</record>
@@ -77,6 +82,11 @@
 			<field name="name">Site Inspection</field>
 			<field name="res_model">site.inspection</field>
 			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+  				<p class="oe_view_nocontent_create">
+    				Click to create details for your Site Inspection...
+  				</p>
+   			</field>
 		</record>
 
 		<!-- Top menu -->

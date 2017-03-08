@@ -11,7 +11,7 @@
 					<field name='cust_name'/>
 					<field name='country'/>
 					<field name='cont_per'/>
-					<field name='cont_no'/>
+					<field name='cont_no' string='Contact Number'/>
 					<field name='active'/>
 				</tree>
 			</field>
@@ -25,12 +25,12 @@
 				<form string="Customer Details">
 					<sheet>
 						<div>
-							<field name="cust_image" widget='image' class='oe_left oe_avatar'/>
+							<field name="cust_image" widget='image' class='oe_left oe_avatar' options='{"preview_image": "image_medium", "size": [90, 90]}'/>
 						</div>
 						<div class='oe_title'>
 							<h2>
 	                            <field name="cust_code" string='Customer Code'/>
-	                            <field name="cust_name" string='Customer Name' placeholder='Customer Name'/>
+	                            <field name="cust_name" default_focus="1" string='Customer Name' placeholder='Customer Name'/>
 						    </h2>
 
 						</div>
@@ -46,6 +46,7 @@
 								<field name='active'/>
 								<field name='sla_start_date'/>
 								<field name='sla_end_date'/>
+								<field name="display_mapping" invisible="1"/>
 							</group>
 							<group string='Escalation Levels'>
 								<field name='acc_manager'/>
@@ -53,18 +54,36 @@
 								<field name='other2'/>
 							</group>
 						</group>
-						<!-- <notebook>
-							<page string='List of Tasks for You'>
-								<tree string='ATM Surveys tree'>
-									<field name='cust_name'/>
-									<field name='country'/>
-								</tree>
+						<notebook>
+							<page string="List of Tasks for You">
+								<field name="task_ids" widget="many2many_list">
+									 <tree string="ATM Surverys tree">
+										<field name="customer_name"/>
+										<field name="atm"/>
+										<field name="country"/>
+										<field name="state" />
+										<field name="surveyor" />
+										<field name="visit_date_time"/>
+										<field name="add_instr"/>
+										<field name="status"/>
+									</tree>
+								</field>
 							</page>
-						</notebook> -->
+						</notebook>
 					</sheet>
 				</form>
 			</field>
 		</record>
+
+		<record id="view_customer_search" model="ir.ui.view">
+        	<field name="name">customer.info.search</field>
+        	<field name="model">customer.info</field>
+        	<field name="arch" type="xml">
+            	<search string="Customer">
+                		<field name="cust_name" filter_domain="['|', ('cust_name','ilike',self), ('cont_per','ilike',self)]" string="Customer"/>
+            	</search>
+        	</field>
+   	    </record>
 
 		<record model="ir.ui.view" id="date_rate_tree_view">
 			<field name="name">date.rate.form</field>
@@ -81,6 +100,11 @@
 			<field name="name">Customer Details</field>
 			<field name="res_model">customer.info</field>
 			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+          		<p class="oe_view_nocontent_create">
+            	click to add new Customer details......
+          		</p>
+       		</field>
 		</record>
 
 		<!-- Top menu -->
