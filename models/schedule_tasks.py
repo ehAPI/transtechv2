@@ -65,6 +65,7 @@ class schedule_tasks(osv.Model):
 			# 'next_exec':fields.char('Next Execution',readonly=True),
 			# 'no_of_visits':fields.integer('No. of visits per month'),
 			'visits_count':fields.function(__count_visits,type='char',string="No.of visits per Month",method=True, store=True, multi=False),
+		# 'visits_count':fields.function(__count_visits,type='integer',string="No.of visits per Month",method=True, store=True, multi=False),
 
 
 			'status': fields.selection([
@@ -129,7 +130,7 @@ class schedule_tasks(osv.Model):
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=5)
 
-		if vals['visit_type'] == '7':
+		if vals['visit_typ e'] == '7':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=4)
 
