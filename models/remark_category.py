@@ -3,6 +3,15 @@ from openerp.osv import fields, osv
 class remark_category(osv.osv):
 
 	_name = 'remark.category'
+
+	def copy(self, cr, uid, id, default=None, context=None):
+		if not default:
+			default = {}
+		default.update({
+            'description': self.pool.get('ir.sequence').get(cr, uid, 'remarks.category'),
+        })
+		return super(remarks_category, self).copy(cr, uid, id, default, context=context)
+
 	_rec_name = 'remark_description'
 	_description = 'Manage Remark Category'
 	_columns = {

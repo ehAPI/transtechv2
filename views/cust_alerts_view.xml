@@ -35,21 +35,22 @@
 						<group>
 							<group>
 								<field name='alert_id'/>
-								<field name='customer'/>
-								<field name='atm'/>
-								<field name='category'/>
-								<field name='priority'/>
-								<field name='country'/>
-								<field name='state'/>
+								<field name="customer" attrs="{'readonly':[('status','!=','assigned')]}" />
+								<field name='atm' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='category' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='priority' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='country' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='state' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='submitted_by' attrs="{'readonly':[('status','!=','assigned')]}"/>
 							</group>
 							<group string='Alert Categorization Details'>
-								<field name='reason_code_id'/>
-								<field name='reason_description'/>
+								<field name='reason_code_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='reason_description' attrs="{'readonly':[('status','!=','assigned')]}"/>
 							</group>
 						</group>
 							<group string='Summary &amp; Description'>
-								<field name='summary'/>
-								<field name='description'/>
+								<field name='summary' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='description' attrs="{'readonly':[('status','!=','assigned')]}"/>
 							</group>
 							<h2>Error Images</h2>
 							<field name='img1' widget='image'/>
@@ -60,11 +61,59 @@
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="action_cust_alerts_form">
-			<field name="name">Customer Alerts</field>
-			<field name="res_model">cust.alerts</field>
-			<field name="view_mode">tree,form</field>
-			<field name="view_id" ref="cust_alerts_tree_view"/>
+		<record id="action_cust_alerts_form" model="ir.actions.act_window">
+		  	<field name="name">Customer Alerts</field>
+			   <field name="type">ir.actions.act_window</field>
+			   <field name="res_model">cust.alerts</field>
+			   <field name="view_type">form</field>
+			   <field name="view_id" ref="cust_alerts_tree_view"/>
+			   <field name="view_mode">tree,form</field>         
+			   <field name="help" type="html">
+              		<p class="oe_view_nocontent_create">
+                	Click to add new Alerts......
+              		</p>
+               		</field>
+		</record>
+
+	<record model="ir.ui.view" id="view_atm_alerts_filter">
+            <field name="name">view_atm_alerts_filter</field>
+            <field name="model">cust.alerts</field>
+            <field name="arch" type="xml">
+             <search string="atm alerts search">
+			<filter icon="terp-check" string="Complants"  domain="[('category','=','complaint')]"/>
+			<separator/>
+			<filter icon="terp-check" string="Issue"  domain="[('category','=','issue')]"/>
+			<separator/>
+			<filter icon="terp-check" string="Low Priority Alerts"  domain="[('priority','=','low')]"/>
+			<separator/>
+			<filter icon="terp-check" string="Medium Priority Alerts"  domain="[('priority','=','medium')]"/>
+			<separator/>
+			<filter icon="terp-check" string="High Priority Alerts"  domain="[('priority','=','high')]"/>
+            <group expand="0" string="Group By...">
+                        <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'customer'}"/>
+			<separator/>
+                       <!-- <filter string="Assigned To" icon="terp-folder" domain="[]" context="{'group_by':'assign_to'}"/>-->
+			<separator/>
+                        <filter string="Category" icon="terp-go-month" domain="[]" context="{'group_by':'category'}"/>
+			<separator/>
+			
+			                   
+			</group>
+            </search>
+            </field>
+            </record>
+
+	<record id="view_alert_info_filter" model="ir.ui.view">
+            <field name="name">cust.alerts.select</field>
+            <field name="model">cust.alerts</field>
+            <field name="arch" type="xml">
+                <search string="Search Details">
+			<group string="Search">
+				<field name="summary" filter_domain="[('summary','ilike', self)]" string="Summary"/>
+				<filter string="ATM" domain="[('atm','=',1)]" context="{'group_by':'atm'}"/>
+			</group>
+			 </search>
+			</field>
 		</record>
 
 		<!-- Top menu -->

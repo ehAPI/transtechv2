@@ -26,7 +26,7 @@
 							<field name="visit_shift"/>
 							<field name="country"/>
 							<field name="surveyor"/>
-							<field name="visit_date_time"/>
+							<field name="visit_time"/>
 							<field name= "add_instr"/>
 							<field name="bulk_insert"/>
 							<field name="visit_type"/>
@@ -61,7 +61,7 @@
 						    <field name="state"/>
 						    <field name="surveyor"/>
 
-							<field name="visit_date_time"/>
+							<field name="visit_time"/>
 							<field name= "add_instr"/>
 							<field name="status"/>
 						

@@ -348,6 +348,7 @@ class atm_details(osv.osv):
 
 
 
+
 atm_details()
 
 class atm_old(osv.osv):
