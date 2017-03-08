@@ -118,7 +118,80 @@
 		<!-- menu item -->
 
 		<menuitem name="View &amp; Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="13" groups="group_atm_user,group_atm_manager"/>
+		 <record model="ir.ui.view" id="res_user_teamlead_view_extend">
+		    		<field name="name">res.user.form.inherit</field>
+		    		<field name="model">res.users</field>
+					<field name="inherit_id" ref="base.view_users_form"/>
+					<field name="arch" type="xml">
+						<field name='company_id' position='after'>
+								<field name="teamleader"/>
+								<field name="name_tl" attrs="{'invisible': [('teamleader', '=',True)]}"/>
+								<field name="contact_num"/>
+								<field name="joining_date"/>
+						</field>
+						<field name="login" position='after'>
+							<label for="password" class="oe_edit_only"/>
+							<field name="password" required="1" password="True"/>
+						</field>
 
+						<field name='active' position='after'>
+							<field name="survey_limit"/>
+							<field name="customer_ids" widget="many2many_tags"/>
+							<field name="Comments" />
+						</field>
+
+						<xpath expr="/form/sheet/div/label[@for='name']" position="before">
+								<h2><field name="tuser_id"/></h2>
+						</xpath>
+						<field name="action_id" position='replace'></field>
+						<field name="menu_id" position='replace'></field>
+					</field>
+			</record>
+
+			<record id="view_users_form_modification" model="ir.ui.view">
+		            <field name="name">res.users.form.mail.modification</field>
+		            <field name="model">res.users</field>
+		            <field name="inherit_id" ref="mail.view_users_form_mail"/>
+		            <field name="arch" type="xml">
+				<field name="notification_email_send" position='replace'></field>
+			     </field>
+				
+			</record>
+
+
+
+			<record model="ir.ui.view" id="res_user_extend_view">
+		    		<field name="name">res.user.form.inherit1</field>
+		    		<field name="model">res.users</field>
+					<field name="inherit_id" ref="base.view_users_simple_form"/>
+					<field name="arch" type="xml">
+						<field name="category_id" position="replace"/>
+						<field name="street" position="replace" nolabel="1"/>
+						<field name="street2" position="replace"/>
+						<field name="state_id" position="replace"/>
+						<field name="city" position="replace"/>
+						<field name="zip" position="replace"/>
+						<field name="country_id" position="replace"/>
+						<field name="website" position="replace"/>
+						<xpath expr="/form/sheet/group/group/label[@string='Address']" position="replace">
+							<field name="teamleader" string="Is Team Leader??"/>
+								<field name="name_tl" attrs="{'invisible': [('teamleader', '=',True)]}" string="Team Leader"/>
+								<field name="joining_date"/>
+								<field name="Comments" />
+								<field name="survey_limit"/>
+								<field name="customer_ids" widget="many2many_tags"/>
+						</xpath>
+					</field>
+			</record>
+
+			<record model="ir.ui.view" id="timezone_replace_form">
+		            <field name="name">timezone.change</field>
+		            <field name="model">res.users</field>
+		            <field name="inherit_id" ref="mail.view_users_form_simple_modif_mail"/>
+		            <field name="arch" type="xml">
+		               <xpath expr="//field[@name='notification_email_send']" position="replace"/>
+			    </field>
+			</record>
 
 	</data>
 </openerp>
