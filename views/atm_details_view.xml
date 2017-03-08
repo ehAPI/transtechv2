@@ -9,13 +9,13 @@
 				<tree string="ATM Details">
 					<field name='atm_code'/>
 					<field name='atm_branch_details'/>
-					<field name='bank_atm_id'/>
+					<field name='bank_atm_id' string='Bank ATM ID'/>
 					<field name='customer'/>
 					<field name='atm_type'/>
 					<field name='state'/>
-					<field name='visits_done'/>
-					<field name='visits_left'/>
-					<field name='visits_required'/>
+					<field name="visits_done" sum="Total"/>
+					<field name="visits_left" sum="Total"/>
+					<field name="visits_total" sum="Total"/>
 				</tree>
 			</field>
 		</record>
@@ -31,7 +31,7 @@
 					</header>
 					<sheet>
 						<h3>ATM Image</h3>
-						<field name="atm_image" widget='image' class='oe_left oe_avatar'/>
+						<field name="atm_image" widget='image' class='oe_left oe_avatar' options='{"size": [100, 100]}'/>
 						<group>
 							<field name='atm_code'/>
 							<field name='atm_branch_details'/>
@@ -42,7 +42,7 @@
 							<page string='Basic Info'>
 								<group>
 									<field name='atm_type'/>
-									<field name='customer'/>
+									<field name='customer' on_change="onchange_customer(customer)"/>
 									<field name='country'/>
 									<field name='state'/>
 									<field name='sla_start_date'/>
@@ -51,16 +51,6 @@
 								</group>
 							</page>
 
-
-							<!-- <page string='Mapping'>
->>>>>>> 7ab66f4f40370e99e9866130e63441eadf4e4fd1
-								<group>
-									<field name='longitude'/>
-									<field name='latitude'/>
-								</group>
-<<<<<<< HEAD
-=======
-							</page> -->
 							<page string="Mapping">
 								<table border="0" cellpadding="0" cellspacing="0">
 									<tbody>
@@ -148,10 +138,36 @@
 			</field>
 		</record>
 
+		<record model="ir.ui.view" id="view_atm_info_filter">
+            <field name="name">view_atm_filter</field>
+            <field name="model">atm.details</field>
+            <field name="arch" type="xml">
+            <search string="atm info search">
+				<field name="atm_branch_details"
+                       filter_domain="['|','|',('atm_branch_details','ilike',self),('bank_atm_id','ilike',self),('customer','ilike',self)]" string="ATM Info"/>
+				<filter string="ATM Only" icon="terp-check" domain="[('atm_type','=','atm_only')]"/>
+				<filter string="ATM and Cash Deposit" icon="terp-check" domain="[('atm_type','=','atm_cash_deposit')]"/>
+				<filter string="Drive Through" icon="terp-check" domain="[('atm_type','=','drive')]"/>
+				<separator/>
+	              <group expand="0" string="Group By...">
+	                        <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'customer'}"/>
+	                       <filter string="ATM Type" icon="terp-folder-green" domain="[]" context="{'group_by':'atm_type'}"/>
+	                        <filter string="Branch" icon="terp-folder-green" domain="[]" context="{'group_by':'atm_branch_details'}"/>
+				<filter string="State"  domain="[]" context="{'group_by':'state'}"/>
+				</group>
+            </search>
+            </field>
+            </record>
+
 		<record model="ir.actions.act_window" id="action_atm_details_form">
 			<field name="name">ATM Details</field>
 			<field name="res_model">atm.details</field>
 			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+          		<p class="oe_view_nocontent_create">
+            	click to add new ATM details......
+          		</p>
+       		</field>
 		</record>
 
 		<!-- Top menu -->

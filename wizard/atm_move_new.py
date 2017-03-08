@@ -30,24 +30,6 @@ class atm_localization(osv.osv):
 
 atm_localization()
 
-# class surveys_approve(osv.TransientModel):
-#     _name="surveys.approve"
-
-#     def approve_survey(self, cr, uid, ids, context=None):
-#         data_inv = self.pool.get('survey.details').read(cr, uid, context['active_ids'], ['status'], context=context)
-
-#         for record in data_inv:
-#             if record['status'] not in ('waiting_approval'):
-#                 raise osv.except_osv(_('Warning!'), _("Selected survey(s) cannot be approved as they are not in 'Waiting Approval' state."))
-#         self.pool.get('survey.details').write(cr,uid,context['active_ids'],{'status':'approved'})
-#         obj_list = self.pool.get('survey.details').browse(cr,uid,context['active_ids'])
-#         for obj in obj_list:
-#             self.pool.get('atm.surverys.management').write(cr, uid, obj.surv_task.id,{'status':'done'}, context)
-#         return {'type': 'ir.actions.act_window_close'}
-
-# surveys_approve()
-
-
 # class surveys_print(osv.TransientModel):
 
 #     _name = "print.survey"
@@ -110,71 +92,3 @@ atm_localization()
 #                 'form': self.read(cr, uid, survey_ids, context=context),
 #             }
 #         return {'type': 'ir.actions.report.xml', 'report_name': 'survey.details', 'datas': datas, 'nodestroy': True}
-    
-
-#     def action_upload(self, cr, uid, ids, context=None):
-#         # for i in range(0,5):
-#         data = self.read(cr, uid, ids)[0]
-
-
-#         vals = {}
-
-#         if data['bfr_img_front']:
-#             vals['bfr_img_front'] = data['bfr_img_front']
-
-#         if data['bfr_img_side']:
-#             vals['bfr_img_side'] = data['bfr_img_side']
-
-#         if data['bfr_img_back']:
-#             vals['bfr_img_back'] = data['bfr_img_back']
-
-#         if data['after_img_front']:
-#             vals['after_img_front'] = data['after_img_front']
-
-#         if data['after_img_side']:
-#             vals['after_img_side'] = data['after_img_side']
-
-#         if data['after_img_back']:
-#             vals['after_img_back'] = data['after_img_back']
-
-
-#         if data['bfr_img_front2']:
-#             vals['bfr_img_front2'] = data['bfr_img_front2']
-
-#         if data['bfr_img_side2']:
-#             vals['bfr_img_side'] = data['bfr_img_side2']
-
-#         if data['bfr_img_back2']:
-#             vals['bfr_img_back2'] = data['bfr_img_back2']
-
-#         if data['after_img_front2']:
-#             vals['after_img_front2'] = data['after_img_front2']
-
-#         if data['after_img_side2']:
-#             vals['after_img_side2'] = data['after_img_side2']
-
-#         if data['after_img_back2']:
-#             vals['after_img_back2'] = data['after_img_back2']
-
-
-#         if data['bfr_img_front3']:
-#             vals['bfr_img_front3'] = data['bfr_img_front3']
-
-#         if data['bfr_img_side3']:
-#             vals['bfr_img_side3'] = data['bfr_img_side3']
-
-#         if data['after_img_front3']:
-#             vals['after_img_front3'] = data['after_img_front3']
-            
-#         if data['after_img_side3']:
-#             vals['after_img_side3'] = data['after_img_side3']
-
-#         survey_ids = self.pool.get('survey.details').write(cr,uid,context['active_id'],vals)
-#         return {
-#                 'type': 'ir.actions.client',
-#                 'tag': 'reload',  }
-
-        
-       
-
-# surveys_print()

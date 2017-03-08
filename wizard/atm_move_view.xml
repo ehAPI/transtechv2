@@ -36,29 +36,12 @@
             <field name="target">new</field>
         </record>
 
-        <!-- <record id="survey_approve_view" model="ir.ui.view">
-            <field name="name">survey.details.confirm.form</field>
-            <field name="model">surveys.approve</field>
-            <field name="arch" type="xml">
-                <form string="Approve Surveys">
-                    <p class="oe_grey">
-                       Click on 'Approve Surveys' button to approve selected Surveys.
-                    </p>
-                    <footer>
-                        <button string="Approve Surveys" name="approve_survey" type="object" default_focus="1" class="oe_highlight"/>
-                        or
-                        <button string="Cancel" class="oe_link" special="cancel"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="wizard_print_survey_form">
+ <!--        <record model="ir.ui.view" id="wizard_print_survey_form">
                 <field name="name">Print Survey</field>
                 <field name="model">print.survey</field>
                 <field name="type">form</field>
                 <field name="arch" type="xml">
-                  <form string="Survey Reports" version="7.0">
+                  <form string="Survey Reports">
                       <p class="oe_grey">
                           This is the 1st wizard. If you want to go to next wizard fill the details below and click on Next button.
                       </p>
@@ -90,63 +73,6 @@
             <field name="view_id" ref="wizard_print_survey_form"/>
             <field name="target">new</field>
         </record>
-
-
-        <record model="ir.ui.view" id="wizard_upload_pics_form">
-                <field name="name">Upload Pictures</field>
-                <field name="model">print.survey</field>
-                <field name="type">form</field>
-                <field name="arch" type="xml">
-                  <form string="Survey Pics" version="7.0">
-                                <p class="oe_grey">
-                                    This wizard helps you to edit survey images.</p>
-        
-                                    <p class="oe_grey">If you want to quit click on Cancel.
-                               </p>    
-                <group>       
-                      <group string="Before Survey">
-                        <field name="bfr_img_front"/>             
-                        <field name="bfr_img_side"/>             
-                        <field name="bfr_img_back"/>
-        
-                        <field name="bfr_img_front2"/>             
-                        <field name="bfr_img_side2"/>             
-                        <field name="bfr_img_back2"/>
-        
-                        <field name="bfr_img_front3"/>             
-                        <field name="bfr_img_side3"/>               
-                      </group>
-        
-                      <group string="After Survey">
-                        <field name="after_img_front"/>             
-                        <field name="after_img_side"/>             
-                        <field name="after_img_back"/>
-                        <field name="after_img_front2"/>             
-                        <field name="after_img_side2"/>             
-                        <field name="after_img_back2"/>
-        
-                        <field name="after_img_front3"/>             
-                        <field name="after_img_side3"/>              
-                      </group>
-                  </group>
-                      <footer>
-                        <button name="action_upload" string="Upload" type="object" class="oe_highlight"/>
-                        <button string="Cancel" class="oe_link" special="cancel"/>
-                      </footer>
-        
-                  </form>
-                </field>
-               </record>
-
-        <record id="action_pics_survey_wizard" model="ir.actions.act_window">
-            <field name="name">Survey Images</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">print.survey</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="wizard_upload_pics_form"/>
-            <field name="target">new</field>
-        </record> -->
-
+ -->
   </data>
 </openerp>
