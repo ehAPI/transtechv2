@@ -12,6 +12,7 @@ from os.path import expanduser
 from lxml import etree
 from openerp import workflow
 
+
 class survey_details(osv.osv):
 
 	_name = 'survey.details'
@@ -46,6 +47,7 @@ class survey_details(osv.osv):
 	_columns = {
 		'name':fields.char('Survey id', readonly=True),
 		'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
+	
 		'month':fields.selection([('Jan','January'),
 			('Feb','February'),
 			('March','March'),
@@ -62,6 +64,7 @@ class survey_details(osv.osv):
 		'atm' : fields.many2one('atm.details', 'ATM'),
 		'customer_name':fields.many2one('customer.info','Customer'),
 		'acc_manager' : fields.many2one('res.users', 'Surveyor'),
+		'is_nbad': fields.function(_check_customer, type='boolean', string='Is NBAD', method=True, store=False, multi=False),
 		
 		#'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
 		'visit_time':fields.datetime('Visit Time'),
@@ -228,6 +231,7 @@ class survey_details(osv.osv):
 			res['value'].update({'atm': part.atm.id})
 			res['value'].update({'acc_manager': part.surveyor.id})
 
+
 			res['value'].update({'customer_name': part.customer.id})
 			res['value'].update({'visit_time': part.visit_time})
 			res['value'].update({'state': part.state.id})
@@ -295,6 +299,7 @@ class survey_details(osv.osv):
 
 	def add_line(self, cr, uid, ids, context):
 
+
 		this = self.browse(cr, uid, ids, context=context)[0]
 		# tree_id = self.pool.get('ir.model.data').get_object_reference(
 		search_view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'atm', 'view_atm_surverys_filter')[1]
@@ -340,6 +345,10 @@ class survey_details(osv.osv):
 	def write(self, cr, uid, ids, vals, context=None):
 		return super(survey_details, self).write(cr, uid, ids, vals, context)
 
+	# def create(self, cr, uid, vals, context=None):
+ #   		vals['name']= self.pool.get('ir.sequence').get(cr, uid, 'survey.det')
+ #   		return super(Survey_Details, self).create(cr, uid, vals, context=context)
+
 	def create(self, cr, uid, vals, context=None):
 
 		if vals.get('name', '/') == '/':
@@ -363,6 +372,7 @@ class survey_details(osv.osv):
 
 		self.pool.get('view.plan.tasks').write(cr, uid, vals['atm_report'], {'status': 'done'}, context)
 
+
 		approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
 		
 		values.update({'state': part.state.id})
@@ -374,14 +384,19 @@ class survey_details(osv.osv):
 		self.write(cr, uid, survey_id, values)
 		return survey_id  
 
-	def print_survey(self, cr, uid, ids, context=None):
-		'''
-		This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
-		'''
-		assert len(ids) == 1, 'This option should only be used for a single id at a time'
-		self.signal_workflow(cr, uid, ids, 'quotation_sent')
-		return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
-		
+	
+
+	# def print_survey(self, cr, uid, ids, context=None):
+	# 	'''
+	# 	This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
+	# 	'''
+	# 	assert len(ids) == 1, 'This option should only be used for a single id at a time'
+	# 	self.signal_workflow(cr, uid, ids, 'quotation_sent')
+	# 	return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
+	 
+	
+
+
 	def create(self, cr, uid, vals, context=None):
 		if vals.get('name','/')=='/':
 			vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.details') or '/'
@@ -389,6 +404,42 @@ class survey_details(osv.osv):
 
 survey_details()
 
+
+# class upload_images(osv.osv):
+#     _name = 'upload_images.tutorial'
+#     _description = 'Tutorial image uploading'
+ 
+#     _columns = {
+#     'upload_name': fields.char('Name', required=True, translate=True),
+#     'image': fields.binary("Image",
+#             help="This field holds the image used as image for our customers, limited to 1024x1024px."),
+#     'image_medium': fields.function(_get_image, fnct_inv=_set_image,
+#             string="Image (auto-resized to 128x128):", type="binary", multi="_get_image",
+#             store={
+#                 'upload_images.tutorial': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+#             },help="Medium-sized image of the category. It is automatically "\
+#                  "resized as a 128x128px image, with aspect ratio preserved. "\
+#                  "Use this field in form views or some kanban views."),
+#     'image_small': fields.function(_get_image, fnct_inv=_set_image,
+#             string="Image (auto-resized to 64x64):", type="binary", multi="_get_image",
+#             store={
+#                 'upload_images.tutorial': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+#             },
+#             help="Small-sized image of the category. It is automatically "\
+#                  "resized as a 64x64px image, with aspect ratio preserved. "\
+#                  "Use this field anywhere a small image is required."),
+#     }
+
+#     def _get_image(self, cr, uid, ids, name, args, context=None):
+#         result = dict.fromkeys(ids, False)
+#         for obj in self.browse(cr, uid, ids, context=context):
+#             result[obj.id] = tools.image_get_resized_images(obj.image)
+#         return result
+
+#     def _set_image(self, cr, uid, id, name, value, args, context=None):
+#         return self.write(cr, uid, [id], {'image': tools.image_resize_image_big(value)}, context=context)
+
+# upload_images()
 # class images_calss(osv.osv):
 
 # 	def image1_bfr(self, cr, uid, ids, name, arg, context=None):
