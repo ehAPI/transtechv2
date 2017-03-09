@@ -249,6 +249,10 @@ class schedule_tasks(osv.Model):
 		return True
 
 
+	def status_cancel(self,cr,uid,ids,context=None):
+		self.write(cr,uid,ids,{'status':'cancel'},context=context)
+		return True
+
 	def schedule_task(self,cr,uid,context=None):
 		today = datetime.datetime.now().date()
 		ids1 = self.search(cr,uid,[('status','!=','cancel'),('next_exec','=',today)])

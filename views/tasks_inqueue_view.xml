@@ -87,7 +87,7 @@
 	                    <field name="country"/>
 	                    <field name="state" />
 	                    <field name="surveyor" />
-	                    <field name="visit_date_time"/>
+	                    <field name="visit_time"/>
 	                    <field name="add_instr"/>
 	                    <field name="assigned_by"/>
 	                    <field name="status"/>
