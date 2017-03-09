@@ -130,7 +130,7 @@ class schedule_tasks(osv.Model):
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=5)
 
-		if vals['visit_typ e'] == '7':
+		if vals['visit_type'] == '7':
 			visit_date = today
 			vals['next_exec'] = visit_date+ relativedelta(days=4)
 
