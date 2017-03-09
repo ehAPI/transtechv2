@@ -14,7 +14,7 @@
 			 "views/schedule_tasks_view.xml",
 			 "views/tasks_status_view.xml",
 			 "views/jsmap.xml",
-			 "views/survey_report.xml",
+			 # "views/survey_report.xml",
 			 # "static/src/xml/base.xml",
 			 "views/alerts_foru_view.xml",
 			 "views/tasks_inqueue_view.xml",
@@ -36,11 +36,7 @@
 			 "views/atm_sequence.xml",
 			 "reports/all_survey_info.xml",
 			 "reports/all_survey_info_template.xml",
-			 "reports/survey2_template.xml",
-			 "reports/survey2.xml",
-			 "reports/new_survey_report_template.xml",
-			 "reports/new_survey_report.xml",
-			 # "reports/print_survey_report.xml",
+		
 			 "data/mail_data.xml"],
 
     'qweb': ['static/src/xml/base.xml',], 

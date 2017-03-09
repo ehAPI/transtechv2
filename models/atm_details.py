@@ -5,6 +5,8 @@ import time
 import urllib
 import random
 
+
+
 # atm details class
 
 class atm_details(osv.osv):

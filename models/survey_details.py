@@ -46,6 +46,7 @@ class survey_details(osv.osv):
 	_columns = {
 		'name':fields.char('Survey id', readonly=True),
 		'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
+	
 		'month':fields.selection([('Jan','January'),
 			('Feb','February'),
 			('March','March'),
@@ -62,6 +63,7 @@ class survey_details(osv.osv):
 		'atm' : fields.many2one('atm.details', 'ATM'),
 		'customer_name':fields.many2one('customer.info','Customer'),
 		'acc_manager' : fields.many2one('res.users', 'Surveyor'),
+		'is_nbad': fields.function(_check_customer, type='boolean', string='Is NBAD', method=True, store=False, multi=False),
 		
 		#'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
 		'visit_time':fields.datetime('Visit Time'),
@@ -218,118 +220,120 @@ class survey_details(osv.osv):
 
 		}
 
-	# def onchange_taskid(self, cr, uid, ids, atm_report, context=None):
-	# 	res = {'value': {}}
-	# 	if atm_report:
-	# 		part = self.pool.get('view.plan.tasks').browse(
-	# 			cr, uid, atm_report, context)
-	# 		# print part.atm.id
-	# 		res['value'].update({'month': part.task_month})
-	# 		res['value'].update({'atm': part.atm.id})
-	# 		res['value'].update({'acc_manager': part.surveyor.id})
-
-	# 		res['value'].update({'customer_name': part.customer.id})
-	# 		res['value'].update({'visit_time': part.visit_time})
-	# 		res['value'].update({'state': part.state.id})
-
-	# 	return res
-
-	# def __resize__image(self, cr, uid, image, context=None):
-
-	# 	imgdata1 = base64.b64decode(image)
-	# 	home = expanduser("~")
-
-	# 	dir_name = home + '/temp_img/%s' % (str(uid))
-
-	# 	if os.path.exists(dir_name):
-	# 		full_path = dir_name + '/temp_img.jpeg'
-
-	# 	else:
-	# 		os.makedirs(dir_name)
-	# 		full_path = dir_name + '/temp_img.jpeg'
-
-	# 	with open(full_path, 'wb') as f:
-	# 		f.write(imgdata1)
-	# 		f.close()
-
-	# 	im = Image.open(full_path)
-	# 	im.save(full_path, quality=20)
-
-	# 	f = open(full_path, 'r')
-
-	# 	photo_data = f.read()
-
-	# 	n_data = base64.b64encode(photo_data)
-
-	# 	# print tools.human_size(n_data)
-
-	# 	return n_data
-
-	# def __create_dir(self, cr, uid, cid, atm_id, month, context=None):
-
-	# 	customer = self.pool.get('customer.info').browse(cr, uid, cid).name
-	# 	atm = self.pool.get('atm.details').browse(cr, uid, atm_id).atm_id
-
-	# 	dir_name = '/var/www/html/ERP/%s/%s/%s' % (
-	# 		str(month), str(customer), str(atm))
-
-	# 	return dir_name
-
-	# def __write_image_file(self, cr, uid, imgdata1, vals, counter, context=None):
-
-	# 	file_loc = self.__create_dir(
-	# 		cr, uid, vals['customer_name'], vals['atm'], vals['month'], context=None)
-
-	# 	if os.path.exists(file_loc):
-	# 		full_path = file_loc + '/%s_%s.jpeg' % (vals['name'], str(counter))
-
-	# 	else:
-	# 		os.makedirs(file_loc)
-	# 		full_path = file_loc + '/%s_%s.jpeg' % (vals['name'], str(counter))
-
-	# 	with open(full_path, 'wb') as f:
-	# 		f.write(imgdata1)
-	# 		f.close()
-
-	# 	return full_path
-
-	# def add_line(self, cr, uid, ids, context):
-
-	# 	this = self.browse(cr, uid, ids, context=context)[0]
-	# 	# tree_id = self.pool.get('ir.model.data').get_object_reference(
-	# 	search_view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'atm', 'view_atm_surverys_filter')[1]
-	# 	form_id = self.pool.get('ir.model.data').get_object_reference(
-	# 		cr, uid, 'atm', 'view_atm_view_plan_tasks_form')[1]
-
-	# 	res = {
-	# 		'type': 'ir.actions.act_window',
-	# 		'name': 'Test',
-	# 		'view_type': 'form',
-	# 		'view_mode': 'form,tree',
-	# 		'res_model': 'view.plan.tasks',
-	# 		'domain': [('id', '=', 290)],
-	# 		# 'context':{'search_default_Current': 1, 'search_default_solu': 1, 'search_default_traj':1},
-	# 		'views': [(tree_id, 'tree'), (form_id, 'form')],
-	# 		# 'search_view_id': search_view_id
-	# 	}
-
-	# 	return res
+	def onchange_taskid(self, cr, uid, ids, atm_report, context=None):
+		res = {'value': {}}
+		if atm_report:
+			part = self.pool.get('view.plan.tasks').browse(
+				cr, uid, atm_report, context)
+			# print part.atm.id
+			res['value'].update({'month': part.task_month})
+			res['value'].update({'atm': part.atm.id})
+			res['value'].update({'acc_manager': part.surveyor.id})
 
 
-	# def cover_print(self, cr, uid, ids, context=None):
-	# 	# for i in range(0,5):
-	# 	survey_ids = self.search(cr, uid, [('status', '=', 'approved')])
-	# 	'''
-	# 	This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
-	# 	'''
-	# 	assert len(
-	# 		ids) == 1, 'This option should only be used for a single id at a time'
-	# 	datas = {
-	# 		'model': 'survey.details',
-	# 		'ids': survey_ids,
-	# 		'form': self.read(cr, uid, survey_ids, context=context),
-	# 	}
-	# 	return {'type': 'ir.actions.report.xml', 'report_name': 'survey.details', 'datas': datas, 'nodestroy': True}
+			res['value'].update({'customer_name': part.customer.id})
+			res['value'].update({'visit_time': part.visit_time})
+			res['value'].update({'state': part.state.id})
+
+		return res
+
+	def __resize__image(self, cr, uid, image, context=None):
+
+		imgdata1 = base64.b64decode(image)
+		home = expanduser("~")
+
+		dir_name = home + '/temp_img/%s' % (str(uid))
+
+		if os.path.exists(dir_name):
+			full_path = dir_name + '/temp_img.jpeg'
+
+		else:
+			os.makedirs(dir_name)
+			full_path = dir_name + '/temp_img.jpeg'
+
+		with open(full_path, 'wb') as f:
+			f.write(imgdata1)
+			f.close()
+
+		im = Image.open(full_path)
+		im.save(full_path, quality=20)
+
+		f = open(full_path, 'r')
+
+		photo_data = f.read()
+
+		n_data = base64.b64encode(photo_data)
+
+		# print tools.human_size(n_data)
+
+		return n_data
+
+	def __create_dir(self, cr, uid, cid, atm_id, month, context=None):
+
+		customer = self.pool.get('customer.info').browse(cr, uid, cid).name
+		atm = self.pool.get('atm.details').browse(cr, uid, atm_id).atm_id
+
+		dir_name = '/var/www/html/ERP/%s/%s/%s' % (
+			str(month), str(customer), str(atm))
+
+		return dir_name
+
+	def __write_image_file(self, cr, uid, imgdata1, vals, counter, context=None):
+
+		file_loc = self.__create_dir(
+			cr, uid, vals['customer_name'], vals['atm'], vals['month'], context=None)
+
+		if os.path.exists(file_loc):
+			full_path = file_loc + '/%s_%s.jpeg' % (vals['name'], str(counter))
+
+		else:
+			os.makedirs(file_loc)
+			full_path = file_loc + '/%s_%s.jpeg' % (vals['name'], str(counter))
+
+		with open(full_path, 'wb') as f:
+			f.write(imgdata1)
+			f.close()
+
+		return full_path
+
+	def add_line(self, cr, uid, ids, context):
+
+
+		this = self.browse(cr, uid, ids, context=context)[0]
+		# tree_id = self.pool.get('ir.model.data').get_object_reference(
+		search_view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'atm', 'view_atm_surverys_filter')[1]
+		form_id = self.pool.get('ir.model.data').get_object_reference(
+			cr, uid, 'atm', 'view_atm_view_plan_tasks_form')[1]
+
+		res = {
+			'type': 'ir.actions.act_window',
+			'name': 'Test',
+			'view_type': 'form',
+			'view_mode': 'form,tree',
+			'res_model': 'view.plan.tasks',
+			'domain': [('id', '=', 290)],
+			# 'context':{'search_default_Current': 1, 'search_default_solu': 1, 'search_default_traj':1},
+			'views': [(tree_id, 'tree'), (form_id, 'form')],
+			# 'search_view_id': search_view_id
+		}
+
+		return res
+
+
+	def cover_print(self, cr, uid, ids, context=None):
+		# for i in range(0,5):
+		survey_ids = self.search(cr, uid, [('status', '=', 'approved')])
+		'''
+		This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
+		'''
+		assert len(
+			ids) == 1, 'This option should only be used for a single id at a time'
+		datas = {
+			'model': 'survey.details',
+			'ids': survey_ids,
+			'form': self.read(cr, uid, survey_ids, context=context),
+		}
+		return {'type': 'ir.actions.report.xml', 'report_name': 'survey.details', 'datas': datas, 'nodestroy': True}
 
 
 
@@ -337,59 +341,103 @@ class survey_details(osv.osv):
 		self.write(cr,uid,ids,{'status':'approved'},context=context)
 		return True 
 
-	# def write(self, cr, uid, ids, vals, context=None):
-	# 	return super(survey_details, self).write(cr, uid, ids, vals, context)
+	def write(self, cr, uid, ids, vals, context=None):
+		return super(survey_details, self).write(cr, uid, ids, vals, context)
 
 	# def create(self, cr, uid, vals, context=None):
+ #   		vals['name']= self.pool.get('ir.sequence').get(cr, uid, 'survey.det')
+ #   		return super(Survey_Details, self).create(cr, uid, vals, context=context)
 
-	# 	if vals.get('name', '/') == '/':
-	# 		vals['name'] = self.pool.get('ir.sequence').get(
-	# 			cr, uid, 'survey.details') or '/'
+	def create(self, cr, uid, vals, context=None):
 
-	# 	vals['visit_time'] = datetime.datetime.now()
-	# 	s_ids = self.search(cr, uid, [('month', '=', vals['month']), ('atm', '=', vals[
-	# 						'atm']), ('atm_report', '=', vals['atm_report'])], context=None)
+		if vals.get('name', '/') == '/':
+			vals['name'] = self.pool.get('ir.sequence').get(
+				cr, uid, 'survey.details') or '/'
 
-	# 	if s_ids:
-	# 		self.unlink(cr, uid, s_ids, context=None)
+		vals['visit_time'] = datetime.datetime.now()
+		s_ids = self.search(cr, uid, [('month', '=', vals['month']), ('atm', '=', vals[
+							'atm']), ('atm_report', '=', vals['atm_report'])], context=None)
 
-	# 	survey_id = super(survey_details, self).create(
-	# 		cr, uid, vals, context=context)
+		if s_ids:
+			self.unlink(cr, uid, s_ids, context=None)
 
-	# 	values = {}
+		survey_id = super(survey_details, self).create(
+			cr, uid, vals, context=context)
 
-	# 	part = self.pool.get('view.plan.tasks').browse(
-	# 		cr, uid, vals['atm_report'], context)
+		values = {}
 
-	# 	self.pool.get('view.plan.tasks').write(cr, uid, vals['atm_report'], {'status': 'done'}, context)
+		part = self.pool.get('view.plan.tasks').browse(
+			cr, uid, vals['atm_report'], context)
 
-	# 	approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
-		
-	# 	values.update({'state': part.state.id})
+		self.pool.get('view.plan.tasks').write(cr, uid, vals['atm_report'], {'status': 'done'}, context)
 
-	# 	if vals['current_longitude'] and vals['current_latitude']:
-	# 		self.pool.get('atm.details').write(cr, uid, vals['atm'], {
-	# 			'latitude': vals['current_latitude'], 'longitude': vals['current_longitude']})
 
-	# 	self.write(cr, uid, survey_id, values)
-	# 	return survey_id  
+		approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
+		values.update({'state': part.state.id})
 
-	# def print_survey(self, cr, uid, ids, context=None):
-	# 	'''
-	# 	This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
-	# 	'''
-	# 	assert len(ids) == 1, 'This option should only be used for a single id at a time'
-	# 	self.signal_workflow(cr, uid, ids, 'quotation_sent')
-	# 	return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
-		
+		if vals['current_longitude'] and vals['current_latitude']:
+			self.pool.get('atm.details').write(cr, uid, vals['atm'], {
+				'latitude': vals['current_latitude'], 'longitude': vals['current_longitude']})
 
-	# def create(self, cr, uid, vals, context=None):
-	# 	if vals.get('name','/')=='/':
-	# 		vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.details') or '/'
-	# 	return super(survey_details,self).create(cr, uid, vals, context=context)
+		self.write(cr, uid, survey_id, values)
+		return survey_id  
+
+	
+
+	def print_survey(self, cr, uid, ids, context=None):
+		'''
+		This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
+		'''
+		assert len(ids) == 1, 'This option should only be used for a single id at a time'
+		self.signal_workflow(cr, uid, ids, 'quotation_sent')
+		return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
+	 
+	
+
+
+	def create(self, cr, uid, vals, context=None):
+		if vals.get('name','/')=='/':
+			vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.details') or '/'
+		return super(survey_details,self).create(cr, uid, vals, context=context)
 
 survey_details()
 
+
+# class upload_images(osv.osv):
+#     _name = 'upload_images.tutorial'
+#     _description = 'Tutorial image uploading'
+ 
+#     _columns = {
+#     'upload_name': fields.char('Name', required=True, translate=True),
+#     'image': fields.binary("Image",
+#             help="This field holds the image used as image for our customers, limited to 1024x1024px."),
+#     'image_medium': fields.function(_get_image, fnct_inv=_set_image,
+#             string="Image (auto-resized to 128x128):", type="binary", multi="_get_image",
+#             store={
+#                 'upload_images.tutorial': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+#             },help="Medium-sized image of the category. It is automatically "\
+#                  "resized as a 128x128px image, with aspect ratio preserved. "\
+#                  "Use this field in form views or some kanban views."),
+#     'image_small': fields.function(_get_image, fnct_inv=_set_image,
+#             string="Image (auto-resized to 64x64):", type="binary", multi="_get_image",
+#             store={
+#                 'upload_images.tutorial': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+#             },
+#             help="Small-sized image of the category. It is automatically "\
+#                  "resized as a 64x64px image, with aspect ratio preserved. "\
+#                  "Use this field anywhere a small image is required."),
+#     }
+
+#     def _get_image(self, cr, uid, ids, name, args, context=None):
+#         result = dict.fromkeys(ids, False)
+#         for obj in self.browse(cr, uid, ids, context=context):
+#             result[obj.id] = tools.image_get_resized_images(obj.image)
+#         return result
+
+#     def _set_image(self, cr, uid, id, name, value, args, context=None):
+#         return self.write(cr, uid, [id], {'image': tools.image_resize_image_big(value)}, context=context)
+
+# upload_images()
 # class images_calss(osv.osv):
 
 # 	def image1_bfr(self, cr, uid, ids, name, arg, context=None):

@@ -73,10 +73,10 @@ class customer_details(osv.osv):
 		'cust_name' : fields.char('Customer Name', size = 20, required=True),
 		'address' : fields.text('Address'),
 		'country' : fields.many2one('res.country','Country', ondelete='set null'),
-		'cont_per' : fields.char('Contact Person', size = 20),
-		'cont_per_e1' : fields.char('Contact Person Email 1', size = 20),
-		'cont_per_e2' : fields.char('Contact Person Email 2', size = 20),
-		'cont_per_e3' : fields.char('Contact Person Email 3', size = 20),
+		'cont_per' : fields.char('Contact Person', size = 50),
+		'cont_per_e1' : fields.char('Contact Person Email 1', size = 50),
+		'cont_per_e2' : fields.char('Contact Person Email 2', size = 50),
+		'cont_per_e3' : fields.char('Contact Person Email 3', size = 50),
 		'cont_no' : fields.char('Contact Number', size = 64),
 		'active' : fields.boolean('Active??', size = 5),
 		'sla_start_date' : fields.datetime('SLA Start Date'),
@@ -86,7 +86,7 @@ class customer_details(osv.osv):
 		'acc_manager' : fields.many2one('res.users', 'Account Manager', ondelete='set null', required=True),
 		'other1' :fields.many2one('res.users', 'Other1', ondelete='set null', required=True),
 		'other2' :fields.many2one('res.users', 'Other2', ondelete='set null', required=True),
-		'is_customer':fields.boolean('Is Customer'),
+		# 'is_customer':fields.boolean('Is Customer'),
 	}
 	def _default_country(self, cr, uid, context=None):
 		cid = self.pool.get('res.country').search(cr, uid, [('code', '=', 'AE')], context=context)
@@ -95,7 +95,7 @@ class customer_details(osv.osv):
 	_defaults ={
 		'active': 1,
 		'country':_default_country,
-		'is_customer':1
+		# 'is_customer':1
 	}
 
 	_order = 'cust_code'

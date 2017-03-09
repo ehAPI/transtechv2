@@ -94,7 +94,7 @@ class view_plan_tasks(osv.osv):
 		return True
 
 	def create(self, cr, uid, vals, context=None):
-		visit_date = vals['visit_date_time']
+		visit_date = vals['visit_time']
 		if vals.get('name','/')== '/':
 			vals['name']=self.pool.get('ir.sequence').get(cr,uid,'view.plan.tasks') or '/'
 		return super(view_plan_tasks,self).create(cr, uid, vals, context=context)	
