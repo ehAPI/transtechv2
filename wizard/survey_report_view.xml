@@ -9,7 +9,7 @@
 		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management"/>
 
 		<!-- menu item -->
-		<menuitem name="Survey Report" parent="survey_details_menu" id="survey_report_menu_mainform" action="action_survey_report_view_wizard" sequence="11" groups="group_atm_manager"/>
+		<menuitem name="Survey Report" parent="survey_details_menu" id="survey_report_menu_mainform" action="action_survey_report_view_wizard" sequence="11" groups="group_atm_manager,group_atm_customer,group_atm_surveyor"/>
 
 
 						
