@@ -12,7 +12,6 @@ from os.path import expanduser
 from lxml import etree
 from openerp import workflow
 
-
 class survey_details(osv.osv):
 
 	_name = 'survey.details'
@@ -374,7 +373,6 @@ class survey_details(osv.osv):
 
 
 		approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
-		
 		values.update({'state': part.state.id})
 
 		if vals['current_longitude'] and vals['current_latitude']:
@@ -491,4 +489,3 @@ survey_details()
 
 # 	}
 # images_calss()
-
