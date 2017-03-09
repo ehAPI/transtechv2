@@ -44,14 +44,14 @@
   max-height: 100px !important;
 } -->
 
-                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"><span t-field="o.image1_b" style="max-height: 100px;" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
-                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image2_b" style="max-height: 100px;max-width: 100px;" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
-                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image3_b" style="max-width: 100px;max-height: 100px"  t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"><span t-field="o.image1_b" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}" class="transtech" /></td>
+                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image2_b" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}" class="transtech" /></td>
+                               <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image3_b"  t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot; }" class="transtech"/></td>
                           </tr>
                           <tr style="font-size: 20px;" align="center">
-                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image1_a" style="max-height: 100px;"  t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
-                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image2_a" style="max-height: 100px;" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
-                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image3_a" style="max-height: 100px;" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/></td>
+                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image1_a" style="max-height: 100px;"  t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}" class="transtech"/></td>
+                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image2_a" style="max-height: 100px;" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}" class="transtech"/></td>
+                              <td colspan="5" style="border:solid black;border-width:1px;margin-left: 80px;padding:10px 5px 15px;"> <span t-field="o.image3_a" style="max-height: 100px;" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}" class="transtech"/></td>
                           </tr>
                         </table>
 

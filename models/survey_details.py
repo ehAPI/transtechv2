@@ -47,7 +47,6 @@ class survey_details(osv.osv):
 	_columns = {
 		'name':fields.char('Survey id', readonly=True),
 		'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
-	
 		'month':fields.selection([('Jan','January'),
 			('Feb','February'),
 			('March','March'),
