@@ -348,9 +348,6 @@ class atm_details(osv.osv):
 				self.pool.get('atm.details').write(cr,uid,j,values)
 		return True
 
-
-
-
 atm_details()
 
 class atm_old(osv.osv):

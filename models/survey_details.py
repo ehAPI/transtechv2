@@ -12,7 +12,6 @@ from os.path import expanduser
 from lxml import etree
 from openerp import workflow
 
-
 class survey_details(osv.osv):
 
 	_name = 'survey.details'
@@ -47,7 +46,6 @@ class survey_details(osv.osv):
 	_columns = {
 		'name':fields.char('Survey id', readonly=True),
 		'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
-	
 		'month':fields.selection([('Jan','January'),
 			('Feb','February'),
 			('March','March'),
@@ -374,7 +372,6 @@ class survey_details(osv.osv):
 
 
 		approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
-		
 		values.update({'state': part.state.id})
 
 		if vals['current_longitude'] and vals['current_latitude']:
@@ -386,13 +383,13 @@ class survey_details(osv.osv):
 
 	
 
-	# def print_survey(self, cr, uid, ids, context=None):
-	# 	'''
-	# 	This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
-	# 	'''
-	# 	assert len(ids) == 1, 'This option should only be used for a single id at a time'
-	# 	self.signal_workflow(cr, uid, ids, 'quotation_sent')
-	# 	return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
+	def print_survey(self, cr, uid, ids, context=None):
+		'''
+		This function prints the sales order and mark it as sent, so that we can see more easily the next step of the workflow
+		'''
+		assert len(ids) == 1, 'This option should only be used for a single id at a time'
+		self.signal_workflow(cr, uid, ids, 'quotation_sent')
+		return self.pool['report'].get_action(cr, uid, ids, 'atm.print_survey', context=context)
 	 
 	
 
@@ -491,4 +488,3 @@ survey_details()
 
 # 	}
 # images_calss()
-

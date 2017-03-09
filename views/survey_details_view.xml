@@ -10,8 +10,8 @@
 				<form string="Survey Details" version="8.0">
 					<header>
 
-						<button name="print_survey" string="Print Survey" type="object" states="draft" class="oe_highlight" groups="atm.group_atm_manager"/>
-						<button name="print_survey" string="Print Survey" type="object" states="sent,progress,manual" groups="atm.group_atm_manager"/>
+						<button name="print_survey" string="Print Survey" type="object" states="draft,sent,progress,manual" class="oe_highlight" groups="atm.group_atm_manager"/>
+					<!-- 	<button name="print_survey" string="Print Survey" type="object" states="sent,progress,manual" groups="atm.group_atm_manager"/> -->
 					<header>
 
 						<button name="status_approve" string="Approve" type="object" class="oe_highlight" groups="atm.group_atm_manager" confirm="Are you sure you want to approve this survey??" attrs="{'invisible': [('status','=','approved')]}"/>
@@ -54,42 +54,42 @@
 							<div>
 								<group string="Before Survey">
 									<div id="thumbwrap">
-										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_b" widget='image'  class="transtech"/></span></a>
 								
-										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_b" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_b" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_b" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_b" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_b" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_b" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_b" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_b" widget='image' class="transtech"/></span></a>
 										</div>
 									</group>
 								
 								<group string="After Survey">
 									<div id="thumbwrap">
 								
-										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_a" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_a" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_a" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_a" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_a" widget='image' class="transtech"/></span></a>
 																		
-										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_a" widget='image' class="transtech"/></span></a>
 								
-										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_a" widget='image' class="transtech"/></span></a>
 								
-										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_a" widget='image'/></span></a>
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_a" widget='image' class="transtech"/></span></a>
 								<!-- <group string='Before Survey'>
 									<field name="image1_b" widget='image'/>
 									<field name="image2_b" widget='image'/>
