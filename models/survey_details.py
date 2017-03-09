@@ -62,7 +62,7 @@ class survey_details(osv.osv):
 		'atm' : fields.many2one('atm.details', 'ATM'),
 		'customer_name':fields.many2one('customer.info','Customer'),
 		'acc_manager' : fields.many2one('res.users', 'Surveyor'),
-		'is_nbad': fields.function(_check_customer, type='boolean', string='Is NBAD', method=True, store=False, multi=False),
+		'is_nbad':fields.function(_check_customer, type='boolean', string='Is NBAD', method=True, store=False, multi=False),
 		
 		#'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
 		'visit_time':fields.datetime('Visit Time'),
@@ -149,6 +149,218 @@ class survey_details(osv.osv):
 		'fascia':fields.selection([('faded_from_edges','Faded from Edges'),
 			('faded_from_keypad','Faded from Keypad'),
 			('damaged','Damaged')],'Fascia Condition'),	
+
+		
+        # Branding Audit Check List sheet-1
+
+        'dl_brochure_holder':fields.selection([('updated_inventory', ' Updated inventory available'),
+                                                ('outdated_inventory',
+                                                 'Outdated inventory available'),
+                                                ('low_inventory',
+                                                 'Low inventory - To be ordered'),
+                                                ], 'DL Brochure Holder'),
+
+        'brochure_holder_19x19':fields.selection([('updated_inventory', ' Updated inventory available'),
+                                                   ('outdated_inventory',
+                                                    'Outdated inventory available'),
+                                                   ('low_inventory',
+                                                    'Low inventory - To be ordered'),
+                                                   ], 'Brochure holder - 19 x 19'),
+
+        'application_form': fields.selection([('updated_inventory', ' Updated inventory available'),
+                                              ('outdated_inventory',
+                                               'Outdated inventory available'),
+                                              ('low_inventory',
+                                               'Low inventory - To be ordered'),
+                                              ], 'Application form'),
+
+        'poster_frames': fields.selection([('current_compaign', 'Current campaigns available'),
+                                           ('outdated', 'Outdated/old available - Reported')],
+                                          'Poster Frames'),
+        'internal_window_graphics': fields.selection([('current_compaign', 'Current campaigns available'), ('outdated', 'Outdated/old available - Reported')], 'Internal window graphics'),
+
+        'advertising_stands': fields.selection([('current_compaign', 'Current campaigns available'), ('outdated', 'Outdated/old available - Reported')], 'Advertising stands'),
+        'push/pull_stickers': fields.selection([('running', 'In running condition'),
+                                                ('req_replacement',
+                                                 'Require replacement'),
+                                                ('missing', 'Missing'),
+                                                ], 'Push/Pull stickers'),
+
+        'stationary_calendars': fields.selection([('updated_inventory', ' Updated inventory available'),
+                                                  ('outdated_inventory',
+                                                   'Outdated inventory available'),
+                                                  ('low_inventory',
+                                                   'Low inventory - To be ordered'),
+                                                  ], 'Stationary - Calendars, annual reports, tissue boxes'),
+
+        'store_inventory_cur_campaigns': fields.selection([('updated_inventory', ' Updated inventory available'),
+                                                           ('outdated_inventory',
+                                                            'Outdated inventory available'),
+                                                           ('low_inventory',
+                                                            'Low inventory - To be ordered'),
+                                                           ], 'Store inventory - Current campaigns'),
+
+        'led_screen_ad': fields.selection([('current_compaign', 'Current campaigns available'), ('outdated', 'Outdated/old available - Reported')], 'LED Screen advertisement'),
+        'palm_leaf_strip_sticker': fields.selection([('running', 'In running condition'),
+                                                     ('req_replacement',
+                                                      'Require replacement'),
+                                                     ('missing', 'Missing'),
+                                                     ], 'Palm Leaf Strip Sticker'),
+        'branding_conditions': fields.selection([('running', 'In running condition'),
+                                                 ('req_replacement',
+                                                  'Require replacement'),
+                                                 ('missing', 'Missing'),
+                                                 ], 'Branding condition (internal) -  Dusty/faded colors/torn'),
+        'led_conditions': fields.selection([('running_updated_campaign', 'Running with updated campaigns'),
+                                            ('damaged', 'Not working/Damaged'),
+                                            ('running_outdated_campaign',
+                                             'Running with outdated campaigns'),
+                                            ], 'LED screen condition - Report in case damaged or not running'),
+
+        'external_br_condition': fields.selection([('running', 'In running condition'),
+                                                   ('req_replacement',
+                                                    'Require replacement'),
+                                                   ('missing', 'Missing'),
+                                                   ], 'External branch branding condition'),
+
+        'onsite_atm_branding': fields.selection([('running', 'In running condition'),
+                                                 ('req_replacement',
+                                                  'Require replacement'),
+                                                 ('missing', 'Missing'),
+                                                 ], 'Branding of on-site ATM'),
+
+        'personal_loan_compaign': fields.selection([('available', 'Available'),
+                                                    ('outdated',
+                                                     'Not available/Outdated'),
+                                                    ], 'Personal Loan Campaign'),
+
+        'real_madrid_compaign': fields.selection([('available', 'Available'),
+                                                  ('outdated',
+                                                   'Not available/Outdated'),
+                                                  ], 'Real-madrid Campaign'),
+        'mobile_app_campaign': fields.selection([('available', 'Available'),
+                                                 ('outdated',
+                                                  'Not available/Outdated'),
+                                                 ], 'Mobile App Campaign'),
+        'mortgage_loan_campaign': fields.selection([('available', 'Available'),
+                                                    ('outdated',
+                                                     'Not available/Outdated'),
+                                                    ], 'Mortgage Loan Campaign'),
+        'other_compaign': fields.selection([('available', 'Available'),
+                                            ('outdated',
+                                             'Not available/Outdated'),
+                                            ], 'Any other campaign except ML,PL, RM & Mobile app'),
+
+        # Branding Audit Check List sheet-2
+
+        # 'initial_observations': fields.boolean('Initial observations'),
+        # 'record_observations': fields.boolean('Recording the observations, record any thing unusual found on the site'),
+        # 'take_pic_before_cleaning': fields.boolean('Taking picture before cleaning initiation'),
+        # 'cleaning_atm_surround': fields.boolean('Cleaning the ATM and surround/enclosure/topper'),
+        # 'cleaning_skirting': fields.boolean('Cleaning the skirting'),
+        # 'cleaning_machine_base': fields.boolean('Cleaning the machine Base'),
+        # 'cleaning_machine_top': fields.boolean('Cleaning the machine top'),
+        # 'cleaning_ad_material': fields.boolean('Cleaning the advertisement material (frames and plastic covers)'),
+        # 'inspecting_kiosk_lightings': fields.selection([('faulty', 'Faulty'),
+        #                                                 ('ok', 'Ok'),
+        #                                                 ], 'Inspecting the lightings for the Kiosk/Topper and External Board Lighting for off-site machines where applicable'),
+
+        # 'cleaning_window_glass': fields.boolean('Cleaning the window glass, where applicable'),
+        # 'cleaning_floor': fields.boolean('Cleaning the floor'),
+        # 'mopping_floor': fields.boolean('Mopping the floor'),
+        # 'remove_trash': fields.boolean('Removing the trash and emptying it in the municipality garbage'),
+
+        # 'logo_stickers': fields.selection([('faded', 'Faded'),
+        #                                    ('missing', 'Missing'),
+        #                                    ('peeloff', 'Peeloff'),
+        #                                    ('required', 'Required'),
+        #                                    ('replaced', 'Replaced'),
+        #                                    ('fine', 'In fine Condition'),
+        #                                    ], 'Logo Stickers (model wise)'),
+
+        # 'chk_card_reader': fields.selection([('cleaned', 'Cleaned'),
+        #                                      ('faulty',
+        #                                       'Faulty, Reported'),
+        #                                      ], 'Check Card Reader & report'),
+
+        # 'taking_pics_upon_completion': fields.boolean('Taking picture upon completion'),
+        # 'rechecking_all_above_chklist': fields.boolean('Rechecking all the above checklist'),
+        # 'surround_side_branding': fields.selection([('required', 'Required'),
+        #                                             ('not_required',
+        #                                              'Not Required'),
+        #                                             ('replaced',
+        #                                              'Replaced'),
+        #                                             ('n/a', 'N/A'),
+        #                                             ], 'Surround side branding (left/ right)'),
+
+        # 'side_frames_posters_kiosk': fields.selection([('required', 'Required'),
+        #                                                ('not_required',
+        #                                                 'Not Required'),
+        #                                                ('replaced',
+        #                                                 'Replaced'),
+        #                                                ('n/a', 'N/A'),
+        #                                                ], 'Side frames/ posters on the kiosk'),
+
+        # 'wall_branding': fields.selection([('required', 'Required'),
+        #                                    ('not_required',
+        #                                     'Not Required'),
+        #                                    ('replaced', 'Replaced'),
+        #                                    ('n/a', 'N/A'),
+        #                                    ], 'Wall Branding'),
+
+
+        #''' Branding Audit Check List sheet-3
+
+
+
+        # 'cur_longitude': fields.char('Current Longitude'),
+        # 'cur_latitude': fields.char('Current Latitude'),
+        # 'nxt_survey_distance': fields.integer('Next Survey Distance'),
+        # 'nxt_taskid': fields.many2one('atm.surverys.management', 'Next Task ID'),
+        # 'visits_done': fields.integer('Visits Done'),
+        # 'visits_left': fields.integer('Visits Left'),
+        # 'total_visits': fields.integer('Total Visits'),
+
+        # 'image_medium': fields.function(_get_image, fnct_inv=_set_image,
+        # 	string="Medium-sized image", type="binary", multi="_get_image",
+        # 	store={
+        # 		'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['bfr_img_front'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['bfr_img_side'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['bfr_img_back'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['after_img_front'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['after_img_side'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['after_img_back'], 10),
+        # 	},
+        # 	help="Medium-sized image of this contact. It is automatically "
+        # 		 "resized as a 128x128px image, with aspect ratio preserved. "
+        # 		 "Use this field in form views or some kanban views."),
+        # 'image_small': fields.function(_get_image, fnct_inv=_set_image,
+        # 			string="Small-sized image", type="binary", multi="_get_image",
+        # 			store={
+        # 			'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['bfr_img_front'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['bfr_img_side'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['bfr_img_back'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['after_img_front'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['after_img_side'], 10),
+        # 	'survey.info': (lambda self, cr, uid, ids, c={}: ids, ['after_img_back'], 10),
+        # 		 },
+        # 		 help="Small-sized image of this contact. It is automatically "
+        # 			 "resized as a 64x64px image, with aspect ratio preserved. "
+        # 			"Use this field anywhere a small image is required."),
+        # 	'has_image': fields.function(_has_image, type="boolean"),
+
+        # 'file': fields.function(_get_image,
+        #                               fnct_inv=_set_image,
+        #                               type="binary",
+        #                               string="File",
+        #                               filters='*.jpeg,*.jpeg,*.gif'),
+
+        # 'status': fields.selection([
+        #     ('waiting_approval', 'Waiting for Approval'),
+        #     ('approved', 'Approved')], 'Status'),
+
+        # 'is_nbad': fields.function(_check_customer, type='boolean', string='Is NBAD', method=True, store=False, multi=False),
+
 		'ins_cash':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Insert Cash'),

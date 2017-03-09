@@ -36,20 +36,21 @@
 
 					<sheet>
 						<group>
-							<group>
+							<group> 
 							<field name="name"/>
-							<!-- <field name="atm_report"/> -->
-							<field name="month"/>
-							<field name="remarks_category"/>
-							<field name="atm"/>
-							<field name="customer_name"/>
-							<field name="acc_manager"/>
-							<field name="visit_time"/>
-							<field name="current_longitude"/>
-							<field name= "current_latitude"/>
-							<field name="next_survey_distance"/>
-							<field name="next_task_id"/>
-							<field name="state"/>
+							<field name="is_nbad" invisible="1"/>
+							<field name="atm_report" on_change="onchange_taskid(atm_report)" groups="atm.group_atm_manager" style="width:40%%"/>
+							<field name="month" style="width:40%%"/>
+							<field name="remarks_category" style="width:40%%"/>
+							<field name="atm" style="width:40%%"/>
+							<field name="customer_name" style="width:40%%"/>
+							<field name="acc_manager" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="visit_time" style="width:40%%"/>
+							<field name="current_longitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name= "current_latitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="next_survey_distance" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="next_task_id" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="state" style="width:40%%"/>
 						    </group>
 							<div>
 								<group string="Before Survey">
@@ -71,7 +72,11 @@
 										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_b" widget='image' class="transtech"/></span></a>
 										</div>
 									</group>
-								
+								<!-- <group>
+								<field name="state" style="width:40%%"/>
+								<field name="visits_left"/>
+								<field name="total_visits"/>
+							</group> -->
 								<group string="After Survey">
 									<div id="thumbwrap">
 								
@@ -110,6 +115,8 @@
 									<field name="image7_a" widget='image'/>
 									<field name="image8_a" widget='image'/>
 								</group> -->
+
+
 							    </div>
 							</group>
 						</div>
@@ -191,6 +198,48 @@
 									<field name="fascia"/>
 								</group>
 							</page>
+							<page string="Branding Audit Checklist" attrs="{'invisible': [('is_nbad', '=',False)]}" >
+
+							   	<group>
+									<group>
+										<field name="dl_brochure_holder"/>
+										<field name="brochure_holder_19x19"/>
+										<field name="application_form"/>
+										<field name="poster_frames"/>
+										<field name="internal_window_graphics"/>
+									</group>
+									<group>
+										<field name="advertising_stands"/>
+										<field name="push/pull_stickers"/>
+										<field name="stationary_calendars"/>
+										<field name="store_inventory_cur_campaigns"/>
+										<field name="led_screen_ad"/>
+									</group>
+								</group>
+								<group>
+									<group>
+										<field name="palm_leaf_strip_sticker" style="width:40%%"/>
+										<field name="branding_conditions" style="width:40%%"/>
+										<field name="led_conditions" style="width:40%%"/>
+										<field name="external_br_condition" style="width:40%%"/>
+										<field name="onsite_atm_branding" style="width:40%%"/>
+
+										<field name="personal_loan_compaign" style="width:40%%"/>
+										<field name="real_madrid_compaign" style="width:40%%"/>
+										<field name="mobile_app_campaign" style="width:40%%"/>
+										<field name="mortgage_loan_campaign" style="width:40%%"/>
+										<field name="other_compaign" style="width:40%%"/>
+									</group>
+
+									
+									
+								</group>
+							</page>
+
+								<!-- <group>
+									<field name="additional_comments"/>
+								</group> -->
+							<!-- </page> -->
 						</notebook>
 					</sheet>
 				</form>

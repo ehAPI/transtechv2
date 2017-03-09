@@ -23,7 +23,7 @@ access_reason_code_setup_manager,reason.code.setup,model_reason_code_setup,atm.g
 
 access_reason_code_setup_surveyor,reason.code.setup,model_reason_code_setup,atm.group_atm_user,1,1,0,0
 
-access_customer_info_surveyor,customer.info,model_customer_info,atm.group_atm_user,1,1,1,1
+
 
 access_reason_code_setup_customer,reason.code.setup,model_reason_code_setup,atm.group_atm_customer,1,1,0,0
 
@@ -79,3 +79,10 @@ access_res_partner_bank,res.partner.bank,base.model_res_partner_bank,atm.group_a
 access_schedule_tasks_customer,schedule.tasks,model_schedule_tasks,atm.group_atm_customer,1,0,0,0
 
 access_alert_customer,cust.alerts,model_cust_alerts,atm.group_atm_customer,1,1,0,0
+
+access_survey_report_manager,survey.report,model_survey_report,atm.group_atm_manager,1,1,1,1
+
+access_survey_report_customer,survey.report,model_survey_report,atm.group_atm_customer,1,1,1,1
+
+access_survey_report_user,survey.report,model_survey_report,atm.group_atm_user,1,1,1,1
+
