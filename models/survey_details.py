@@ -442,7 +442,7 @@ class survey_details(osv.osv):
 			res['value'].update({'acc_manager': part.surveyor.id})
 
 
-			res['value'].update({'customer_name': part.customer.id})
+			res['value'].update({'customer_name': part.customer_name.id})
 			res['value'].update({'visit_time': part.visit_time})
 			res['value'].update({'state': part.state.id})
 
