@@ -10,9 +10,7 @@
 
 		<!-- menu item -->
 		<menuitem name="Survey Report" parent="survey_details_menu" id="survey_report_menu_mainform" action="action_survey_report_view_wizard" sequence="11"/>
-
-
-						
+			
 
 	</data>
 </openerp>
