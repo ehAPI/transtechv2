@@ -33,16 +33,30 @@ class view_plan_tasks(osv.osv):
 				('Dec','December')],'Month'),
 			# 'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
 			'customer_name':fields.many2one('customer.info','Customer',required=True),
-			'state' : fields.many2one('res.country.state', 'State', required=True),
-			'atm' : fields.many2one('atm.details', 'ATM', required=True),
+			'state' : fields.many2one('res.country.state', 'State', required=True,domain="[('country_id','=',country)]"),
+			'atm' : fields.many2one('atm.details', 'ATM', domain="[('customer','=',customer_name),('state_id','=',state)]",required=True),
 			'visit_shift':fields.selection([('day','Day'),
 				('night','Night')],'Visit Shift',required=True),
-			'country' : fields.many2one('res.country','Country'),
-			'surveyor' : fields.many2one('res.users', 'Surveyor', required=True),
+			'country' : fields.many2one('res.country','Country',domain="[('code','=','AE')]",required=True),
+			'surveyor' : fields.many2one('res.users', 'Surveyor', required=True,domain="[('name_tl','!=',False)]"),
 			'visit_time':fields.datetime('Visit Date and Time', required=True),
 			#'customer':fields.many2one('customer.info','Customer Name'),
 			'add_instr':fields.text('Additional instructions'),
 			'bulk_insert' : fields.boolean('Bulk Insert',size=5),
+			'task_month':fields.selection([
+			('jan','January'),
+			('feb', 'February'),
+			('mar', 'March'),
+			('apr', 'April'),
+			('may', 'May'),
+			('june','June'),
+			('jul', 'July'),
+			('aug', 'August'),
+			('sep', 'September'),
+			('oct', 'October'),
+			('nov', 'November'),
+			('dec', 'December'),
+			], 'Month'),
 			'visit_type': fields.selection([('daily','Daily'),
 				('weekly','Weekly'),
 				('monthly','Monthly'),
@@ -109,7 +123,7 @@ class view_plan_tasks(osv.osv):
 		for i in task_list:
 			# if i.next_visit.split(' ')[0] == str(today) and i.nos > 1:
 				# if i.status == 'assigned' or i.status == 'progress' or i.status == 'pending' or i.status== 'done':
-				vals = {'customer':i.customer.id, 'atm':i.atm.id, 'country':i.country.id, 'state':i.state.id, 'surveyor':i.surveyor.id,'visit_time':i.next_visit,'additional_info':i.additional_info,'bulk_insert':i.bulk_insert, 'visit_type':i.visit_type,'act_visit_time':i.act_visit_time,'nos':i.nos-1}
+				vals = {'customer':i.customer_name.id, 'atm':i.atm.id, 'country':i.country.id, 'state':i.state.id, 'surveyor':i.surveyor.id,'visit_time':i.next_visit,'additional_info':i.additional_info,'bulk_insert':i.bulk_insert, 'visit_type':i.visit_type,'act_visit_time':i.act_visit_time,'nos':i.nos-1}
 				
 				if i.visit_type == 'daily':
 					visit_date = datetime.datetime.strptime(i.visit_time, "%Y-%m-%d %H:%M:%S")

@@ -121,7 +121,7 @@
 			<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 			<!-- sub menu -->
-			<menuitem name="ATM Dashboard" id="atm_dashboard" parent="atm_survey_management"/>
+			<menuitem name="ATM Dashboard" id="atm_dashboard" parent="atm_survey_management" groups='group_atm_manager,group_atm_user'/>
 			 
 
 			<!-- <menuitem name="Alerts for You" parent='atm_dashboard' id='alerts_dashboard_left' action='alerts_dashboard_action' sequence="3"/> -->
