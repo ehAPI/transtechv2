@@ -21,8 +21,8 @@
     <record id="group_atm_manager" model="res.groups">
         <field name="name">Team Leader</field>
         <field name="category_id" ref="base.module_atm_surverys_management"/>
-
     </record>
+
     <!-- <record model="ir.ui.menu" id="base.menu_definitions">
         <field name="groups_id" eval="[(6,0,[ref('group_atm_manager')])]"/>
     </record> -->
