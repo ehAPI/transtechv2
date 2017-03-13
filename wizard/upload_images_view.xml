@@ -13,28 +13,32 @@
 
                     <p class="oe_grey">
                         If you want to quit click on Cancel.
-                    </p>    
-                    <group>       
+                    </p> 
+                    <p class="transtech">
+                       
+                    </p>
+
+                    <group>    
                         <group string="Before Survey">
-                          <field name="image1_b"/>
-                          <field name="image2_b"/>
-                          <field name="image3_b"/>
-                          <field name="image4_b"/>
-                          <field name="image5_b"/>
-                          <field name="image6_b"/>
-                          <field name="image7_b"/>
-                          <field name="image8_b"/>
+                          <field name="image1_b" />
+                          <field name="image2_b" />
+                          <field name="image3_b" />
+                          <field name="image4_b" />
+                          <field name="image5_b" />
+                          <field name="image6_b" />
+                          <field name="image7_b" />
+                          <field name="image8_b" />
                         </group>
     
                         <group string="After Survey">
-                          <field name="image1_a"/>
-                          <field name="image2_a"/>
-                          <field name="image3_a"/>
-                          <field name="image4_a"/>
-                          <field name="image5_a"/>
-                          <field name="image6_a"/>
-                          <field name="image7_a"/>
-                          <field name="image8_a"/>              
+                          <field name="image1_a" />
+                          <field name="image2_a" />
+                          <field name="image3_a" />
+                          <field name="image4_a" />
+                          <field name="image5_a" />
+                          <field name="image6_a" />
+                          <field name="image7_a" />
+                          <field name="image8_a" />              
                         </group>
                     </group>
                     <footer>
