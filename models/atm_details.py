@@ -160,6 +160,7 @@ class atm_details(osv.osv):
 	'longitude' : fields.char('Longitude'),
 	'latitude' : fields.char('Latitude'),
 	'child_ids' : fields.one2many('atm.old','parent_id', readonly=True),
+
 	'atm_id2' :fields.char('ATM ID'),
 	'atm_model' :fields.char('ATM Model'),
 	'serial_no' :fields.char('ATM Serial No.'),

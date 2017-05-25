@@ -15,7 +15,7 @@
         <record id="group_atm_user" model="res.groups">
         <field name="name">Surveyor</field>
         <field name="category_id" ref="base.module_atm_surverys_management"/>
-    	</record>
+        </record>
 
         <record id="group_atm_manager" model="res.groups">
             <field name="name">Team Leader</field>
