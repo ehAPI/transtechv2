@@ -13,7 +13,7 @@
                                 <p class="oe_grey">If you want to quit click on Cancel.
                             </p> -->           
                   <group>
-                    <field name="atm_branch_details" style="width:60%%"/> 
+                    <field name="name" style="width:60%%"/> 
                     <field name="longitude" style="width:60%%"/>                
                     <field name="latitude" style="width:60%%"/> 
                     <field name="date"/>             

@@ -9,22 +9,22 @@ from openerp import workflow
 
 
 class cust_alerts(osv.osv):
-	_name = 'cust.alerts'
+	_name = 'alert.info'
 	_inherit = ['mail.thread']
-	_rec_name = 'alert_id'
+	_rec_name = 'name'
 	_description = 'Customer Alerts'
 	_columns = {
-	'alert_id' : fields.char('Alert ID', readonly=True),
+	'name' : fields.char('Alert ID', readonly=True),
 	'customer' : fields.many2one('customer.info', 'Customer', ondelete='set null'),
-	'atm' : fields.many2one('atm.details', 'ATM', required=True, ondelete='set null'),
+	'atm_id' : fields.many2one('atm.info', 'ATM', required=True, ondelete='set null'),
 	'category' : fields.selection([('complaint','Complaint'),('issue','Issue')],'Category', required=True),
 	'priority' : fields.selection([('low','Low'),('medium','Medium'),('high','High'),('critical','Critical')],'Priority', required=True),
-	'country' : fields.many2one('res.country', 'Country', ondelete='set null'),
-	'state' : fields.many2one('res.country.state', 'State', ondelete='set null'),
+	'country_id' : fields.many2one('res.country', 'Country', ondelete='set null'),
+	'state_id' : fields.many2one('res.country.state', 'State', ondelete='set null'),
 	'submitted_by' : fields.many2one('res.users','Submitted by', readonly=True, ondelete='set null'),
 	'status': fields.selection([('assigned','Assigned'),('resolved','Resolved'),('closed','Closed')],'Status'),
-	'reason_code_id' : fields.many2one('reason.code.setup','Reason Code', ondelete='set null'),
-	'reason_description' : fields.text('Reason Descriptions'),
+	'reason_id' : fields.many2one('reason.code','Reason Code', ondelete='set null'),
+	'reason_disc' : fields.text('Reason Descriptions'),
 	'summary' : fields.char('Summary', size=100),
 	'description' : fields.text('Description'),
 	'img1' : fields.binary('Image', widget='image'),
@@ -41,7 +41,7 @@ class cust_alerts(osv.osv):
 		cid = []
 
 		user = self.pool.get('res.users').browse(cr,uid,uid)
-		cid = self.pool.get('customer.info').search(cr,uid,[('cust_name','=',user.name)])
+		cid = self.pool.get('customer.info').search(cr,uid,[('name','=',user.name)])
 
 		if cid:
 			return cid[0]
@@ -63,26 +63,26 @@ class cust_alerts(osv.osv):
 		'customer':_default_customer,
 	}
 
-	_order = "alert_id desc"
+	_order = "name desc"
 
 	def unlink(self, cr, uid, ids, context=None):
-        	alert_obj = self.pool.get('cust.alerts').browse(cr,uid,ids[0])
+        	alert_obj = self.pool.get('alert.info').browse(cr,uid,ids[0])
 		if alert_obj.status in ('resolved','closed'):
 			raise osv.except_osv(_('Invalid Action!'), _("You can't delete an Alert which is either in 'Resolved state' or in 'Closed state' "))
         	
         	return super(alert_section, self).unlink(cr, uid, ids, context=context)
 
 	def create(self,cr,uid,vals,context=None):
-		if vals.get('alert_id','/') == '/': 
-			vals['alert_id'] = self.pool.get('ir.sequence').get(cr, uid, 'cust.alerts') or '/'
-		alert_id = super(cust_alerts, self).create(cr, uid, vals, context=context)
-		alert_info = self.browse(cr,uid,[alert_id],context=None)[0]
-		alertnumber = alert_info.alert_id
+		if vals.get('name','/') == '/': 
+			vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'alert.info') or '/'
+		name = super(cust_alerts, self).create(cr, uid, vals, context=context)
+		alert_info = self.browse(cr,uid,[name],context=None)[0]
+		alertnumber = alert_info.name
 		
-		if alert_id != False and alertnumber[0:5]=='Alert':
-			self.send_alert_invitation_customer(cr,uid,[alert_id],context=None)
-			self.send_alert_invitation_teamleader(cr,uid,[alert_id],context=None)
-		return alert_id
+		if name != False and alertnumber[0:5]=='Alert':
+			self.send_alert_invitation_customer(cr,uid,[name],context=None)
+			self.send_alert_invitation_teamleader(cr,uid,[name],context=None)
+		return name
 
 	def action_alert_send(self,cr,uid,ids,context=None):
 		'''
@@ -100,7 +100,7 @@ class cust_alerts(osv.osv):
 			compose_form_id = False 
 		ctx = dict()
 		ctx.update({
-			'default_model': 'cust.alerts',
+			'default_model': 'alert.info',
 			'default_res_id': ids[0],
 			'default_use_template': bool(template_id),
 			'default_template_id': template_id,
@@ -122,12 +122,14 @@ class cust_alerts(osv.osv):
 	def send_alert_invitation_customer(self,cr,uid,ids,context=None):
 		alert_obj = self.browse(cr,uid,ids,context=None)[0]
 		customer_id =  self.pool.get('customer.info').browse(cr,uid,alert_obj.customer.id)
-		customer_name = customer_id.cust_name
-		affectedATM =self.pool.get('atm.details').browse(cr,uid,alert_obj.atm.id)
-		atm_name = affectedATM.atm_branch_details
-		if not customer_id.cont_per:
+		customer_name = customer_id.name
+		affectedATM =self.pool.get('atm.info').browse(cr,uid,alert_obj.atm_id.id)
+		atm_name = affectedATM.name
+		if not customer_id.contact_email:
 			raise osv.except_osv(_('No Email Provided for this customer'),_("Please give a Valid email address !") )
 			return False
+
+
 		# mail_ids = self.pool.get('ir.mail_server').search(cr,uid,[('active','=','True')])
 		# mail_obj = self.pool.get('ir.mail_server').browse(cr,uid,mail_ids)[0]
 		# username = mail_obj.smtp_user
@@ -142,7 +144,7 @@ class cust_alerts(osv.osv):
 		# server.login(username, pwd)
 		# SMTP
 		msg = MIMEMultipart()
-		TO = customer_id.cont_per
+		TO = customer_id.contact_email
 		msg['To'] = TO
 		FROM = 'info@transtech.ae'
 		msg['From'] = FROM
@@ -153,7 +155,7 @@ class cust_alerts(osv.osv):
 		
 		# msg['From'] = fromaddr
 		msg['Subject'] = 'Regarding Alert in TransTech Portal'
-		toaddr = customer_id.cont_per
+		toaddr = customer_id.contact_email
 		msg['To'] = toaddr
 		text = ('<p><h2>Dear %s,</h2><p>\
 			<p>An error alert is recorded in TransTech portal. Details are as follows:</p>\
@@ -163,11 +165,11 @@ class cust_alerts(osv.osv):
 			<p><b>ATM ID</b>: %s</p>\
 			<p><b>Subject</b>: %s</p>\n \
 			<p><b>Description</b>: %s</p>\n Thanks')\
-		%(customer_id.cust_name,
+		%(customer_id.name,
 			str(alert_obj.category).title(),
 			str(alert_obj.priority).title(),
-			affectedATM.atm_branch_details,
-			affectedATM.bank_atm_id,
+			affectedATM.name,
+			affectedATM.atm_id,
 			alert_obj.summary,
 			alert_obj.description)
 		body = MIMEText(text,_subtype='html')
@@ -182,7 +184,7 @@ class cust_alerts(osv.osv):
 		if not default:
 			default = {}
 		default.update({
-			'name': self.pool.get('ir.sequence').get(cr, uid, 'cust.alerts'),
+			'name': self.pool.get('ir.sequence').get(cr, uid, 'alert.info'),
 			})
 
 		return super(alert_section, self).copy(cr, uid, id, default, context=context)
@@ -197,10 +199,10 @@ class cust_alerts(osv.osv):
 	def send_alert_invitation_teamleader(self,cr,uid,ids,context=None):
 		alert_obj = self.browse(cr,uid,ids,context=None)[0]
 		customer_id =  self.pool.get('customer.info').browse(cr,uid,alert_obj.customer.id)
-		customer_name = customer_id.cust_name
-		affectedATM =self.pool.get('atm.details').browse(cr,uid,alert_obj.atm.id)
-		atm_name = affectedATM.atm_branch_details
-		user_ids = self.pool.get('res.users').browse(cr,uid,customer_id.acc_manager.id)
+		customer = customer_id.name
+		affectedATM =self.pool.get('atm.info').browse(cr,uid,alert_obj.atm_id.id)
+		atm_name = affectedATM.name
+		user_ids = self.pool.get('res.users').browse(cr,uid,customer_id.account_manager.id)
 		temail_id = user_ids.email
 		if not temail_id:
 			raise osv.except_osv(_('No Email Provided for this Team Leader'),_("Please give a Valid email address !") )
@@ -239,12 +241,12 @@ class cust_alerts(osv.osv):
 		 <p><b>Summary </b>: %s</p>\
 		 <p><b>Description </b>: %s</p>')\
 		%(tname,
-			customer_id.cust_name,
-			alert_obj.alert_id,
+			customer_id.name,
+			alert_obj.name,
 			alert_obj.category,
 			alert_obj.priority,
 			atm_name,
-			affectedATM.bank_atm_id,
+			affectedATM.atm_id,
 			alert_obj.summary,
 			alert_obj.description)
 		body = MIMEText(text, _subtype='html')
@@ -263,8 +265,8 @@ class mail_compose_message(osv.Model):
 
 	def send_mail(self, cr, uid, ids, context=None):
 		context = context or {}
-		if context.get('default_model') == 'cust.alerts' and context.get('default_res_id') and context.get('mark_so_as_sent'):
+		if context.get('default_model') == 'alert.info' and context.get('default_res_id') and context.get('mark_so_as_sent'):
 			context = dict(context, mail_post_autofollow=True)
-			self.pool.get('cust.alerts').signal_workflow(cr, uid, [context['default_res_id']], 'quotation_sent')
+			self.pool.get('alert.info').signal_workflow(cr, uid, [context['default_res_id']], 'quotation_sent')
 		return super(mail_compose_message, self).send_mail(cr, uid, ids, context=context)
 

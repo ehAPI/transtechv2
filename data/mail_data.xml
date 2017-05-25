@@ -9,7 +9,7 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
-            <field eval="'view.plan.tasks'" name="model"/>
+            <field eval="'atm.surverys.management'" name="model"/>
             <field eval="'create_task'" name="function"/>
             <field  eval="'()'" name="args"/>
         </record>
@@ -22,7 +22,7 @@
             <field name="interval_type">minutes</field>
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
-            <field eval="'atm.details'" name="model"/>
+            <field eval="'atm.info'" name="model"/>
             <field eval="'count_tasks'" name="function"/>
             <field  eval="'()'" name="args"/>
         </record>
@@ -35,7 +35,7 @@
             <field name="interval_type">minutes</field>
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
-            <field eval="'view.plan.tasks'" name="model"/>
+            <field eval="'atm.surverys.management'" name="model"/>
             <field eval="'change_task_status'" name="function"/>
             <field  eval="'()'" name="args"/>
         </record>
@@ -49,7 +49,7 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
-            <field eval="'schedule.tasks'" name="model"/>
+            <field eval="'schedule.task'" name="model"/>
             <field eval="'schedule_task'" name="function"/>
             <field  eval="'()'" name="args"/>
         </record>
@@ -63,7 +63,7 @@
             <field name="interval_type">months</field>
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
-            <field eval="'schedule.tasks'" name="model"/>
+            <field eval="'schedule.task'" name="model"/>
             <field eval="'changeDateto1st'" name="function"/>
             <field  eval="'()'" name="args"/>
         </record>

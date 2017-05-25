@@ -12,18 +12,18 @@ from os.path import expanduser
 from lxml import etree
 from openerp import workflow
 
-class survey_details(osv.osv):
+class survey_details_info(osv.osv):
 
-	_name = 'survey.details'
+	_name = 'survey.info'
 
 
 	def copy(self, cr, uid, id, default=None, context=None):
 		if not default:
 			default = {}
 		default.update({
-			'name': self.pool.get('ir.sequence').get(cr, uid, 'survey.details'),
+			'name': self.pool.get('ir.sequence').get(cr, uid, 'survey.info'),
 		})
-		return super(survey_details, self).copy(cr, uid, id, default, context=context)
+		return super(survey_details_info, self).copy(cr, uid, id, default, context=context)
 
 	def _check_customer(self, cr, uid, ids, name, args, context=None):
 
@@ -45,54 +45,56 @@ class survey_details(osv.osv):
 	
 	_columns = {
 		'name':fields.char('Survey id', readonly=True),
-		'atm_report':fields.many2one('view.plan.tasks','ATM Report Task ID'),
-		'month':fields.selection([('Jan','January'),
-			('Feb','February'),
-			('March','March'),
-			('April','April'),
-			('May','May'),
-			('June','June'),
-			('July','July'),
-			('August','August'),
-			('Sept','September'),
-			('Oct', 'October'),
-			('Nov','November'),
-			('Dec','December')],'Month'),
-		'remarks_category' : fields.many2one('remark.category','Remarks Category'),
-		'atm' : fields.many2one('atm.details', 'ATM'),
-		'customer_name':fields.many2one('customer.info','Customer'),
-		'acc_manager' : fields.many2one('res.users', 'Surveyor'),
+		'surv_task':fields.many2one('atm.surverys.management','ATM Report Task ID'),
+		'month': fields.selection([
+            ('jan', 'January'),
+            ('feb', 'February'),
+            ('mar', 'March'),
+            ('apr', 'April'),
+            ('may', 'May'),
+            ('june', 'June'),
+            ('jul', 'July'),
+            ('aug', 'August'),
+            ('sep', 'September'),
+            ('oct', 'October'),
+            ('nov', 'November'),
+            ('dec', 'December'),
+        ], 'Month'),
+		'remarks_survey' : fields.many2one('remark.category','Remarks Category'),
+		'atm_surv' : fields.many2one('atm.info', 'ATM'),
+		'customer_surv':fields.many2one('customer.info','Customer'),
+		'surveyor_surv' : fields.many2one('res.users', 'Surveyor'),
 		'is_nbad':fields.function(_check_customer, type='boolean', string='Is NBAD', method=True, store=False, multi=False),
 		
 		#'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
-		'visit_time':fields.datetime('Visit Time'),
+		'visit_tm':fields.datetime('Visit Time'),
 		#'customer':fields.many2one('customer.info','Customer Name'),
-		'current_longitude':fields.char('Current Longitude'),
-		'current_latitude':fields.char('Current Latitude'),
-		'next_survey_distance':fields.integer('Next Survey Distance'),
-		'next_task_id':fields.many2one('view.plan.tasks','Next Task ID'),
+		'cur_longitude':fields.char('Current Longitude'),
+		'cur_latitude':fields.char('Current Latitude'),
+		'nxt_survey_distance':fields.integer('Next Survey Distance'),
+		'nxt_taskid':fields.many2one('atm.surverys.management','Next Task ID'),
 		'state' : fields.many2one('res.country.state', 'State'),
 		'status': fields.selection([
 		('waiting_approval', 'Waiting for Approval'),
 		('approved', 'Approved')], 'Status'),
 
-		'no_comments':fields.boolean('No Comments'),
-		'col_cash':fields.selection([('required','Required'),
+		'check_list1':fields.boolean('No Comments'),
+		'check_list3':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Collect Cash'),
-		'col_receipt':fields.selection([('required','Required'),
+		'check_list4':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Collect Receipt'),
-		'ins_card':fields.selection([('required','Required'),
+		'check_list5':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Insert Card'),
-		'ins_cheq':fields.selection([('required','Required'),
+		'insert_chq':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Insert Cheque'),
-		'cables':fields.selection([('required','Required'),
+		'check_list11':fields.selection([('required','Required'),
 			('completed','Completed')],'Cables Securing'),
-		'trash':fields.selection([('required','Required')],'Trash bin Keys'),
-		'mach':fields.selection([('required','Required')],'Machine Surround Maintenance'),
+		'check_list13':fields.selection([('required','Required')],'Trash bin Keys'),
+		'check_list15':fields.selection([('required','Required')],'Machine Surround Maintenance'),
 		'card_pic':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Insert Card'),
@@ -105,35 +107,35 @@ class survey_details(osv.osv):
 			('dd','Display Distorted')],'Touch Screen Errors'),
 		'screen':fields.selection([('blank','Blank'),('frozen','Frozen')],'Screen'),
 		'ac_issues':fields.selection([('nw','Not Working')],'AC Issues'),
-		'surround_locks':fields.selection([('nw_lock_damaged','Network Lock Box Damaged'),
+		'check_list21':fields.selection([('nw_lock_damaged','Network Lock Box Damaged'),
 			('nw_lock_required','Network Box Lock Required'),
 			('vl_damaged','Vault Lock Damaged'),
 			('lock_req','Lock Required')],'Surround Locks'),
-		'lights':fields.selection([('off','Off'),('on','On')],'Main Board Lights'),
-		'sec_cam':fields.selection([('exp','Exposed')],'Security Camera Cables'),
-		'out_cont':fields.selection([('yes','Yes'),('no','No')],'Outdated Contact no.on the Surround'),
-		'card_reader':fields.selection([('required','Required'),
+		'check_list23':fields.selection([('off','Off'),('on','On')],'Main Board Lights'),
+		'check_list25':fields.selection([('exp','Exposed')],'Security Camera Cables'),
+		'check_list26':fields.selection([('yes','Yes'),('no','No')],'Outdated Contact no.on the Surround'),
+		'check_list27':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Card Reader'),
 		'side_frames':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Side Frames/Posters on the Surround'),
 
-		'atm_vault':fields.selection([('open','Open'),('damaged','Damaged')],'ATM Vault Door'),
-		'ded':fields.selection([('required','Required'),
+		'check_list28':fields.selection([('open','Open'),('damaged','Damaged')],'ATM Vault Door'),
+		'check_list29':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'DED Number'),
-		'atm_notices':fields.selection([('required','Required'),
+		'black_notices':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'ATM Notices'),
-		'keypad':fields.selection([('displaced','Displaced'),
+		'keypad_condition':fields.selection([('displaced','Displaced'),
 			('damaged','Damaged'),
 			('faded','Number Faded')],'Keypad Condition'),
 		'atm_status':fields.selection([('offline','Offline'),
 			('off','Powered Off'),
 			('out_of_service','Out of Service')],'ATM Status'),
-		'atm_screen_protector':fields.selection([('damaged','Damaged')],'ATM Screen Protector'),
-		'trashbin_repairs':fields.selection([('required','Required'),
+		'scree_protector':fields.selection([('damaged','Damaged')],'ATM Screen Protector'),
+		'trash_bin_repairs':fields.selection([('required','Required'),
 			('keys_required','Keys Required'),
 			('damaged','Damaged'),('replaced','Replaced')],
 			'Trash Bin Repairs/ replacement to be completed(as per the agreed contract'),
@@ -143,10 +145,10 @@ class survey_details(osv.osv):
 		'protective_box':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Protective Box for Power Crcuit'),
-		'machine_cam':fields.selection([('glass_mining','Glass Mining'),
+		'machine_security_camera':fields.selection([('glass_mining','Glass Mining'),
 			('glass_broken','Glass Broken'),
 			('out_of_focus','Out of Focus')],'Machine Security Camera'),
-		'fascia':fields.selection([('faded_from_edges','Faded from Edges'),
+		'fascia_condition':fields.selection([('faded_from_edges','Faded from Edges'),
 			('faded_from_keypad','Faded from Keypad'),
 			('damaged','Damaged')],'Fascia Condition'),	
 
@@ -361,27 +363,27 @@ class survey_details(osv.osv):
 
         # 'is_nbad': fields.function(_check_customer, type='boolean', string='Is NBAD', method=True, store=False, multi=False),
 
-		'ins_cash':fields.selection([('required','Required'),
+		'check_list6':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Insert Cash'),
-		'network_sticker':fields.selection([('required','Required'),
+		'check_list7':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Network Sticker'),
-		'instruction_sticker':fields.selection([('required','Required'),
+		'check_list8':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Instruction Sticker'),
-		'vault_branding':fields.selection([('required','Required'),
+		'check_list9':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Vault Branding'),
-		'terminal_id':fields.selection([('required','Required'),
+		'check_list10':fields.selection([('required','Required'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Terminal ID'),
-		'spot_lights':fields.selection([('off','Off'),
+		'check_list17':fields.selection([('off','Off'),
 			('missing','Missing'),
 			('replaced','Replaced')],'Spot Lights'),
-		'machine_surround':fields.selection([
+		'check_list19':fields.selection([
 			('damaged','Damaged')],'Machine Surround Branding'),
-		'canopy':fields.selection([
+		'check_list20':fields.selection([
 			('damaged','Damaged')],'Canopy Branding'),
 		'pin_guard':fields.selection([('required','Required'),
 			('damaged','Damaged'),
@@ -402,48 +404,51 @@ class survey_details(osv.osv):
 		'boom_sign':fields.selection([('off','Off'),
 			('damaged','Damaged'),
 			('replaced','Replaced')],'Boom Sign'),
-		'image1_b':fields.binary('image1'),
-		'image2_b':fields.binary('image2'),
-		'image3_b':fields.binary('image3'),
-		'image4_b':fields.binary('image4'),
-		'image5_b':fields.binary('image5'),
-		'image6_b':fields.binary('image6'),
-		'image7_b':fields.binary('image7'),
-		'image8_b':fields.binary('image8'),
-		'image1_a':fields.binary('image1'),
-		'image2_a':fields.binary('image2'),
-		'image3_a':fields.binary('image3'),
-		'image4_a':fields.binary('image4'),
-		'image5_a':fields.binary('image5'),
-		'image6_a':fields.binary('image6'),
-		'image7_a':fields.binary('image7'),
-		'image8_a':fields.binary('image8'),
+		'bfr_img_front': fields.binary('Front View'),
+        'bfr_img_side': fields.binary('Side View'),
+        'bfr_img_back': fields.binary('Back View'),
+        'after_img_front': fields.binary('Front View After'),
+        'after_img_side': fields.binary('Side View After'),
+        'after_img_back': fields.binary('Back View After'),
+
+        'bfr_img_front2': fields.binary('Front View 2'),
+        'bfr_img_side2': fields.binary('Side View 2'),
+        'bfr_img_back2': fields.binary('Back View 2'),
+        'after_img_front2': fields.binary('Front View After 2'),
+        'after_img_side2': fields.binary('Side View After 2'),
+        'after_img_back2': fields.binary('Back View After 2'),
+
+
+        'bfr_img_front3': fields.binary('Front View 3'),
+        'bfr_img_side3': fields.binary('Front View Side 3'),
+        'after_img_front3': fields.binary('Front View After 3'),
+        'after_img_side3': fields.binary('Side View After 3'),
 
 
 		}
 
-	_order = "visit_time desc"
+	_order = "visit_tm"
 
 	_defaults={
 
 		'status': 'waiting_approval',
-		'visit_time': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+		'visit_tm': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
 
 		}
 
-	def onchange_taskid(self, cr, uid, ids, atm_report, context=None):
+	def onchange_taskid(self, cr, uid, ids, surv_task, context=None):
 		res = {'value': {}}
-		if atm_report:
-			part = self.pool.get('view.plan.tasks').browse(
-				cr, uid, atm_report, context)
+		if surv_task:
+			part = self.pool.get('atm.surverys.management').browse(
+				cr, uid, surv_task, context)
 			# print part.atm.id
 			res['value'].update({'month': part.task_month})
-			res['value'].update({'atm': part.atm.id})
-			res['value'].update({'acc_manager': part.surveyor.id})
+			res['value'].update({'atm_surv': part.atm.id})
+			res['value'].update({'surveyor_surv': part.surveyor.id})
 
 
-			res['value'].update({'customer_name': part.customer_name.id})
-			res['value'].update({'visit_time': part.visit_time})
+			res['value'].update({'customer_surv': part.customer.id})
+			res['value'].update({'visit_tm': part.visit_time})
 			res['value'].update({'state': part.state.id})
 
 		return res
@@ -482,7 +487,7 @@ class survey_details(osv.osv):
 	def __create_dir(self, cr, uid, cid, atm_id, month, context=None):
 
 		customer = self.pool.get('customer.info').browse(cr, uid, cid).name
-		atm = self.pool.get('atm.details').browse(cr, uid, atm_id).atm_id
+		atm = self.pool.get('atm.info').browse(cr, uid, atm_id).atm_id
 
 		dir_name = '/var/www/html/ERP/%s/%s/%s' % (
 			str(month), str(customer), str(atm))
@@ -492,7 +497,7 @@ class survey_details(osv.osv):
 	def __write_image_file(self, cr, uid, imgdata1, vals, counter, context=None):
 
 		file_loc = self.__create_dir(
-			cr, uid, vals['customer_name'], vals['atm'], vals['month'], context=None)
+			cr, uid, vals['customer_surv'], vals['atm_surv'], vals['month'], context=None)
 
 		if os.path.exists(file_loc):
 			full_path = file_loc + '/%s_%s.jpeg' % (vals['name'], str(counter))
@@ -514,14 +519,14 @@ class survey_details(osv.osv):
 		# tree_id = self.pool.get('ir.model.data').get_object_reference(
 		search_view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'atm', 'view_atm_surverys_filter')[1]
 		form_id = self.pool.get('ir.model.data').get_object_reference(
-			cr, uid, 'atm', 'view_atm_view_plan_tasks_form')[1]
+			cr, uid, 'atm', 'view_atm_surveys_management_form')[1]
 
 		res = {
 			'type': 'ir.actions.act_window',
 			'name': 'Test',
 			'view_type': 'form',
 			'view_mode': 'form,tree',
-			'res_model': 'view.plan.tasks',
+			'res_model': 'atm.surverys.management',
 			'domain': [('id', '=', 290)],
 			# 'context':{'search_default_Current': 1, 'search_default_solu': 1, 'search_default_traj':1},
 			'views': [(tree_id, 'tree'), (form_id, 'form')],
@@ -540,11 +545,11 @@ class survey_details(osv.osv):
 		assert len(
 			ids) == 1, 'This option should only be used for a single id at a time'
 		datas = {
-			'model': 'survey.details',
+			'model': 'survey.info',
 			'ids': survey_ids,
 			'form': self.read(cr, uid, survey_ids, context=context),
 		}
-		return {'type': 'ir.actions.report.xml', 'report_name': 'survey.details', 'datas': datas, 'nodestroy': True}
+		return {'type': 'ir.actions.report.xml', 'report_name': 'survey.info', 'datas': datas, 'nodestroy': True}
 
 
 
@@ -553,7 +558,7 @@ class survey_details(osv.osv):
 		return True 
 
 	def write(self, cr, uid, ids, vals, context=None):
-		return super(survey_details, self).write(cr, uid, ids, vals, context)
+		return super(survey_details_info, self).write(cr, uid, ids, vals, context)
 
 	# def create(self, cr, uid, vals, context=None):
  #   		vals['name']= self.pool.get('ir.sequence').get(cr, uid, 'survey.det')
@@ -563,32 +568,32 @@ class survey_details(osv.osv):
 
 		if vals.get('name', '/') == '/':
 			vals['name'] = self.pool.get('ir.sequence').get(
-				cr, uid, 'survey.details') or '/'
+				cr, uid, 'survey.info') or '/'
 
-		vals['visit_time'] = datetime.datetime.now()
-		s_ids = self.search(cr, uid, [('month', '=', vals['month']), ('atm', '=', vals[
-							'atm']), ('atm_report', '=', vals['atm_report'])], context=None)
+		vals['visit_tm'] = datetime.datetime.now()
+		s_ids = self.search(cr, uid, [('month', '=', vals['month']), ('atm_surv', '=', vals[
+							'atm_surv']), ('surv_task', '=', vals['surv_task'])], context=None)
 
 		if s_ids:
 			self.unlink(cr, uid, s_ids, context=None)
 
-		survey_id = super(survey_details, self).create(
+		survey_id = super(survey_details_info, self).create(
 			cr, uid, vals, context=context)
 
 		values = {}
 
-		part = self.pool.get('view.plan.tasks').browse(
-			cr, uid, vals['atm_report'], context)
+		part = self.pool.get('atm.surverys.management').browse(
+			cr, uid, vals['surv_task'], context)
 
-		self.pool.get('view.plan.tasks').write(cr, uid, vals['atm_report'], {'status': 'done'}, context)
+		self.pool.get('atm.surverys.management').write(cr, uid, vals['surv_task'], {'status': 'done'}, context)
 
 
 		approve_surveys = self.status_approve(cr,uid,survey_id,context=None)
 		values.update({'state': part.state.id})
 
-		if vals['current_longitude'] and vals['current_latitude']:
-			self.pool.get('atm.details').write(cr, uid, vals['atm'], {
-				'latitude': vals['current_latitude'], 'longitude': vals['current_longitude']})
+		if vals['cur_longitude'] and vals['cur_latitude']:
+			self.pool.get('atm.info').write(cr, uid, vals['atm_surv'], {
+				'latitude': vals['cur_latitude'], 'longitude': vals['cur_longitude']})
 
 		self.write(cr, uid, survey_id, values)
 		return survey_id  
@@ -608,10 +613,10 @@ class survey_details(osv.osv):
 
 	def create(self, cr, uid, vals, context=None):
 		if vals.get('name','/')=='/':
-			vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.details') or '/'
+			vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.info') or '/'
 		return super(survey_details,self).create(cr, uid, vals, context=context)
 
-survey_details()
+survey_details_info()
 
 
 # class upload_images(osv.osv):
@@ -687,7 +692,7 @@ survey_details()
 # 			result[obj.id] = obj.image7_a
 # 		return result
 
-# 	_inherit = 'survey.details'
+# 	_inherit = 'survey.info'
 
 # 	_columns = {
 

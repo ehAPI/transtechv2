@@ -2,36 +2,36 @@
 <openerp>
 	<data>
 
-		<record model="ir.ui.view" id="remark_category_tree_view">
-			<field name="name">remark.category.tree</field>
-			<field name="model">remark.category</field>
+		<record model="ir.ui.view" id="view_remarks_category_tree">
+			<field name="name">Remarks Category Tree</field>
+			<field name="model">remarks.category</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree string="Manage Remark Category">
-					<field name='remark_category_id'/>
-					<field name='remark_description'/>
+				<tree string="Remarks Information">
+					<field name='description'/>
+					<field name='name'/>
 				</tree>
 			</field>
 		</record>
 
-		<record model="ir.ui.view" id="remark_category_form_view">
-			<field name="name">remark.category.form</field>
-			<field name="model">remark.category</field>
+		<record model="ir.ui.view" id="view_remarks_category_form">
+			<field name="name">Remarks Category Setup</field>
+			<field name="model">remarks.category</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="Manage Remark Category">
+				<form string="Remarks Details">
 					<group>
-						<field name='remark_category_id'/>
+						<field name='description'/>
 						<newline/>
-						<field name='remark_description'/>
+						<field name='name'/>
 					</group>
 				</form>
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="action_remark_category_form">
+		<record model="ir.actions.act_window" id="view_remarks_category_action">
 			<field name="name">Manage Remark Category</field>
-			<field name="res_model">remark.category</field>
+			<field name="res_model">remarks.category</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
 	      		<p class="oe_view_nocontent_create">
@@ -47,6 +47,6 @@
 		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management"/>
 		
 		<!-- menu item -->
-		<menuitem name="Manage Remark Category" parent="admin_setup" id="remark_category_menu_mainform" action="action_remark_category_form" sequence="21" groups="group_atm_manager"/>
+		<menuitem name="Manage Remark Category" parent="admin_setup" id="menu_remarks_category_details" action="view_remarks_category_action" sequence="21" groups="group_atm_manager"/>
 	</data>
 </openerp>

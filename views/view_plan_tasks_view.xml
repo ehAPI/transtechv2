@@ -3,8 +3,8 @@
 	<data>
 	
 		<record model="ir.ui.view" id="view_atm_view_plan_tasks_form"> 
-		    <field name="name">view.plan.tasks.form</field>
-		    <field name="model">view.plan.tasks</field>
+		    <field name="name">ATM Surverys Management</field>
+		    <field name="model">atm.surverys.management</field>
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
 			<form string="Survey Details" version="8.0">
@@ -18,8 +18,8 @@
 						<group>
 				
 							<field name="name"/>
-							<field name="month" attrs="{'readonly':[('status','!=','assigned')]}" on_change="onchange_month(month)"/>
-							<field name="customer_name" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="task_month" attrs="{'readonly':[('status','!=','assigned')]}" on_change="onchange_month(task_month)"/>
+							<field name="customer" attrs="{'readonly':[('status','!=','assigned')]}"/>
 							<field name="state" attrs="{'readonly':[('status','!=','assigned')]}"/>
 							<field name="atm" attrs="{'readonly':[('status','!=','assigned')]}"/>
 
@@ -27,14 +27,14 @@
 							<field name="country" attrs="{'readonly':[('status','!=','assigned')]}"/>
 							<field name="surveyor" attrs="{'readonly':[('status','!=','assigned')]}" groups="atm.group_atm_manager, atm.group_atm_customer"/>
 							<field name="visit_time" attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name= "add_instr" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name= "additional_info" attrs="{'readonly':[('status','!=','assigned')]}"/>
 							<field name="bulk_insert" attrs="{'readonly':[('status','!=','assigned')]}"/>
 							<field name="visit_type" attrs="{'readonly':[('status','!=','assigned')]}"/>
 						</group>
 						<group string='Visit Details' attrs="{'readonly':[('status','!=','assigned')]}">
-							<field name="remarks_category" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="remarks_id" attrs="{'readonly':[('status','!=','assigned')]}"/>
 							<field name="remarks" attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name="act_date_time" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="act_visit_time" attrs="{'readonly':[('status','!=','assigned')]}"/>
 						</group>
 
 						
@@ -45,15 +45,15 @@
 		</record>
 
 		<record model="ir.ui.view" id="view_atm_view_plan_tasks_tree"> 
-		    <field name="name">view.plan.tasks.tree</field>
-		    <field name="model">view.plan.tasks</field>
+		    <field name="name">atm.surverys.management.tree</field>
+		    <field name="model">atm.surverys.management</field>
 		    <field name="type">tree</field>
 		    <field name="arch" type="xml">
 			<tree string="Survey Details" colors="red:status=='cancel';blue:status=='done'" version="8.0">
 					
 							<field name="name"/>
-							<field name="month"/>
-						    <field name="customer_name"/>
+							<field name="task_month"/>
+						    <field name="customer"/>
 						    <field name="atm"/>
 
 
@@ -62,7 +62,7 @@
 						    <field name="surveyor" groups="atm.group_atm_manager, atm.group_atm_customer"/>
 
 							<field name="visit_time"/>
-							<field name= "add_instr"/>
+							<field name= "additional_info"/>
 							<field name="status"/>
 						
 			</tree>
@@ -71,12 +71,12 @@
 		
 		        <record model="ir.ui.view" id="view_plan_tasks_filter">
 		            <field name="name">view_plan_tasks_filter</field>
-		            <field name="model">view.plan.tasks</field>
+		            <field name="model">atm.surverys.management</field>
 		            <field name="arch" type="xml">
 		                <search string="atm surverys search">
 
 		                		<field name="name"
-		                       filter_domain="['|','|',('name','ilike',self),('atm','ilike',self),('customer_name','ilike',self)]" string="TASK"/>
+		                       filter_domain="['|','|',('name','ilike',self),('atm','ilike',self),('customer','ilike',self)]" string="TASK"/>
 
 		                       <filter icon="terp-go-today" string="Today" name="today" domain="[('visit_time','&gt;=',current_date),('visit_time','&lt;=',current_date)]" />
 					<separator/>
@@ -87,7 +87,7 @@
 					<filter icon="terp-check" string="Done"  domain="[('status','=','done')]"/>
 		                        
 		                     <group expand="0" string="Group By...">
-		                        <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'customer_name'}"/>
+		                        <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'customer'}"/>
 		                        <filter string="Surveyor Name" icon="terp-folder-green" domain="[]" context="{'group_by':'surveyor'}" groups="atm.group_atm_manager, atm.group_atm_customer"/>
 		                        <filter string="Date" icon="terp-go-month" domain="[]" context="{'group_by':'visit_time'}"/>
 					<filter string="Location"  domain="[]" context="{'group_by':'state'}"/>
@@ -100,7 +100,7 @@
 
 		<record model="ir.actions.act_window" id="action_view_plan_tasks_form">
 			<field name="name">View &amp; Plan Tasks</field>
-			<field name="res_model">view.plan.tasks</field>
+			<field name="res_model">atm.surverys.management</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
               				<p class="oe_view_nocontent_create">

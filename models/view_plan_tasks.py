@@ -5,44 +5,20 @@ import time
 from dateutil.relativedelta import relativedelta
 from openerp import SUPERUSER_ID
 
-class view_plan_tasks(osv.osv):
+class atm_surverys_management(osv.osv):
 
-	_name = 'view.plan.tasks'
+	_name = 'atm.surverys.management'
 
 	def copy(self, cr, uid, id, default=None, context=None):
 		if not default:
 			default = {}
 		default.update({
-			'name': self.pool.get('ir.sequence').get(cr, uid, 'view.plan.tasks'),
+			'name': self.pool.get('ir.sequence').get(cr, uid, 'atm.surverys.management'),
 		})
-		return super(view_plan_tasks, self).copy(cr, uid, id, default, context=context)
+		return super(atm_surverys_management, self).copy(cr, uid, id, default, context=context)
 
 	_columns = {
 	        'name':fields.char('Task ID', readonly=True),
-			'month':fields.selection([('Jan','January'),
-				('Feb','February'),
-				('March','March'),
-				('April','April'),
-				('May','May'),
-				('June','June'),
-				('July','July'),
-				('August','August'),
-				('Sept','September'),
-				('Oct', 'October'),
-				('Nov','November'),
-				('Dec','December')],'Month'),
-			# 'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
-			'customer_name':fields.many2one('customer.info','Customer',required=True),
-			'state' : fields.many2one('res.country.state', 'State', required=True,domain="[('country_id','=',country)]"),
-			'atm' : fields.many2one('atm.details', 'ATM', domain="[('customer','=',customer_name),('state_id','=',state)]",required=True),
-			'visit_shift':fields.selection([('day','Day'),
-				('night','Night')],'Visit Shift',required=True),
-			'country' : fields.many2one('res.country','Country',domain="[('code','=','AE')]",required=True),
-			'surveyor' : fields.many2one('res.users', 'Surveyor', required=True,domain="[('name_tl','!=',False)]"),
-			'visit_time':fields.datetime('Visit Date and Time', required=True),
-			#'customer':fields.many2one('customer.info','Customer Name'),
-			'add_instr':fields.text('Additional instructions'),
-			'bulk_insert' : fields.boolean('Bulk Insert',size=5),
 			'task_month':fields.selection([
 			('jan','January'),
 			('feb', 'February'),
@@ -57,6 +33,18 @@ class view_plan_tasks(osv.osv):
 			('nov', 'November'),
 			('dec', 'December'),
 			], 'Month'),
+			# 'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
+			'customer':fields.many2one('customer.info','Customer',required=True),
+			'state' : fields.many2one('res.country.state', 'State', required=True,domain="[('country_id','=',country)]"),
+			'atm' : fields.many2one('atm.details', 'ATM', domain="[('customer','=',customer),('state_id','=',state)]",required=True),
+			'visit_shift':fields.selection([('day','Day'),
+				('night','Night')],'Visit Shift',required=True),
+			'country' : fields.many2one('res.country','Country',domain="[('code','=','AE')]",required=True),
+			'surveyor' : fields.many2one('res.users', 'Surveyor', required=True,domain="[('name_tl','!=',False)]"),
+			'visit_time':fields.datetime('Visit Date and Time', required=True),
+			#'customer':fields.many2one('customer.info','Customer Name'),
+			'additional_info':fields.text('Additional instructions'),
+			'bulk_insert' : fields.boolean('Bulk Insert',size=5),
 			'visit_type': fields.selection([('daily','Daily'),
 				('weekly','Weekly'),
 				('monthly','Monthly'),
@@ -74,10 +62,10 @@ class view_plan_tasks(osv.osv):
 				('16_times','16 times')],'Visit Type'),
 			'visit_details':fields.char('Visit Details',readonly=True),
 			'assigned_by':fields.many2one('res.users','Assigned By' ,readonly=True),
-			'remarks_category' : fields.many2one('remarks.category','Remarks Category'),
+			'remarks_id' : fields.many2one('remarks.category','Remarks Category'),
 			'remarks':fields.text('Remarks'),
 			'nos':fields.integer('Number of records for Bulk Insert '),
-			'act_date_time':fields.datetime('Actual Date Time'),
+			'act_visit_time':fields.datetime('Actual Date Time'),
 			'status':fields.selection([('assigned','Assigned'),
 									   ('pending','Pending'),
 									   ('cancel','Cancelled'),
@@ -110,8 +98,8 @@ class view_plan_tasks(osv.osv):
 	def create(self, cr, uid, vals, context=None):
 		visit_date = vals['visit_time']
 		if vals.get('name','/')== '/':
-			vals['name']=self.pool.get('ir.sequence').get(cr,uid,'view.plan.tasks') or '/'
-		return super(view_plan_tasks,self).create(cr, uid, vals, context=context)	
+			vals['name']=self.pool.get('ir.sequence').get(cr,uid,'atm.surverys.management') or '/'
+		return super(atm_surverys_management,self).create(cr, uid, vals, context=context)	
 
 
 	def create_task(self,cr,uid,context=None):
@@ -123,7 +111,7 @@ class view_plan_tasks(osv.osv):
 		for i in task_list:
 			# if i.next_visit.split(' ')[0] == str(today) and i.nos > 1:
 				# if i.status == 'assigned' or i.status == 'progress' or i.status == 'pending' or i.status== 'done':
-				vals = {'customer':i.customer_name.id, 'atm':i.atm.id, 'country':i.country.id, 'state':i.state.id, 'surveyor':i.surveyor.id,'visit_time':i.next_visit,'additional_info':i.additional_info,'bulk_insert':i.bulk_insert, 'visit_type':i.visit_type,'act_visit_time':i.act_visit_time,'nos':i.nos-1}
+				vals = {'customer':i.customer.id, 'atm':i.atm.id, 'country':i.country.id, 'state':i.state.id, 'surveyor':i.surveyor.id,'visit_time':i.next_visit,'additional_info':i.additional_info,'bulk_insert':i.bulk_insert, 'visit_type':i.visit_type,'act_visit_time':i.act_visit_time,'nos':i.nos-1}
 				
 				if i.visit_type == 'daily':
 					visit_date = datetime.datetime.strptime(i.visit_time, "%Y-%m-%d %H:%M:%S")
@@ -214,8 +202,8 @@ class view_plan_tasks(osv.osv):
 				# print vals
 				# if datetime.datetime.today().weekday() != 4:
 					# print i.id
-				print self.pool.get('view.plan.tasks').create(cr,uid,vals,context=None)
-				self.pool.get('view.plan.tasks').write(cr,uid,i.id,{'nos':i.nos-1},context=None)
+				print self.pool.get('atm.surverys.management').create(cr,uid,vals,context=None)
+				self.pool.get('atm.surverys.management').write(cr,uid,i.id,{'nos':i.nos-1},context=None)
 		return True	
 
 
@@ -225,9 +213,9 @@ class view_plan_tasks(osv.osv):
 		task_list1 = self.browse(cr,uid,all_tasks,context=None)
 		for obj in task_list1:
 			if obj.visit_time.split()[0] == today:
-				self.pool.get('view.plan.tasks').write(cr,uid,obj.id,{'status':'progress'},context=None)
+				self.pool.get('atm.surverys.management').write(cr,uid,obj.id,{'status':'progress'},context=None)
 			if obj.visit_time.split()[0] < today:
-				self.pool.get('view.plan.tasks').write(cr,uid,obj.id,{'status':'pending'},context=None)
+				self.pool.get('atm.surverys.management').write(cr,uid,obj.id,{'status':'pending'},context=None)
 
 		return True
 
@@ -254,7 +242,7 @@ class view_plan_tasks(osv.osv):
 				if ids[0] not in lines:
 					raise osv.except_osv(_('Error !'),_("One Task has been already created with this ATM & with the same visit date !") )
 
-		result = super(view_plan_tasks,self).write(cr,uid,ids,vals,context=None)
+		result = super(atm_surverys_management,self).write(cr,uid,ids,vals,context=None)
 		lst = self.browse(cr,uid,ids)
 		for obj in lst:
 			if obj.nos > 1:
@@ -322,7 +310,7 @@ class view_plan_tasks(osv.osv):
 					vals['next_visit'] = None
 					vals['nos'] = 0
 					vals['visit_type'] = None
-				super(view_plan_tasks,self).write(cr,uid,ids,vals,context=None)
+				super(atm_surverys_management,self).write(cr,uid,ids,vals,context=None)
 
 		return True
 
@@ -332,7 +320,7 @@ class view_plan_tasks(osv.osv):
 		# if prod_obj.status in ('progress','done'):
 		# 	raise osv.except_osv(_('Invalid Action!'), _("You can't delete a task which is either in 'Pending' or in 'Progress' or in 'Done'"))
 			
-		return super(view_plan_tasks, self).unlink(cr, uid, ids, context=context)
+		return super(atm_surverys_management, self).unlink(cr, uid, ids, context=context)
 
 
 	def onchange_month(self,cr,uid,ids,task_month,context=None):
@@ -369,4 +357,4 @@ class view_plan_tasks(osv.osv):
 
 
 
-view_plan_tasks	()
+atm_surverys_management	()

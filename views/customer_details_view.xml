@@ -7,11 +7,11 @@
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
 				<tree string="Customer Details">
-					<field name='cust_code'/>
-					<field name='cust_name'/>
-					<field name='country'/>
-					<field name='cont_per'/>
-					<field name='cont_no' string='Contact Number'/>
+					<field name='customer_code'/>
+					<field name='name'/>
+					<field name='country_id'/>
+					<field name='contact_person'/>
+					<field name='mobile_no' string='Contact Number'/>
 					<field name='active'/>
 				</tree>
 			</field>
@@ -25,46 +25,46 @@
 				<form string="Customer Details">
 					<sheet>
 						<div>
-							<field name="cust_image" widget='image' class='oe_left oe_avatar' options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+							<field name="image" widget='image' class='oe_left oe_avatar' options='{"preview_image": "image_medium", "size": [90, 90]}'/>
 						</div>
 						<div class='oe_title'>
 							<h2>
-	                            <field name="cust_code" string='Customer Code'/>
-	                            <field name="cust_name" default_focus="1" string='Customer Name' placeholder='Customer Name'/>
+	                            <field name="customer_code" string='Customer Code'/>
+	                            <field name="name" default_focus="1" string='Customer Name' placeholder='Customer Name'/>
 						    </h2>
 
 						</div>
 						<group>
 							<group>
 								<field name='address'/>
-								<field name='country'/>
-								<field name='cont_per' widget='email'/>
-								<field name='cont_per_e1' widget='email'/>
-								<field name='cont_per_e2' widget='email'/>
-								<field name='cont_per_e3' widget='email'/>
-								<field name='cont_no'/>
+								<field name='country_id'/>
+								<field name='contact_person' widget='email'/>
+								<field name='contact_email' widget='email'/>
+								<field name='contact_email2' widget='email'/>
+								<field name='contact_email3' widget='email'/>
+								<field name='mobile_no' string="Contact Number"/>
 								<field name='active'/>
-								<field name='sla_start_date'/>
-								<field name='sla_end_date'/>
+								<field name='sla_start'/>
+								<field name='sla_end'/>
 								<field name="display_mapping" invisible="1"/>
 							</group>
 							<group string='Escalation Levels'>
-								<field name='acc_manager'/>
-								<field name='other1'/>
-								<field name='other2'/>
+								<field name='account_manager'/>
+								<field name='other_1'/>
+								<field name='other_2'/>
 							</group>
 						</group>
 						<notebook>
 							<page string="List of Tasks for You">
 								<field name="task_ids" widget="many2many_list">
 									 <tree string="ATM Surverys tree">
-										<field name="customer_name"/>
+										<field name="customer"/>
 										<field name="atm"/>
 										<field name="country"/>
 										<field name="state" />
 										<field name="surveyor" />
 										<field name="visit_time"/>
-										<field name="add_instr"/>
+										<field name="additional_info"/>
 										<field name="status"/>
 									</tree>
 								</field>
@@ -80,7 +80,7 @@
         	<field name="model">customer.info</field>
         	<field name="arch" type="xml">
             	<search string="Customer">
-                		<field name="cust_name" filter_domain="['|', ('cust_name','ilike',self), ('cont_per','ilike',self)]" string="Customer"/>
+                		<field name="name" filter_domain="['|', ('name','ilike',self), ('contact_person','ilike',self)]" string="Customer"/>
             	</search>
         	</field>
    	    </record>
@@ -98,8 +98,12 @@
 
 		<record model="ir.actions.act_window" id="action_cust_details_form">
 			<field name="name">Customer Details</field>
+			<field name="type">ir.actions.act_window</field>
 			<field name="res_model">customer.info</field>
+		    <field name="view_type">form</field>
+		    <field name="view_id" ref="cust_details_tree_view1"/>
 			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_customer_search"/>
 			<field name="help" type="html">
           		<p class="oe_view_nocontent_create">
             	click to add new Customer details......

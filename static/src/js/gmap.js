@@ -16,7 +16,7 @@ openerp.atm = function (instance)
     set_value: function(value) {
       this.id = value;      
       if(this.map != null & value != false) {
-        var Partner = new instance.web.Model('atm.details');
+        var Partner = new instance.web.Model('atm.info');
         Partner.query(['latitude', 'longitude'])
           .filter([['id', '=', this.id]]).limit(1)
           .all().done(

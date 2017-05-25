@@ -1,32 +1,32 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 
-access_view_plan_tasks_customer,view.plan.tasks,model_view_plan_tasks,atm.group_atm_customer,1,0,0,0
+access_view_plan_tasks_customer,atm.surverys.management,model_atm_surverys_management,atm.group_atm_customer,1,0,0,0
 
 access_customer_info,customer.info,model_customer_info,atm.group_atm_customer,1,0,0,0
 
-access_view_plan_tasks,view.plan.tasks,model_view_plan_tasks,atm.group_atm_user,1,1,0,0
+access_view_plan_tasks,atm.surverys.management,model_atm_surverys_management,atm.group_atm_user,1,1,0,0
 
-access_cust_alerts_cus,cust.alerts,model_cust_alerts,atm.group_atm_customer,1,0,1,0
+access_cust_alerts_cus,alert.info,model_alert_info,atm.group_atm_customer,1,0,1,0
 
-access_atm_details_cus,atm.details,model_atm_details,atm.group_atm_customer,1,1,0,0
+access_atm_details_cus,atm.info,model_atm_info,atm.group_atm_customer,1,1,0,0
 
-access_project_project_manager,view.plan.tasks,model_view_plan_tasks,atm.group_atm_manager,1,1,1,1
+access_project_project_manager,atm.surverys.management,model_atm_surverys_management,atm.group_atm_manager,1,1,1,1
 
-access_atm_manager,atm.details,model_atm_details,atm.group_atm_manager,1,1,1,1
+access_atm_manager,atm.info,model_atm_info,atm.group_atm_manager,1,1,1,1
 
-access_cust_alerts,cust.alerts,model_cust_alerts,atm.group_atm_manager,1,1,1,1
+access_cust_alerts,alert.info,model_alert_info,atm.group_atm_manager,1,1,1,1
 
 access_customer_info_manager,customer.info,model_customer_info,atm.group_atm_manager,1,1,1,1
 
-access_reason_code_setup_manager,reason.code.setup,model_reason_code_setup,atm.group_atm_manager,1,1,1,1
+access_reason_code_setup_manager,reason.code,model_reason_code,atm.group_atm_manager,1,1,1,1
 
-access_reason_code_setup_surveyor,reason.code.setup,model_reason_code_setup,atm.group_atm_user,1,1,0,0
+access_reason_code_setup_surveyor,reason.code,model_reason_code,atm.group_atm_user,1,1,0,0
 
 access_customer_info_surveyor,customer.info,model_customer_info,atm.group_atm_user,1,0,0,0
 
 
-access_reason_code_setup_customer,reason.code.setup,model_reason_code_setup,atm.group_atm_customer,1,1,0,0
+access_reason_code_setup_customer,reason.code,model_reason_code,atm.group_atm_customer,1,1,0,0
 
 
 access_atm_old_manager,atm.old,model_atm_old,atm.group_atm_manager,1,1,1,1
@@ -37,15 +37,15 @@ access_atm_old_user,atm.old,model_atm_old,atm.group_atm_user,1,0,0,0
 access_atm_old_customer,atm.old,model_atm_old,atm.group_atm_customer,1,1,1,1
 
 
-access_remark_category_manager,remark.category,model_remark_category,atm.group_atm_manager,1,1,1,1
+access_remark_category_manager,remarks.category,model_remarks_category,atm.group_atm_manager,1,1,1,1
 
-access_remark_category_surveyor,remark.category,model_remark_category,atm.group_atm_user,1,1,,0
+access_remark_category_surveyor,remarks.category,model_remarks_category,atm.group_atm_user,1,1,,0
 
-access_remark_category_customer,remark.category,model_remark_category,atm.group_atm_customer,1,1,0,0
+access_remark_category_customer,remarks.category,model_remarks_category,atm.group_atm_customer,1,1,0,0
 
 access_customer_info_user,customer.info,model_customer_info,atm.group_atm_user,1,0,0,0
 
-access_atm_details,atm.details,model_atm_details,atm.group_atm_user,1,1,1,0
+access_atm_details,atm.info,model_atm_info,atm.group_atm_user,1,1,1,0
 
 access_res_users_manager,res.users,model_res_users,atm.group_atm_manager,1,1,1,1
 
@@ -54,32 +54,32 @@ access_internal_alerts,internal.alerts,model_internal_alerts,atm.group_atm_manag
 access_internal_alerts_user,internal.alerts,model_internal_alerts,atm.group_atm_user,1,1,1,1
 
 
-access_survey_details_manager,survey.details,model_survey_details,atm.group_atm_manager,1,1,1,1
+access_survey_details_manager,survey.info,model_survey_info,atm.group_atm_manager,1,1,1,1
 
-access_survey_details_surveyor,survey.details,model_survey_details,atm.group_atm_user,1,1,1,0
+access_survey_details_surveyor,survey.info,model_survey_info,atm.group_atm_user,1,1,1,0
 
-access_survey_details_customer,survey.details,model_survey_details,atm.group_atm_customer,1,0,0,0
+access_survey_details_customer,survey.info,model_survey_info,atm.group_atm_customer,1,0,0,0
 
 access_res_users_group_erp_manager,res.users,base.model_res_users,atm.group_atm_manager,1,1,1,1
 
-#access_site_inspection_manager,site.inspection,model_site_inspection,atm.group_atm_manager,1,1,1,1
+#access_site_inspection_manager,transtech.site.inspection,model_transtech_site_inspection,atm.group_atm_manager,1,1,1,1
 
 
 
 access_res_partner_manager,atm.res.partner,base.model_res_partner,atm.group_atm_manager,1,1,1,0
 
-access_schedule_tasks_manager,schedule.tasks,model_schedule_tasks,atm.group_atm_manager,1,1,1,1
+access_schedule_tasks_manager,schedule.task,model_schedule_task,atm.group_atm_manager,1,1,1,1
 
-access_schedule_tasks_user,schedule.tasks,model_schedule_tasks,atm.group_atm_user,1,0,0,0
+access_schedule_tasks_user,schedule.task,model_schedule_task,atm.group_atm_user,1,0,0,0
 
 
 access_res_partner_customer,res.partner,base.model_res_partner,atm.group_atm_customer,1,0,0,0
 
 access_res_partner_bank,res.partner.bank,base.model_res_partner_bank,atm.group_atm_customer,1,0,0,0
 
-access_schedule_tasks_customer,schedule.tasks,model_schedule_tasks,atm.group_atm_customer,1,0,0,0
+access_schedule_tasks_customer,schedule.task,model_schedule_task,atm.group_atm_customer,1,0,0,0
 
-access_alert_customer,cust.alerts,model_cust_alerts,atm.group_atm_customer,1,1,0,0
+access_alert_customer,alert.info,model_alert_info,atm.group_atm_customer,1,1,0,0
 
 access_survey_report_manager,survey.report,model_survey_report,atm.group_atm_manager,1,1,1,1
 
