@@ -48,7 +48,9 @@ class hr_holidays_line(osv.osv):
 	_name = 'hr.holidays.public.line'
 	_description = 'Public Holidays Lines'
 	_columns = {
+
 	# 'dn' : fields.integer('Day', required= True),
+
 	'date' : fields.date('Date', required= True),
 	'name' : fields.char('Name', required= True),
     'holidays_id': fields.many2one('hr.holidays.public', 'Holiday Calendar Year'),
