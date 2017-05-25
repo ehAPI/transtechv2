@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="wizard_print_survey_form">
+            <field name="name">Print Survey</field>
+            <field name="model">print.survey</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Survey Reports" version="8.0">
+                    <p class="oe_grey">
+                        This wizard helps you to edit survey images.
+                    </p>
+                    <p class="oe_grey">
+                        If you want to quit click on Cancel.
+                    </p> 
+                    <p class="transtech">
+                       
+                    </p>
+                <group>       
+                      <group string="Before Survey">
+                        <field name="bfr_img_front"/>             
+                        <field name="bfr_img_side"/>             
+                        <field name="bfr_img_back"/>
+
+                        <field name="bfr_img_front2"/>             
+                        <field name="bfr_img_side2"/>             
+                        <field name="bfr_img_back2"/>
+
+                        <field name="bfr_img_front3"/>             
+                        <field name="bfr_img_side3"/>               
+                      </group>
+
+                      <group string="After Survey">
+                        <field name="after_img_front"/>             
+                        <field name="after_img_side"/>             
+                        <field name="after_img_back"/>
+                        <field name="after_img_front2"/>             
+                        <field name="after_img_side2"/>             
+                        <field name="after_img_back2"/>
+
+                        <field name="after_img_front3"/>             
+                        <field name="after_img_side3"/>              
+                      </group>
+                  </group>
+                    <footer>
+                      <button name="action_upload" string="Upload" type="object" class="oe_highlight"/>
+                      <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+              </form>
+            </field>
+      </record>
+
+      <record id="action_pics_survey_wizard" model="ir.actions.act_window">
+          <field name="name">Survey Images</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">print.survey</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="wizard_print_survey_form"/>
+          <field name="target">new</field>
+      </record> 
+
+  </data>
+</openerp>

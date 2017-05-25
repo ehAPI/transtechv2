@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="view_remarks_category_tree">
+			<field name="name">Remarks Category Tree</field>
+			<field name="model">remarks.category</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Remarks Information">
+					<field name='description'/>
+					<field name='name'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_remarks_category_form">
+			<field name="name">Remarks Category Setup</field>
+			<field name="model">remarks.category</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Remarks Details">
+					<group>
+						<field name='description'/>
+						<newline/>
+						<field name='name'/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="view_remarks_category_action">
+			<field name="name">Manage Remark Category</field>
+			<field name="res_model">remarks.category</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+	      		<p class="oe_view_nocontent_create">
+	        	Click to add new Remark Categories......
+	      		</p>
+       		</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management"/>
+		
+		<!-- menu item -->
+		<menuitem name="Manage Remark Category" parent="admin_setup" id="menu_remarks_category_details" action="view_remarks_category_action" sequence="21" groups="group_atm_manager"/>
+	</data>
+</openerp>

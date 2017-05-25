@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="res_user_tree_view_extend">
+    		<field name="name">res.user.tree.inherit</field>
+    		<field name="model">res.users</field>
+			<field name="inherit_id" ref="base.view_users_tree"></field>
+			<field name="arch" type="xml">
+				<field name="lang" position="after">
+					<field name="role"/>
+					<field name="contact_num"/>
+					<field name="joining_date"/>
+				</field>
+			</field>
+	    </record>
+
+	    <record model="ir.ui.view" id="view_user_info_form">
+	        		<field name="name">Manage Users</field>
+	        		<field name="model">res.users</field>
+	    			<field name="inherit_id" ref="base.view_users_form"></field>
+	    					
+	    			<field name="arch" type="xml">
+	    
+	    				<field name='login' position='after'>
+	    					<div class='oe_title'>
+	    				<label for='password' class='oe_edit_only'/>
+	        					<h3>
+	    
+	    					<field name='password' password= "True" />
+	    
+	    				</h3>
+	        				</div>
+	        			</field>
+	        			<group>
+	    			<group>
+	        					<field name="company"/>
+	    						<field name="is_team_leader"/>
+	        					<field name="team_leader"/>
+	        					<field name="contact_num"/>
+	        					<field name="joining_date"/>
+	    					</group>
+	    					<group>
+	        					<field name="survey_limit"/>
+	        					<field name="customer_ids"/>
+	        					<field name="Comments"/>
+	    			</group>
+	    				</group>
+	    			</field>
+	    </record>
+
+		 <record id="view_atm_user_tree" model="ir.ui.view">
+			<field name="name">Users Tree</field>
+			<field name="model">res.users</field>
+			<field name="type">tree</field>
+			 <field name="arch" type="xml">
+				<tree string="Users Information">
+                    <field name="role"/>
+				</tree>
+			</field>
+		</record>
+
+	<record id="view_user_info_action" model="ir.actions.act_window">
+	  	<field name="name">Manage Users</field>
+		   <field name="type">ir.actions.act_window</field>
+		   <field name="res_model">res.users</field>
+		   <field name="view_type">form</field>
+		   <field name="view_id" ref="view_atm_user_tree"/>
+		   <field name="view_mode">tree,form</field>         
+		   <field name="help" type="html">
+
+					<header>
+						<field name="status" widget="statusbar" statusbar_visible="never_connected,activated,"/>
+					</header>
+          		<p class="oe_view_nocontent_create">
+            	Click to add new Users......
+          		</p>
+
+          		<!-- <field name='customer'/>
+          		<field name='team_leader'/>
+-->
+       		</field>
+		</record>
+
+		<menuitem  id="admin_setup" name="Administration Setup" parent="atm_survey_management"/>		
+
+<!-- groups='group_atm_manager' -->
+
+		<!-- <menuitem  id="transtech_user_management" name="User Management" parent="admin_setup" groups="group_atm_manager" sequence="22"/> -->	
+
+		<!-- <menuitem action="base.action_res_users" id="action_res_users"  parent="transtech_user_management" sequence="24"/> -->
+
+        <record id="view_atm_group_tree" model="ir.ui.view">
+			<field name="name">Group Tree</field>
+			<field name="model">res.groups</field>
+			<field name="type">tree</field>
+			 <field name="arch" type="xml">
+				<tree string="State Information">
+					<field name="name"/>				
+				</tree>
+			</field>
+		</record>
+
+	    <record id="view_atm_group_info_action" model="ir.actions.act_window">
+		    <field name="name">Manage User Groups</field>
+		    <field name="type">ir.actions.act_window</field>
+		    <field name="res_model">res.groups</field>
+		    <field name="view_type">form</field>
+		    <field name="view_id" ref="view_atm_group_tree"/>
+		    <field name="view_mode">tree,form</field>         
+		    <field name="help" type="html">
+          		<p class="oe_view_nocontent_create">
+            	Click to add new Groups......
+          		</p>
+       		</field>
+		</record>
+
+		<!-- <menuitem action="base.action_res_groups" id="action_res_groups"  parent="transtech_user_management" sequence="23"/> -->
+
+     </data>
+</openerp>

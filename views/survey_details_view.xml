@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="form_surveys_info_new_1"> 
+		    <field name="name">survey.info.details</field>
+		    <field name="model">survey.info</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+				<form string="Survey Details" version="8.0">
+					<header>
+
+						<button name="print_survey" string="Print Survey" type="object" states="draft,sent,progress,manual" class="oe_highlight" groups="atm.group_atm_manager"/>
+					<!-- 	<button name="print_survey" string="Print Survey" type="object" states="sent,progress,manual" groups="atm.group_atm_manager"/> -->
+					<header>
+
+						<button name="status_approve" string="Approve" type="object" class="oe_highlight" groups="atm.group_atm_manager" confirm="Are you sure you want to approve this survey??" attrs="{'invisible': [('status','=','approved')]}"/>
+						
+						<field name="status" widget="statusbar" statusbar_visible="waiting_approval,approved"/>
+
+					</header>
+
+					<header>	
+	
+						<button name="%(action_pics_survey_wizard)d" string="Upload Images" type="action" class="oe_highlight" groups="atm.group_atm_manager,atm.group_atm_user"/>
+					</header>
+				
+					
+<!-- 
+	                    <button name="status_approve" type="object" String="Approve" groups="atm.group_atm_manager, atm.group_atm_user"  
+	                     attrs="{'invisible':[('status','in',('waiting_approval','approved'))]}" 
+	                     class="oe_highlight"/> -->
+
+				</header>
+
+					<sheet>
+						<group>
+							<group> 
+							<field name="name"/>
+
+							<field name="is_nbad" invisible="1"/>
+							<field name="surv_task" on_change="onchange_taskid(surv_task)" groups="atm.group_atm_manager" style="width:40%%"/>
+							<field name="month" style="width:40%%"/>
+							<field name="remarks_survey" style="width:40%%"/>
+							<field name="atm_surv" style="width:40%%"/>
+							<field name="customer_surv" style="width:40%%"/>
+							<field name="surveyor_surv" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="visit_tm" style="width:40%%"/>
+							<field name="cur_longitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name= "cur_latitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="nxt_survey_distance" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="nxt_taskid" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="state" style="width:40%%"/>
+<!-- 
+							<field name="atm_report"/>
+							<field name="month"/>
+							<field name="remarks_survey"/>
+							<field name="atm"/>
+							<field name="customer_name"/>
+							<field name="surveyor_surv"/>
+							<field name="visit_time"/>
+							<field name="current_longitude"/>
+							<field name= "current_latitude"/>
+							<field name="next_survey_distance"/>
+							<field name="next_task_id"/>
+							<field name="state"/>
+ -->
+						    </group>
+								<group string="Before Survey">
+									<div id="thumbwrap">
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="bfr_img_front" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="bfr_img_back" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="bfr_img_side" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="bfr_img_front2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="bfr_img_back2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="bfr_img_side2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="bfr_img_front3" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="bfr_img_side3" widget='image'/></span></a>
+
+										</div>
+									</group>
+								<!-- <group>
+								<field name="state" style="width:40%%"/>
+								<field name="visits_left"/>
+								<field name="total_visits"/>
+							</group> -->
+								<group string="After Survey">
+									<div id="thumbwrap">
+
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="after_img_front3" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="after_img_side3" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="after_img_front2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="after_img_back2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="after_img_side2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="after_img_front" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="after_img_back" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="after_img_side" widget='image'/></span></a>
+
+										
+
+										</div>
+									</group>
+
+						</group>
+
+
+
+
+						<notebook>
+							 <page string="Checklist for ATM Xp">
+								<group>
+									<group>
+										<field name="check_list1"/>
+										
+										<field name="check_list3" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list4" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list5" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+
+										<field name="insert_chq" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+
+
+
+									</group>
+									<group>
+										<field name="check_list6" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list7" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list8" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list9" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list10" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+									</group>
+								</group>
+								<group>
+									<group>
+										<field name="check_list11" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										
+										<field name="check_list13" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										
+										<field name="check_list15" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+									</group>
+									<group>
+										
+										<field name="check_list17" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										
+										<field name="check_list19" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list20" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+									</group>
+								</group>
+									<group>
+										<field name="check_list21" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										
+										<field name="check_list23" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										
+										<field name="check_list25" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+									</group>
+									<group>
+										<field name="check_list26" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="check_list27" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+
+										<field name="side_frames" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="check_list28" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="check_list29" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										
+									</group>
+
+									
+									
+									<group>
+										
+										<field name="black_notices" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="keypad_condition" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+
+										<field name="atm_status" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="scree_protector" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+
+									</group>
+
+									
+
+									<group>
+										<field name="trash_bin_repairs" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="ttw_branding" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="protective_box" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="machine_security_camera" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+
+										<field name="fascia_condition" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										
+									</group>
+
+							   </page>
+
+							   <page string="Branding Audit Checklist" attrs="{'invisible': [('is_nbad', '=',False)]}">
+
+							   	<group>
+									<group>
+										<field name="dl_brochure_holder"/>
+										<field name="brochure_holder_19x19"/>
+										<field name="application_form"/>
+										<field name="poster_frames"/>
+										<field name="internal_window_graphics"/>
+									</group>
+									<group>
+										<field name="advertising_stands"/>
+										<field name="push/pull_stickers"/>
+										<field name="stationary_calendars"/>
+										<field name="store_inventory_cur_campaigns"/>
+										<field name="led_screen_ad"/>
+									</group>
+								</group>
+								<group>
+									<group>
+										<field name="palm_leaf_strip_sticker" style="width:40%%"/>
+										<field name="branding_conditions" style="width:40%%"/>
+										<field name="led_conditions" style="width:40%%"/>
+										<field name="external_br_condition" style="width:40%%"/>
+										<field name="onsite_atm_branding" style="width:40%%"/>
+
+										<field name="personal_loan_compaign" style="width:40%%"/>
+										<field name="real_madrid_compaign" style="width:40%%"/>
+										<field name="mobile_app_campaign" style="width:40%%"/>
+										<field name="mortgage_loan_campaign" style="width:40%%"/>
+										<field name="other_compaign" style="width:40%%"/>
+									</group>
+
+									
+									
+								</group>
+
+								
+							</page>
+							
+							 
+						</notebook>
+							
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_survey_details_info_tree"> 
+		    <field name="name">Survey Tree</field>
+		    <field name="model">survey.info</field>
+		    <field name="type">tree</field>
+		    <field name="arch" type="xml">
+			<tree string="Customer Information" version="8.0">
+				<field name="name"/>
+				<field name="surv_task"/>
+				<field name="month"/>
+				
+				<field name="atm_surv"/>
+				<field name="state"/>
+
+				<field name="customer_surv"/>
+				<field name="surveyor_surv"/>
+
+				<field name="visit_tm"/>
+				<field name="status"/>
+			</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="view_survey_details_action">
+			<field name="name">Survey Details</field>
+			<field name="res_model">survey.info</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management"/>
+		
+		<!-- menu item -->
+		<menuitem name="Survey Details" parent="survey_details_menu" id="survey_details_menu_mainform" action="view_survey_details_action" sequence = "10"/>
+
+	</data>
+</openerp>

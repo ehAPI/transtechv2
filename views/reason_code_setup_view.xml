@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="view_reason_code_tree">
+			<field name="name">Reason Code Tree</field>
+			<field name="model">reason.code</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Reason Code Information">
+					<field name='reason_code'/>
+					<field name='name'/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_reason_code_info_form">
+			<field name="name">Reason Code Setup</field>
+			<field name="model">reason.code</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Reason Code Details">
+					<group>
+						<field name='reason_code'/>
+						<field name='name'/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="view_reason_code_action">
+			<field name="name">Reason Code Setup</field>
+			<field name="res_model">reason.code</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management"/>
+		
+		<!-- menu item -->
+		<menuitem name="Reason Code Setup" parent="admin_setup" id="menu_reason_code_info" action="view_reason_code_action" sequence="20" groups="group_atm_manager"/>
+		
+	</data>
+</openerp>

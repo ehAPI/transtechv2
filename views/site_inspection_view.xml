@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="view_atm_transtech_site_inspection_form"> 
+		    <field name="name">transtech.site.inspection.form</field>
+		    <field name="model">transtech.site.inspection</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+				<form string="Site Inspection" version="8.0">
+
+				<sheet>
+					<group>
+						<group>
+					
+							<field name="name"/>
+							<field name="site_type"/>
+							<field name="surveyor"/>
+							<field name="date_assigned"/>
+							<field name="date_of_visit"/>
+							<field name="customer"/>
+							<field name="site_address"/>
+							<field name="site_lat"/>
+							<field name="site_long"/>
+							<field name="contact_person"/>
+							<field name="contact_mobile"/>
+							<field name="job_description"/>
+							<field name="atm_brand"/>
+						</group>
+						<group>
+							<field name="access_for_truck"/>
+							<field name="access_for_truck_crane"/>
+							<field name="hole_inside_height"/>
+						</group>
+						<group>
+							<field name="inside_outside"/>
+							<field name="hole_height"/>
+							<field name="hole_height_outside"/>
+						</group>	
+					</group>
+				</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_atm_transtech_site_inspection_tree"> 
+		    <field name="name">transtech.site.inspection.tree</field>
+		    <field name="model">transtech.site.inspection</field>
+		    <field name="type">tree</field>
+		    <field name="arch" type="xml">
+				<tree string="Site Inspection" version="8.0">
+
+				<!-- <sheet> -->
+					<!-- <group> -->
+						<!-- <group> -->
+					
+							<field name="name"/>
+							<field name="site_type"/>
+							<field name="surveyor"/>
+							<field name="date_assigned"/>
+							<field name="date_of_visit"/>
+							<field name="customer"/>
+					
+
+							<field name="site_address"/>
+							<field name="site_lat"/>
+							<field name="site_long"/>
+							<field name="contact_person"/>
+							<field name="contact_mobile"/>
+
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="action_site_form">
+			<field name="name">Site Inspection</field>
+			<field name="res_model">transtech.site.inspection</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+  				<p class="oe_view_nocontent_create">
+    				Click to create details for your Site Inspection...
+  				</p>
+   			</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management" sequence="8"/>
+		
+		<!-- menu item -->
+		<menuitem name="Site Inspection Form" parent="survey_details_menu" id="transtech_site_inspection_menu_mainform" action="action_site_form" sequence="9" groups="group_atm_manager"/>
+
+	</data>
+</openerp>
+
+						
