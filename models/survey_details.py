@@ -60,7 +60,7 @@ class survey_details_info(osv.osv):
             ('nov', 'November'),
             ('dec', 'December'),
         ], 'Month'),
-		'remarks_survey' : fields.many2one('remark.category','Remarks Category'),
+		'remarks_survey' : fields.many2one('remarks.category','Remarks Category'),
 		'atm_surv' : fields.many2one('atm.info', 'ATM'),
 		'customer_surv':fields.many2one('customer.info','Customer'),
 		'surveyor_surv' : fields.many2one('res.users', 'Surveyor'),
@@ -614,7 +614,7 @@ class survey_details_info(osv.osv):
 	def create(self, cr, uid, vals, context=None):
 		if vals.get('name','/')=='/':
 			vals['name']=self.pool.get('ir.sequence').get(cr, uid, 'survey.info') or '/'
-		return super(survey_details,self).create(cr, uid, vals, context=context)
+		return super(survey_details_info,self).create(cr, uid, vals, context=context)
 
 survey_details_info()
 
