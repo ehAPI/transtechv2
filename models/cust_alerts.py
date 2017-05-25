@@ -15,7 +15,7 @@ class cust_alerts(osv.osv):
 	_description = 'Customer Alerts'
 	_columns = {
 	'name' : fields.char('Alert ID', readonly=True),
-	'customer' : fields.many2one('customer.info', 'Customer', ondelete='set null'),
+	'customer' : fields.many2one('customer.info', 'Customer', ondelete='set null', required=True),
 	'atm_id' : fields.many2one('atm.info', 'ATM', required=True, ondelete='set null'),
 	'category' : fields.selection([('complaint','Complaint'),('issue','Issue')],'Category', required=True),
 	'priority' : fields.selection([('low','Low'),('medium','Medium'),('high','High'),('critical','Critical')],'Priority', required=True),

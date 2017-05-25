@@ -80,23 +80,50 @@ class atm_details(osv.osv):
 
 	def __count_visits3(self, cr, uid, ids, name, arg, context=None):
 
+		# result = {}
+		# mnth = self.CurrentMonth(cr,uid,context=None)
+		# for obj in self.browse(cr, uid, ids, context=context):
+		# 	survey_ids = self.pool.get('survey.info').search(cr,uid,[('month','=',mnth),('atm_surv','=',obj.id),('status','=','approved')])
+
+		# 	sct_ids = self.pool.get('schedule.task').search(cr,uid,[('atm','=',obj.id),('status','!=','cancel')])
+		# 	if sct_ids:
+		# 		sct_obj = self.pool.get('schedule.task').browse(cr,uid,sct_ids[0])
+
+		# 		if sct_obj.visit_type == 'monthly':
+		# 			result[obj.id] = 1
+		# 		else:
+		# 			result[obj.id] = sct_obj.visit_type
+		# 	else:
+
+		# 		survey_ids = self.pool.get('survey.info').search(cr,uid,[('month','=',mnth),('atm','=',obj.id),('status','=','approved')])
+		# 		result[obj.id] = len(survey_ids)
+
+		# return result
+
 		result = {}
 		mnth = self.CurrentMonth(cr,uid,context=None)
 		for obj in self.browse(cr, uid, ids, context=context):
-			survey_ids = self.pool.get('survey.info').search(cr,uid,[('month','=',mnth),('atm_surv','=',obj.id),('status','=','approved')])
 
-			sct_ids = self.pool.get('schedule.task').search(cr,uid,[('atm','=',obj.id),('status','!=','cancel')])
-			if sct_ids:
-				sct_obj = self.pool.get('schedule.task').browse(cr,uid,sct_ids[0])
+			result[obj.id] = 1
 
-				if sct_obj.visit_type == 'monthly':
-					result[obj.id] = 1
-				else:
-					result[obj.id] = sct_obj.visit_type
-			else:
+			tasks_ids = self.pool.get('atm.surverys.management').search(cr,uid,[('atm','=',obj.id)])
+			# print ("obj.id",obj.id)
+			result[obj.id] = len(tasks_ids)
 
-				survey_ids = self.pool.get('survey.info').search(cr,uid,[('month','=',mnth),('atm','=',obj.id),('status','=','approved')])
-				result[obj.id] = len(survey_ids)
+
+			# survey_ids = self.pool.get('survey.info').search(cr,uid,[('month','=',mnth),('atm_surv','=',obj.id),('status','=','approved')])
+
+			# sct_ids = self.pool.get('schedule.task').search(cr,uid,[('atm','=',obj.id)])
+			# if sct_ids:
+			# 	sct_obj = self.pool.get('schedule.task').browse(cr,uid,sct_ids[0])
+
+			# 	if sct_obj.visit_type == 'monthly':
+			# 		result[obj.id] = 1
+			# 	else:
+			# 		result[obj.id] = sct_obj.visit_type
+			# else:
+			# 	survey_ids = self.pool.get('survey.info').search(cr,uid,[('month','=',mnth),('atm_surv','=',obj.id),('status','=','approved')])
+			# 	result[obj.id] = len(survey_ids)
 
 		return result
 
