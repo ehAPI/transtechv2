@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+
+			<menuitem parent='job_execution_parent' id='survey_request_sub_menu_id' sequence="0" name="Surveys"/>
+
+			<!-- Survey Request tree view -->
+			<record model="ir.ui.view" id="survey_request_tree_view">
+				<field name="name">survey.request.tree</field>
+				<field name="model">survey.request</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="Survey Request" >
+						<field name="date"/>
+						<field name="name"/>
+						<field name="street" string="Area"/>
+						<field name="state_id" string="City"/>
+						<!-- <field name="country_id"/> -->
+						<field name="salesmen"/>
+						<field name="status"/>
+					</tree>
+				</field>
+			</record>
+	
+			<!-- Survey Request form view -->
+			<record model="ir.ui.view" id="survey_request_form_view">
+				<field name="name">survey.request.form</field>
+				<field name="model">survey.request</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="Survey Request">
+						<header>
+						
+							<button name="approve" type="object" string="Approve" class="oe_highlight" attrs="{'invisible': ['|','|','|','|','|',('status','=','cancelled'),('status','=','draft'),('status','=','approved'),('status','=','scheduled'),('status','=','rejected')]}" confirm="Are you sure?"/>
+							<button name="reject" type="object" string="Reject" class="oe_highlight" attrs="{'invisible': ['|','|','|','|','|',('status','=','cancelled'),('status','=','draft'),('status','=','rejected'),('status','=','scheduled'),('status','=','approved')]}" confirm="Are you sure?"/>
+							<button name="survey_scheduling_button" type="object" string="Schedule for Survey" class="oe_highlight" attrs="{'invisible': ['|','|','|','|',('status','=','cancelled'),('status','=','rejected'),('status','=','scheduled'),('status','=','waiting_approval')]}"/>
+
+							<button name="%(action_cancel_req_view_wizard)d" type="action" string="Cancel" class="oe_highlight" attrs="{'invisible': ['|','|','|','|',('status','=','cancelled'),('status','=','rejected'),('status','=','scheduled'),('status','=','waiting_approval')]}"/>
+							<field name="status" widget="statusbar"/>
+						</header>
+					<sheet>
+						<h1>
+							<label string="ID: "/>
+							<field name="survey_id" class="oe_inline" readonly="1" attrs="{'readonly': [('status','=','scheduled')]}"/>
+						</h1>
+
+						<group string="Survey Request">
+							<field name="salesmen" style="width:50%" attrs="{'readonly': [('status','=','scheduled')]}"/>
+							<field name="date" style="width:50%" readonly="1" />
+							<field name="enquiry_date" style="width:50%" invisible="1"/>
+							<field name="surveyor" style="width:50%" invisible="1"/>
+							<field name="payment_terms" style="width:50%" invisible="1"/>
+						</group>
+						<group string="Property Info" col="2">
+							<field name="name" style="width:40%" attrs="{'readonly': [('status','=','scheduled')]}"/>
+							<field name="building_name" style="width:40%" attrs="{'readonly': [('status','=','scheduled')]}"/>
+							<field name="account_id" style="width:40%" attrs="{'readonly': [('status','=','scheduled')]}"/>
+							<field name="responsible" style="width:40%" invisible="1"/>
+
+							<label for="street" string="Address"/>
+								<div>
+									<field name="street" placeholder="Street..." style="width:60%%" attrs="{'readonly': [('status','=','scheduled')]}"/>
+									<field name="street2" style="width:60%%" placeholder="Area..." attrs="{'readonly': [('status','=','scheduled')]}"/>
+									<div>
+										<field name="city" placeholder="City" style="width: 40%%" invisible="1"/>
+										<field name="state_id" class="oe_no_button" placeholder="City" style="width: 30%%" options='{"no_open": True}' attrs="{'readonly': [('status','=','scheduled')]}" required="1" on_change="onchange_state(state_id)"/>
+										<field name="zip" placeholder="PO Box" style="width:30%%" invisible="1"/>
+									</div>
+									<field name="country_id" placeholder="Country" class="oe_no_button" options='{"no_open": True}' style="width:50%%" attrs="{'readonly': [('status','=','scheduled')]}"/>
+								</div>
+							<field name="location_desc" style="width:50%" attrs="{'readonly': [('status','=','scheduled')]}"/>
+						</group>
+						
+						<!-- <group string="Lead Details">
+							<field name="lead_type" style="width:30%" />
+							<field name="ref_name" style="width:50%" attrs="{'invisible':['|',('lead_type', '=', 'existing'),('lead_type', '=', False)]}"/>
+							<field name="ref_contact_no" style="width:50%" attrs="{'invisible':['|',('lead_type', '=', 'existing'),('lead_type', '=', False)]}"/>
+							<field name="ref_email" style="width:50%" attrs="{'invisible':['|',('lead_type', '=', 'existing'),('lead_type', '=', False)]}"/>
+							<field name="ref_account" style="width:50%" attrs="{'invisible':['|',('lead_type', '!=', 'existing'),('lead_type', '=', False)]}" widget="selection"/>
+							
+						</group> -->
+							<notebook>
+								<page string="Job Types">
+									<field name="job_types"  attrs="{'readonly':[('status','=','scheduled')]}">
+										<tree string="Request Job Types">
+											<!-- <field name="location" style="width:30%"/> -->
+											<field name="job_type_id" style="width:30%"/>
+											<field name="frequency" style="width:30%"/>
+										</tree>
+
+										<form string="Jobs">
+											<sheet>
+												<group>
+													<field name="location"  style="width:30%"/>
+													<field name="job_type_id"  style="width:30%" required="1" widget="selection"/>
+													<field name="frequency"  string="Frequency" required="1"/>
+													<field name="payment_term_days" required="1"/>
+
+													<!-- <field name="location"  style="width:30%"/> -->
+													<field name="job_type_id"  style="width:30%" required="1" widget="selection"/>
+													<field name="frequency" string="Frequency" required="1"/>
+													<field name="payment_term_days"  required="1"/>
+													<field name="notes" string="Notes" style="width:40%"/>
+												</group>
+											</sheet>
+										</form>
+									</field>
+								</page>
+
+								<page string="Contact Persons">
+										<field name="contact_persons" attrs="{'readonly': [('status','=','scheduled')]}">
+											<tree string="Contact Persons">
+												<field name="name" required="1"/>
+												<field name="complete_no"/>
+												<field name="land_line"/>
+												<field name="title"/>
+												<field name="email"/>
+											 </tree>
+
+											<form string="Contact Person Info">
+												<sheet>
+													<group>
+														<field name="name" required="1" style="width:30%"/>
+													   <label for="country_code" string="Contact Number" />
+														<div class="address_format">
+															 <field name="country_code" style="width: 6%" placeholder="971" required="1"/>
+															 <field name="operator_code" style="width: 7%" placeholder="55" required="1"/>
+															 <field name="mobile" style="width: 15%" placeholder="number" required="1"/>
+														</div>
+														<field name="land_line" style="width:20%"/>
+														<field name="title" style="width:30%"/>
+														<field name="complete_no" invisible="1"/>
+														<field name="email" style="width:30%"/>
+													</group>
+
+													
+												</sheet>
+											</form>
+										</field>
+								</page>
+
+								<page string="RFQ Information &amp; Attachments">
+									<field name="attachments" attrs="{'readonly': [('status','=','scheduled')]}">
+										<tree string="Attachments" >
+											<field name="name" style="width:30%" />
+											<!-- <field name="attachment" widget="fa-paperclip" /> -->
+											<field name="attachment" widget="many2many_binary"/>
+										</tree>
+									</field>
+
+									<group>
+										<field name="scope_of_work" attrs="{'readonly': [('status','=','scheduled')]}" placeholder="RFQ Notes..." string="RFQ Notes"/>
+									</group>
+								</page>
+
+								<page string="Notes">
+									<field name="notes" attrs="{'readonly': [('status','=','scheduled')]}" placeholder="Notes..."/>
+								</page>
+							</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+					</form>
+
+				</field>
+			</record>
+
+			<record id="view_survey_request_filter" model="ir.ui.view">
+				<field name="name">survey.request.select</field>
+				<field name="model">survey.request</field>
+				<field name="arch" type="xml">
+					<search string="Search Survey Request">
+						<filter string="Pending Survey/Approved" domain="[('status','in',['draft','approved'])]" name="my_status_filter"/>
+				   </search>
+				</field>
+			</record>
+			
+			<!-- survey request action -->
+			  <record model='ir.actions.act_window' id='survey_request_action_new'>
+				<field name="name">Survey Requests</field>
+				<field name='res_model'>survey.request</field>
+				<field name="view_mode">tree,form</field>
+				<field name="context">{
+							'search_default_my_status_filter': 1
+						}</field>
+				<field name="help" type="html">
+				  <p class="oe_view_nocontent_create">
+					  Click to create a new survey request......
+					  </p>
+					</field>
+			  </record>
+
+
+			<menuitem parent='survey_request_sub_menu_id' id='survey_request_menu_id' action='survey_request_action_new' sequence="0"/>
+
+
+
+			<!-- Survey Report -->
+
+			<!-- Survey Report tree view -->
+			<record model="ir.ui.view" id="survey_report_tree_view">
+				<field name="name">survey.report.tree</field>
+				<field name="model">survey.report</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="Survey Report" create="false">
+						<field name="date"/>
+						<field name="surveyor"/>
+						<field name="property_name"/>
+						<field name="street"/>
+						<field name="city"/>
+					</tree>
+				</field>
+			</record>
+	
+			<!-- Survey Report form view -->
+			<record model="ir.ui.view" id="survey_report_form_view">
+				<field name="name">survey.report.form</field>
+				<field name="model">survey.report</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					
+					<form string="Survey Report" create="false" edit="false">
+						<header>
+							<button string="Start Pricing" name="%(action_job_selection_view_wizard)d" class="oe_highlight" type="action"/>
+						</header>
+						<sheet>
+
+						<group string="Property Details">
+								<field name="property_name" readonly="1"/>
+								<field name="building" readonly="1"/>
+								<field name="street" style="width:50%" readonly="1"/>
+								<field name="street2" style="width:50%" readonly="1"/>
+								<field name="city" style="width:50%" readonly="1"/>
+						</group>
+
+						<group string="Survey Report">
+							<field name="date" style="width:50%" />
+							<field name="survey_req_id"  style="width:30%" invisible="1"/>
+							<field name="surveyor" style="width:30%" />
+							<field name="sales_engineer" style="width:30%" />
+						</group>
+						<group col="4" string="Survey Type">
+							<field name="hvac" /> 
+							<field name="water_tank" />
+							<field name="kitchen" />
+							<field name="sumpit_sewage" />
+							<field name="grease_trap" />
+							<field name="line_jetting" />
+							<field name="laundry_duct" />
+						</group>
+							<notebook>
+								
+								<page string="Notes" attrs="{'invisible': [('surveyor','=',True)]}">
+									<field name="notes" placeholder="Notes..."/>
+								</page>
+								<page string="HVAC Survey Report" attrs="{'invisible':[('hvac','!=',True)]}">
+									<group> 
+										<field name='first_floor' widget="many2many">
+											<tree string="room" >
+												<field name="room_type" />
+												<field name="no_of_rooms"/>
+											</tree>
+										</field>
+									</group>
+									<group  col="4" >
+
+										<field name='rooms_suppliedby_ac' widget="many2many_tags"/>
+										<field name='ac_type' />
+										<field name='air_handling_unit' />
+										<field name='fan_split_unit_no' />
+										<field name='no_of_unit' />
+										<field name='direct_drain' />
+										<field name='drip_tray' />
+										<field name='p_trap' />
+										<field name='drip_trap_accesible' />
+										<field name='tilted_corretly' attrs="{'invisible':[('drip_trap_accesible','!=',True)]}"/>
+										<field name='drip_tray_clean' attrs="{'invisible':[('drip_trap_accesible','!=',True)]}"/>
+										<field name='particle_filters' />
+										<field name='filters_location' attrs="{'invisible':[('particle_filters','!=',True)]}"/>
+										<field name='filters_type' attrs="{'invisible':[('particle_filters','!=',True)]}"/>
+										<field name='duct_work' />
+										<field name='pysical_entry_ducts' />
+										<field name='acces_with_tools' />
+										<field name='supply_grills' />
+										<field name='return_grills'/>
+										<field name='fresh_air_inlet' />
+										<field name='flow_dampers' />
+										<field name='sensors' />
+										<field name='grill_type' />
+										<field name='acoustic_insulation' />
+										<field name='external_insulation' />
+										<field name='external_insulation_type' attrs="{'invisible':[('external_insulation','!=',True)]}"/>
+										<field name='insulation_covering' attrs="{'invisible':[('external_insulation','!=',True)]}"/>
+										<field name='door_panels_present' />
+										<field name='how_many' attrs="{'invisible':[('door_panels_present','!=',True)]}"/>
+										<field name='duct_size_app_length' />
+										<field name='duct_damage' />
+										<field name='where' attrs="{'invisible':[('duct_damage','!=',True)]}"/>
+										<field name='comments'/>
+										<separator string="Requirements before executing the job" colspan="4"/>
+										<field name='work_permit'/>
+										<field name='timings'/>
+										<field name='photos_taken'/>
+										<field name='location' widget="many2many">
+											<form string="Locations">
+												<group col="4">
+													<field name="location_id"/>
+													<field name="fresh_air_handling_unit"/>
+													<field name="air_handling_unit"/>
+													<field name="package_unit"/>
+													<field name="fcu"/>
+													<field name="fcu_count"/>
+													<field name="duct"/>
+													<field name="duct_count" />
+													<field name="grills"/>
+													<field name="grills_count" />
+													<field name="access_panels"/>
+												</group>
+											</form>
+										</field>
+										<separator string="Reviewed and endorsed" colspan="4"/>
+										<field name='by' />
+										<field name='date'/>
+									</group>
+
+									<group string="Summary">
+										<field name="components">
+											<tree string="components" editable="bottom">
+												<field name="section_id" style="width:50%%"/>
+												<field name="component" style="width:50%%"/>
+												<field name="count" style="width:50%%"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="WaterTank Survey Report" attrs="{'invisible':[('water_tank','!=',True)]}">
+									<group string=" WaterTank Survey Report"  >
+										<field name='water_tank_details' widget="many2many">
+											<tree string="Water Tank" >
+												<field name="tank_location" />
+												<field name="tank_type"/>
+												<field name="capacity"/>
+											</tree>
+										</field>
+									</group>
+									<group cols="4">
+										<field name='work_permit' style="width:50%" />
+										<field name='shift_timing' style="width:50%" />
+										<field name='time' style="width:50%" />
+									</group>
+
+									<group string="Summary">
+										<field name="tank_line">
+											<tree string="tank" editable="bottom">
+												<field name="section_id" style="width:50%%"/>
+												<field name="size" style="width:50%%" string="Tank Size"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Kitchen Survey Report" attrs="{'invisible':[('kitchen','!=',True)]}">
+									<group string=" Kitchen Survey Report" >
+										<field name='kitchen_hood' widget="many2many">
+											<tree string="Kitchen Hood" >
+												<field name="kitchen_hood_no" />
+												<field name="location"/>
+												<field name="kitchen_name"/>
+											</tree>
+										</field>
+									</group>
+									<group col="4" >
+										<field name='horizontal_length' />
+										<field name='vertical_length' />
+										<field name='ducting_size' />	
+										<field name='duct_material' />
+										<field name='access_panel' />
+										<field name='count1' attrs="{'invisible':[('access_panel','!=',True)]}"/>	
+										<field name='electrostatic_filter' />
+										<field name='count2' attrs="{'invisible':[('electrostatic_filter','!=',True)]}"/>
+										<field name='exhaust_fan_type'/>
+										<field name='fan_size'/>
+										<field name='electrostatic_filter_kitchen'/>
+										<field name='photos_taken_kitchen' />	
+										<field name='work_permit_kitchen'/>
+										<field name='timings_kitchen' />
+										<field name='time_kitchen'/>
+										<field name='permit_kitchen' />
+									</group>
+
+									<group string="Summary">
+										<field name="kitchen_components">
+											<tree string="components" editable="bottom">
+												<field name="section_id" style="width:50%%"/>
+												<field name="component" style="width:50%%"/>
+												<field name="count" style="width:50%%"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Sumpit/Sewage Tank" attrs="{'invisible':[('sumpit_sewage','!=',True)]}">
+									<group string="Sumpit/sewage Tank Assessment Report" >
+										<field name='sewage_tank_details' widget="many2many">
+											<tree string="Sumpit/Sewage Details" >
+												<field name="tank_no" />
+												<field name="sewage_tank_location"/>
+												<field name="tank_type"/>
+											</tree>
+										</field>
+									</group>
+									<group col="2">
+										<field name='env_hazard' />
+										<field name='env_hazard_coments' attrs="{'invisible':[('env_hazard','!=',True)]}"/>
+									</group>
+									<group string="Requirements before executing the jobs:" col="4">
+										<field name='wrk_prmt' />
+										<field name='timngs' />
+										<field name='job_completion_days' />
+										<field name='persons_needed_job' />
+										<field name='photos_taken_sewage' />
+									</group>
+								</page>
+								<page string="Grease Trap Cleaning" attrs="{'invisible':[('grease_trap','!=',True)]}">
+									<group string="Grease Trap Cleaning Assessment Report" >
+										<field name="grease_trap_no"/>
+										<field name='grease_trap_details' widget="many2many">
+											<tree string="Grease Trap Details" >
+												<field name="grease_trap_type" />
+												<field name="grease_trap_capacity"/>
+												<field name="location"/>
+											</tree>
+										</field>
+										<field name="comments_grease"/>
+									</group>
+									<group string="Requirements before executing the jobs:" col="4">
+										<field name='work_permit_grease' />
+										<field name='timings_grease' />
+										<field name='sub_contractor' />
+										<field name='persons_needed' />
+										<field name='photos_taken_grease' />
+									</group>
+								</page>
+								<page string="Line Jetting" attrs="{'invisible':[('line_jetting','!=',True)]}">
+									<group string="Line Jetting Assessment Report" />
+									<label for="linejetting_details"/>
+									<field name='linejetting_details' nolabel="1" />
+									<label for="linejetting_requirements"/>
+									<field name='linejetting_requirements' nolabel="1"/>
+
+									<group string="Requirements before executing the jobs:" col="4">
+										<field name='work_permit_line' />
+										<field name='timings_line' />
+										<field name='days_needed' />
+										<field name='persons_needed_line' />
+										<field name='photos_taken_line' />
+									</group>
+								</page>
+								<page string="Laundry Duct Cleaning" attrs="{'invisible':[('laundry_duct','!=',True)]}">
+									<group string="Details" >
+										<field name='hrzntl_len' style="width:50%" />
+										<field name='vrtcl_len' style="width:50%" />
+										<field name='ductingsize' style="width:50%" />
+										<field name='duct_mtrl' style="width:50%" />
+										<field name='acces_panel' style="width:50%" />
+										<field name="extract_fan_no" style="width:50%" />
+									</group>
+									<h3><label for="comments_laundry_duct" string="Comments :"/></h3>
+									<field name="comments_laundry_duct"/>
+									<group string="Requirements before executing the jobs:" col="4">
+										<field name='work_permit_duct' />
+										<field name='timings_duct' />
+										<field name='days_needed' />
+										<field name='persons_needed_duct' />
+										<field name='photos_taken_duct' />
+									</group>
+								</page>
+							</notebook>
+						</sheet>
+					</form>			
+					
+
+				</field>
+			</record>
+
+			
+			
+			<!-- survey Report action -->
+			<record model='ir.actions.act_window' id='survey_report_action_new'>
+				<field name="name">Survey Reports</field>
+				<field name='res_model'>survey.report</field>
+				<field name="view_mode">tree,form</field>
+				<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+					Click to create a new survey report......
+					</p>
+				</field>
+			</record>
+
+
+			<menuitem parent='survey_request_sub_menu_id' id='survey_report_menu_id' action='survey_report_action_new' sequence="10"/>
+
+
+			<!-- form view of survey.req.attachments -->
+			<record id="survey_req_attachments_form_view" model="ir.ui.view">
+				<field name="name">survey.req.attachments.form</field>
+				<field name="model">survey.req.attachments</field>
+				<field name="arch" type="xml">
+					<form>
+						<sheet >
+						<group string="Attachments">						
+							<field name="attachment" widget="many2many_binary" />
+							<field name="name"/>
+						</group>
+						</sheet>
+					</form>
+				</field>
+			</record>
+		</data>
+	</openerp>

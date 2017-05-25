@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<record model="ir.ui.view" id="view_atm_view_plan_tasks_form"> 
+		    <field name="name">ATM Surverys Management</field>
+		    <field name="model">atm.surverys.management</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+			<form string="Survey Details" version="8.0">
+				<header>
+					<button name="status_done" type="object" String="Done" class="oe_highlight" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+					<button name="status_cancel" type="object" String="Cancel" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('done','cancel'))]}"/>
+					<field name="status" widget='statusbar' statusbar_visible='assigned,pending,cancel,progress,waiting_approve,done'/>
+				</header>
+				<sheet>
+					<group>
+						<group>
+				
+							<field name="name"/>
+							<field name="task_month" attrs="{'readonly':[('status','!=','assigned')]}" on_change="onchange_month(task_month)"/>
+							<field name="customer" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="state" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="atm" attrs="{'readonly':[('status','!=','assigned')]}"/>
+
+							<field name="visit_shift" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="country" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="surveyor" attrs="{'readonly':[('status','!=','assigned')]}" groups="atm.group_atm_manager, atm.group_atm_customer"/>
+							<field name="visit_time" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name= "additional_info" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="bulk_insert" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="visit_type" attrs="{'readonly':[('status','!=','assigned')]}"/>
+						</group>
+						<group string='Visit Details' attrs="{'readonly':[('status','!=','assigned')]}">
+							<field name="remarks_id" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="remarks" attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name="act_visit_time" attrs="{'readonly':[('status','!=','assigned')]}"/>
+						</group>
+
+						
+					</group>
+				</sheet>
+			</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_atm_view_plan_tasks_tree"> 
+		    <field name="name">atm.surverys.management.tree</field>
+		    <field name="model">atm.surverys.management</field>
+		    <field name="type">tree</field>
+		    <field name="arch" type="xml">
+			<tree string="Survey Details" colors="red:status=='cancel';blue:status=='done'" version="8.0">
+					
+							<field name="name"/>
+							<field name="task_month"/>
+						    <field name="customer"/>
+						    <field name="atm"/>
+
+
+						    <field name="country"/>
+						    <field name="state"/>
+						    <field name="surveyor" groups="atm.group_atm_manager, atm.group_atm_customer"/>
+
+							<field name="visit_time"/>
+							<field name= "additional_info"/>
+							<field name="status"/>
+						
+			</tree>
+			</field>
+		</record>
+		
+		        <record model="ir.ui.view" id="view_plan_tasks_filter">
+		            <field name="name">view_plan_tasks_filter</field>
+		            <field name="model">atm.surverys.management</field>
+		            <field name="arch" type="xml">
+		                <search string="atm surverys search">
+
+		                		<field name="name"
+		                       filter_domain="['|','|',('name','ilike',self),('atm','ilike',self),('customer','ilike',self)]" string="TASK"/>
+
+		                       <filter icon="terp-go-today" string="Today" name="today" domain="[('visit_time','&gt;=',current_date),('visit_time','&lt;=',current_date)]" />
+					<separator/>
+					<filter icon="terp-check" string="Assigned"  domain="[('status','=','assigned')]"/>
+					<filter icon="terp-check" string="Progress"  domain="[('status','=','progress')]"/>
+					<filter icon="terp-check" string="Pending"  domain="[('status','=','pending')]"/>
+					<filter icon="terp-check" string="Waiting Approval"  domain="[('status','=','waitnig_approve')]"/>
+					<filter icon="terp-check" string="Done"  domain="[('status','=','done')]"/>
+		                        
+		                     <group expand="0" string="Group By...">
+		                        <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'customer'}"/>
+		                        <filter string="Surveyor Name" icon="terp-folder-green" domain="[]" context="{'group_by':'surveyor'}" groups="atm.group_atm_manager, atm.group_atm_customer"/>
+		                        <filter string="Date" icon="terp-go-month" domain="[]" context="{'group_by':'visit_time'}"/>
+					<filter string="Location"  domain="[]" context="{'group_by':'state'}"/>
+					<filter string="Status"  domain="[]" context="{'group_by':'status'}"/>                    
+					</group>
+		            </search>
+		            </field>
+		        </record>	
+
+
+		<record model="ir.actions.act_window" id="action_view_plan_tasks_form">
+			<field name="name">View &amp; Plan Tasks</field>
+			<field name="res_model">atm.surverys.management</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              				<p class="oe_view_nocontent_create">
+                				click to create task and plan..
+              				</p>
+               			</field>
+		</record>
+
+		<!-- Top menu -->
+		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
+
+		<!-- sub menu -->
+		<menuitem name="Tasks Management" id="tasks_management_menu" parent="atm_survey_management" sequence="12"/>
+		
+		<!-- menu item -->
+
+		<menuitem name="View &amp; Plan Tasks" parent="tasks_management_menu" id="view_plan_tasks_menu_mainform" action="action_view_plan_tasks_form" sequence="13" groups="group_atm_user,group_atm_manager"/>
+
+		<!-- <record model="ir.ui.view" id="res_user_teamlead_view_extend">
+		    		<field name="name">res.user.form.inherit</field>
+		    		<field name="model">res.users</field>
+					<field name="inherit_id" ref="base.view_users_form"/>
+					<field name="arch" type="xml">
+						<field name='company_id' position='after'>
+								<field name="teamleader"/>
+								<field name="name_tl" attrs="{'invisible': [('teamleader', '=',True)]}"/>
+								<field name="contact_num"/>
+								<field name="joining_date"/>
+						</field>
+						<field name="login" position='after'>
+							<label for="password" class="oe_edit_only"/>
+							<field name="password" required="1" password="True"/>
+						</field>
+
+						<field name='active' position='after'>
+							<field name="survey_limit"/>
+							<field name="customer_ids" widget="many2many_tags"/>
+							<field name="Comments" />
+						</field>
+
+						<xpath expr="/form/sheet/div/label[@for='name']" position="before">
+								<h2><field name="tuser_id"/></h2>
+						</xpath>
+						<field name="action_id" position='replace'></field>
+						<field name="menu_id" position='replace'></field>
+					</field>
+			</record>
+
+			<record id="view_users_form_modification" model="ir.ui.view">
+		            <field name="name">res.users.form.mail.modification</field>
+		            <field name="model">res.users</field>
+		            <field name="inherit_id" ref="mail.view_users_form_mail"/>
+		            <field name="arch" type="xml">
+				<field name="notification_email_send" position='replace'></field>
+			     </field>
+				
+			</record>
+
+
+
+			<record model="ir.ui.view" id="res_user_extend_view">
+		    		<field name="name">res.user.form.inherit1</field>
+		    		<field name="model">res.users</field>
+					<field name="inherit_id" ref="base.view_users_simple_form"/>
+					<field name="arch" type="xml">
+						<field name="category_id" position="replace"/>
+						<field name="street" position="replace" nolabel="1"/>
+						<field name="street2" position="replace"/>
+						<field name="state_id" position="replace"/>
+						<field name="city" position="replace"/>
+						<field name="zip" position="replace"/>
+						<field name="country_id" position="replace"/>
+						<field name="website" position="replace"/>
+						<xpath expr="/form/sheet/group/group/label[@string='Address']" position="replace">
+							<field name="teamleader" string="Is Team Leader??"/>
+								<field name="name_tl" attrs="{'invisible': [('teamleader', '=',True)]}" string="Team Leader"/>
+								<field name="joining_date"/>
+								<field name="Comments" />
+								<field name="survey_limit"/>
+								<field name="customer_ids" widget="many2many_tags"/>
+						</xpath>
+					</field>
+			</record>
+
+			<record model="ir.ui.view" id="timezone_replace_form">
+		            <field name="name">timezone.change</field>
+		            <field name="model">res.users</field>
+		            <field name="inherit_id" ref="mail.view_users_form_simple_modif_mail"/>
+		            <field name="arch" type="xml">
+		               <xpath expr="//field[@name='notification_email_send']" position="replace"/>
+			    </field>
+			</record> -->
+
+	</data>
+</openerp>
+
+						
