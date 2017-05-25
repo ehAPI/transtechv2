@@ -57,19 +57,13 @@ class schedule_tasks(osv.Model):
 				('13','13 times'),
 				('16','16 times')],'Visit Type/ No. of Visits to be done',required=True),
 			'visit_details':fields.char('Visit Details',readonly=True),
-
-
             'remarks_id' : fields.many2one('remarks.category','Remarks Category'),
-
 			'remarks':fields.text('Remarks'),
-
 			'next_exec':fields.date('Next Execution',readonly=True),
 			# 'next_exec':fields.char('Next Execution',readonly=True),
 			# 'no_of_visits':fields.integer('No. of visits per month'),
 			'visits_count':fields.function(__count_visits,type='char',string="No.of visits per Month",method=True, store=True, multi=False),
 		# 'visits_count':fields.function(__count_visits,type='integer',string="No.of visits per Month",method=True, store=True, multi=False),
-
-
 			'status': fields.selection([
 			('assigned','Assigned'),
 			('cancel', 'Cancelled')],'Status',readonly=True, track_visibility='always')
