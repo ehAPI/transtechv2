@@ -28,7 +28,7 @@ class schedule_tasks(osv.Model):
 	        'customer':fields.many2one('customer.info','Customer',required=True),
 
 			'state' : fields.many2one('res.country.state', 'State', required=True),
-			'atm' : fields.many2one('atm.details', 'ATM', required=True),
+			'atm' : fields.many2one('atm.info', 'ATM', required=True),
 		
 			#'surveyor':fields.many2one('res.users','Site Indpector Name',required=True),
 			'visit_shift':fields.selection([('day','Day'),
