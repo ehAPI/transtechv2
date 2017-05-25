@@ -2,7 +2,7 @@
 <openerp>
 	<data>
         <record model="ir.ui.view" id="res_user_tree_view_extend">
-    		<field name="name">res.users.tree.inherit</field>
+    		<field name="name">res.user.tree.inherit</field>
     		<field name="model">res.users</field>
 			<field name="inherit_id" ref="base.view_users_tree"></field>
 			<field name="arch" type="xml">
@@ -14,8 +14,8 @@
 			</field>
 	    </record>
 
-	    <record model="ir.ui.view" id="res_user_form_view_extend">
-    		<field name="name">res.users.form.inherit</field>
+	    <record model="ir.ui.view" id="view_user_info_form">
+    		<field name="name">Manage Users</field>
     		<field name="model">res.users</field>
 			<field name="inherit_id" ref="base.view_users_form"></field>
 					
@@ -42,7 +42,7 @@
 					<group>
     					<field name="survey_limit"/>
     					<field name="customer_ids"/>
-    					<field name="comments"/>
+    					<field name="Comments"/>
 	    			</group>
 				</group>
 			</field>

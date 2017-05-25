@@ -2,17 +2,17 @@
 <openerp>
 	<data>
 		<record model="ir.ui.view" id="atm_details_tree_view">
-			<field name="name">atm.details.tree</field>
-			<field name="model">atm.details</field>
+			<field name="name">atm.info.tree</field>
+			<field name="model">atm.info</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree string="ATM Details">
+				<tree string="ATM Information">
 					<field name='atm_code'/>
-					<field name='atm_branch_details'/>
-					<field name='bank_atm_id' string='Bank ATM ID'/>
+					<field name='name'/>
+					<field name='atm_id' string='Bank ATM ID'/>
 					<field name='customer'/>
 					<field name='atm_type'/>
-					<field name='state'/>
+					<field name='state_id'/>
 					<field name="visits_done" sum="Total"/>
 					<field name="visits_left" sum="Total"/>
 					<field name="visits_total" sum="Total"/>
@@ -21,8 +21,8 @@
 		</record>
 
 		<record model="ir.ui.view" id="atm_details_form_view">
-			<field name="name">atm.details.form</field>
-			<field name="model">atm.details</field>
+			<field name="name">atm.info.form</field>
+			<field name="model">atm.info</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="ATM Details">
@@ -34,8 +34,8 @@
 						<field name="atm_image" widget='image' class='oe_left oe_avatar' options='{"size": [100, 100]}'/>
 						<group>
 							<field name='atm_code'/>
-							<field name='atm_branch_details'/>
-							<field name='bank_atm_id'/>
+							<field name='name'/>
+							<field name='atm_id'/>
 							<field name='date'/>
 						</group>
 						<notebook>
@@ -44,10 +44,10 @@
 									<field name='atm_type'/>
 									<field name='customer' on_change="onchange_customer(customer)"/>
 									<field name='country'/>
-									<field name='state'/>
-									<field name='sla_start_date'/>
-									<field name='sla_end_date'/>
-									<field name='sic'/>
+									<field name='state_id'/>
+									<field name='sla_start'/>
+									<field name='sla_end'/>
+									<field name='comments'/>
 								</group>
 							</page>
 
@@ -81,15 +81,15 @@
 							<page string='ATM Inventory'>
 								<group>
 									<group>
-										<field name='atm_id'/>
+										<field name='atm_id2'/>
 										<field name='atm_model'/>
-										<field name='atm_serial_no'/>
+										<field name='serial_no'/>
 										<field name='atm_make'/>
 										<field name='atm_functionality'/>
 										<field name='base_height'/>
-										<field name='location_category'/>
-										<field name='onsite_category'/>
-										<field name='offsite_category'/>
+										<field name='location_cat'/>
+										<field name='onsite_cat' attrs="{'invisible':[('location_cat','=','offsite')]}"/>
+										<field name='offsite_cat' attrs="{'invisible':[('location_cat','=','onsite')]}"/>
 									</group>
 									<group>
 										<field name='kiosk_type'/>
@@ -100,11 +100,11 @@
 								</group>
 								<group>
 									<group string='Network Equipment Details'>
-										<field name='d1'/>
-										<field name='d2'/>
-										<field name='d3'/>
-										<field name='d4'/>
-										<field name='d5'/>
+										<field name='device1'/>
+										<field name='device2'/>
+										<field name='device3'/>
+										<field name='device4'/>
+										<field name='device5'/>
 									</group>
 									<group string='ATM DVR'>
 										<field name='make'/>
@@ -115,8 +115,8 @@
 									</group>
 								</group>
 								<group>
-									<field name='escorting_company'/>
-									<field name='ded_no'/>
+									<field name='escorting_comp'/>
+									<field name='ded_num'/>
 								</group>
 							</page>
 						</notebook>
@@ -129,7 +129,7 @@
 			<field name="name">atm.old.tree</field>
 			<field name="model">atm.old</field>
 			<field name="arch" type="xml">
-				<tree>
+				<tree string='ATM Moves'>
 					<field name='name'/>
 					<field name='longitude'/>
 					<field name='latitude'/>
@@ -140,20 +140,20 @@
 
 		<record model="ir.ui.view" id="view_atm_info_filter">
             <field name="name">view_atm_filter</field>
-            <field name="model">atm.details</field>
+            <field name="model">atm.info</field>
             <field name="arch" type="xml">
             <search string="atm info search">
-				<field name="atm_branch_details"
-                       filter_domain="['|','|',('atm_branch_details','ilike',self),('bank_atm_id','ilike',self),('customer','ilike',self)]" string="ATM Info"/>
+				<field name="name"
+                       filter_domain="['|','|',('name','ilike',self),('atm_id','ilike',self),('customer','ilike',self)]" string="ATM Info"/>
 				<filter string="ATM Only" icon="terp-check" domain="[('atm_type','=','atm_only')]"/>
 				<filter string="ATM and Cash Deposit" icon="terp-check" domain="[('atm_type','=','atm_cash_deposit')]"/>
-				<filter string="Drive Through" icon="terp-check" domain="[('atm_type','=','drive')]"/>
+				<filter string="Drive Through" icon="terp-check" domain="[('atm_type','=','drive_through')]"/>
 				<separator/>
 	              <group expand="0" string="Group By...">
 	                        <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'customer'}"/>
 	                       <filter string="ATM Type" icon="terp-folder-green" domain="[]" context="{'group_by':'atm_type'}"/>
-	                        <filter string="Branch" icon="terp-folder-green" domain="[]" context="{'group_by':'atm_branch_details'}"/>
-				<filter string="State"  domain="[]" context="{'group_by':'state'}"/>
+	                        <filter string="Branch" icon="terp-folder-green" domain="[]" context="{'group_by':'name'}"/>
+				<filter string="State"  domain="[]" context="{'group_by':'state_id'}"/>
 				</group>
             </search>
             </field>
@@ -161,7 +161,7 @@
 
 		<record model="ir.actions.act_window" id="action_atm_details_form">
 			<field name="name">ATM Details</field>
-			<field name="res_model">atm.details</field>
+			<field name="res_model">atm.info</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
           		<p class="oe_view_nocontent_create">
@@ -174,7 +174,7 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Customer/ATM Setup" id="cust_atm_setup" parent="atm_survey_management"/>
+		<menuitem name="Customer/ATM Setup" id="cust_atm_setup" parent="atm_survey_management" sequence="2"/>
 		
 		<!-- menu item -->
 		<menuitem name="ATM Details" parent="cust_atm_setup" id="atm_details_menu_mainform" action="action_atm_details_form" sequence="5"/>

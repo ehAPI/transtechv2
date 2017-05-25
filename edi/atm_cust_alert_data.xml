@@ -22,20 +22,20 @@
             <field name="name">Customer Alerts Mail - Send by mail</field>
             <field name="email_from">info@transtech.ae</field>
             <field name="subject">Regarding alert in TransTech portal</field>
-            <field name="email_to">${object.customer.cont_per|safe}</field>
+            <field name="email_to">${object.customer.contact_person|safe}</field>
             <field name="auto_delete" eval="True" />
-            <field name="model_id" ref="model_cust_alerts" />
+            <field name="model_id" ref="model_alert_info" />
             <field name="body_html"><![CDATA[
 <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
 
-    <p>Dear ${object.customer.cust_name},</p>
+    <p>Dear ${object.customer.name},</p>
 
     <p>An error alert is recorded in TransTech portal. Details are as follows:</p>
 
-    <p><b>Alert ID: </b>${object.alert_id}</p>
-    <p><b>ATM: </b>${object.atm.atm_branch_details},${object.atm.bank_atm_id}</p>
+    <p><b>Alert ID: </b>${object.name}</p>
+    <p><b>ATM: </b>${object.atm_id.name},${object.atm_id.atm_id}</p>
     <p><b>Priority: </b>${object.priority}</p>
-    <p><b>Emirate: </b>${object.state.name}</p>
+    <p><b>Emirate: </b>${object.state_id.name}</p>
     <p><b>Subject: </b>${object.summary}</p>
     <p><b>Description: </b>${object.description}</p>
 

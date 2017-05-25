@@ -2,9 +2,9 @@
 <openerp>
 	<data>
 	
-		<record model="ir.ui.view" id="view_atm_survey_details_form"> 
-		    <field name="name">survey.details.form</field>
-		    <field name="model">survey.details</field>
+		<record model="ir.ui.view" id="form_surveys_info_new_1"> 
+		    <field name="name">survey.info.details</field>
+		    <field name="model">survey.info</field>
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
 				<form string="Survey Details" version="8.0">
@@ -16,14 +16,13 @@
 
 						<button name="status_approve" string="Approve" type="object" class="oe_highlight" groups="atm.group_atm_manager" confirm="Are you sure you want to approve this survey??" attrs="{'invisible': [('status','=','approved')]}"/>
 						
-						<field name="status" widget="statusbar" 
-	                     	statusbar_visible="waiting_approval,approved"/>
+						<field name="status" widget="statusbar" statusbar_visible="waiting_approval,approved"/>
 
 					</header>
 
 					<header>	
 	
-						<button name="%(action_pics_survey_wizard)d" string="Upload Images" type="action" class="oe_highlight"/>
+						<button name="%(action_pics_survey_wizard)d" string="Upload Images" type="action" class="oe_highlight" groups="atm.group_atm_manager,atm.group_atm_user"/>
 					</header>
 				
 					
@@ -40,25 +39,25 @@
 							<field name="name"/>
 
 							<field name="is_nbad" invisible="1"/>
-							<field name="atm_report" on_change="onchange_taskid(atm_report)" groups="atm.group_atm_manager" style="width:40%%"/>
+							<field name="surv_task" on_change="onchange_taskid(surv_task)" groups="atm.group_atm_manager" style="width:40%%"/>
 							<field name="month" style="width:40%%"/>
-							<field name="remarks_category" style="width:40%%"/>
-							<field name="atm" style="width:40%%"/>
-							<field name="customer_name" style="width:40%%"/>
-							<field name="acc_manager" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
-							<field name="visit_time" style="width:40%%"/>
-							<field name="current_longitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
-							<field name= "current_latitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
-							<field name="next_survey_distance" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
-							<field name="next_task_id" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="remarks_survey" style="width:40%%"/>
+							<field name="atm_surv" style="width:40%%"/>
+							<field name="customer_surv" style="width:40%%"/>
+							<field name="surveyor_surv" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="visit_tm" style="width:40%%"/>
+							<field name="cur_longitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name= "cur_latitude" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="nxt_survey_distance" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
+							<field name="nxt_taskid" groups="atm.group_atm_manager, atm.group_atm_user" style="width:40%%"/>
 							<field name="state" style="width:40%%"/>
 <!-- 
 							<field name="atm_report"/>
 							<field name="month"/>
-							<field name="remarks_category"/>
+							<field name="remarks_survey"/>
 							<field name="atm"/>
 							<field name="customer_name"/>
-							<field name="acc_manager"/>
+							<field name="surveyor_surv"/>
 							<field name="visit_time"/>
 							<field name="current_longitude"/>
 							<field name= "current_latitude"/>
@@ -67,24 +66,24 @@
 							<field name="state"/>
  -->
 						    </group>
-							<div>
 								<group string="Before Survey">
 									<div id="thumbwrap">
-										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_b" widget='image'  class="transtech"/></span></a>
-								
-										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_b" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_b" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_b" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_b" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_b" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_b" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_b" widget='image' class="transtech"/></span></a>
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="bfr_img_front" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="bfr_img_back" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="bfr_img_side" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="bfr_img_front2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="bfr_img_back2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="bfr_img_side2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="bfr_img_front3" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="bfr_img_side3" widget='image'/></span></a>
+
 										</div>
 									</group>
 								<!-- <group>
@@ -94,126 +93,116 @@
 							</group> -->
 								<group string="After Survey">
 									<div id="thumbwrap">
-								
-										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="image1_a" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="image2_a" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="image3_a" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="image4_a" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="image5_a" widget='image' class="transtech"/></span></a>
-																		
-										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="image6_a" widget='image' class="transtech"/></span></a>
-								
-										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="image7_a" widget='image' class="transtech"/></span></a>
-								
-										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="image8_a" widget='image' class="transtech"/></span></a>
-								<!-- <group string='Before Survey'>
-									<field name="image1_b" widget='image'/>
-									<field name="image2_b" widget='image'/>
-									<field name="image3_b" widget='image'/>
-									<field name="image4_b" widget='image'/>
-									<field name="image5_b" widget='image'/>
-									<field name="image6_b" widget='image'/>
-									<field name="image7_b" widget='image'/>
-									<field name="image8_b" widget='image'/>
-								</group>
-								<group string='After Survey'>
-									<field name="image1_a" widget='image'/>
-									<field name="image2_a" widget='image'/>
-									<field name="image3_a" widget='image'/>
-									<field name="image4_a" widget='image'/>
-									<field name="image5_a" widget='image'/>
-									<field name="image6_a" widget='image'/>
-									<field name="image7_a" widget='image'/>
-									<field name="image8_a" widget='image'/>
-								</group> -->
 
+										<a class="thumb" href="#"><h3>image1</h3><span class="test"><field name="after_img_front3" widget='image'/></span></a>
 
-							    </div>
-							</group>
-						</div>
-					</group>
-				
+										<a class="thumb" href="#"><h3>image2</h3><span class="test"><field name="after_img_side3" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image3</h3><span class="test"><field name="after_img_front2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image4</h3><span class="test"><field name="after_img_back2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image5</h3><span class="test"><field name="after_img_side2" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image6</h3><span class="test"><field name="after_img_front" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image7</h3><span class="test"><field name="after_img_back" widget='image'/></span></a>
+
+										<a class="thumb" href="#"><h3>image8</h3><span class="test"><field name="after_img_side" widget='image'/></span></a>
+
+										
+
+										</div>
+									</group>
+
+						</group>
 
 
 
 
 						<notebook>
-							<page string='Checklist for ATM XP'>
+							 <page string="Checklist for ATM Xp">
 								<group>
 									<group>
-										<field name="no_comments"/>
-										<field name="col_cash"/>
-										<field name="col_receipt"/>
-										<field name="ins_card"/>
-										<field name="ins_cheq"/>
-									</group>
+										<field name="check_list1"/>
+										
+										<field name="check_list3" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list4" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list5" attrs="{'invisible': [('check_list1', '=',True)]}"/>
 
-									<group>
-										<field name="ins_cash"/>
-										<field name="network_sticker"/>
-										<field name="instruction_sticker"/>
-										<field name="vault_branding"/>
-										<field name="terminal_id"/>
-									</group>
+										<field name="insert_chq" attrs="{'invisible': [('check_list1', '=',True)]}"/>
 
-									<group>
-										<field name="cables"/>
-										<field name="trash"/>
-										<field name="mach"/>
-									</group>
-									<group> 
-										<field name="spot_lights"/>
-										<field name="machine_surround"/>
-										<field name="canopy"/>
+
+
 									</group>
 									<group>
-
-										<field name="card_pic"/>
-										<field name="trans_receipt"/>
-										<field name="do_dont"/>
-										<field name="cash_deposit"/>
-										<field name="touch_errors"/>
-										<field name="screen"/>
-										<field name="ac_issues"/>
+										<field name="check_list6" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list7" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list8" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list9" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list10" attrs="{'invisible': [('check_list1', '=',True)]}"/>
 									</group>
-
+								</group>
+								<group>
 									<group>
-										<field name="pin_guard"/>
-										<field name="privacy_flap"/>
-										<field name="kiosk_door"/>
-										<field name="kiosk_lights"/>
-										<field name="fascia_light"/>
-										<field name="boom_sign"/>
+										<field name="check_list11" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										
+										<field name="check_list13" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										
+										<field name="check_list15" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+									</group>
+									<group>
+										
+										<field name="check_list17" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										
+										<field name="check_list19" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+										<field name="check_list20" attrs="{'invisible': [('check_list1', '=',True)]}"/>
+									</group>
+								</group>
+									<group>
+										<field name="check_list21" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										
+										<field name="check_list23" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										
+										<field name="check_list25" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+									</group>
+									<group>
+										<field name="check_list26" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="check_list27" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+
+										<field name="side_frames" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="check_list28" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="check_list29" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
 										
 									</group>
-									<group>
 
-										<field name="surround_locks"/>
-										<field name="lights"/>
-										<field name="sec_cam"/>
-										<field name="out_cont"/>
-										<field name="card_reader"/>
-										<field name="side_frames"/>
-										<field name="atm_vault"/>
-										<field name="ded"/>
-										<field name="atm_notices"/>
-										<field name="keypad"/>
-										<field name="atm_status"/>
+									
+									
+									<group>
+										
+										<field name="black_notices" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="keypad_condition" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+
+										<field name="atm_status" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="scree_protector" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+
 									</group>
-								</group>
-								<group>
-									<field name="trashbin_repairs"/>
-									<field name="ttw_branding"/>
-									<field name="protective_box"/>
-									<field name="machine_cam"/>
-									<field name="fascia"/>
-								</group>
-							</page>
-							<page string="Branding Audit Checklist" attrs="{'invisible': [('is_nbad', '=',False)]}" >
+
+									
+
+									<group>
+										<field name="trash_bin_repairs" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="ttw_branding" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:30%%"/>
+										<field name="protective_box" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										<field name="machine_security_camera" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+
+										<field name="fascia_condition" attrs="{'invisible': [('check_list1', '=',True)]}" style="width:20%%"/>
+										
+									</group>
+
+							   </page>
+
+							   <page string="Branding Audit Checklist" attrs="{'invisible': [('is_nbad', '=',False)]}">
 
 							   	<group>
 									<group>
@@ -249,43 +238,43 @@
 									
 									
 								</group>
-							</page>
 
-								<!-- <group>
-									<field name="additional_comments"/>
-								</group> -->
-							<!-- </page> -->
+								
+							</page>
+							
+							 
 						</notebook>
+							
 					</sheet>
 				</form>
 			</field>
 		</record>
 
-		<record model="ir.ui.view" id="view_atm_survey_details_tree"> 
-		    <field name="name">survey.details.tree</field>
-		    <field name="model">survey.details</field>
+		<record model="ir.ui.view" id="view_survey_details_info_tree"> 
+		    <field name="name">Survey Tree</field>
+		    <field name="model">survey.info</field>
 		    <field name="type">tree</field>
 		    <field name="arch" type="xml">
-			<tree string="Survey Details" version="8.0">
+			<tree string="Customer Information" version="8.0">
 				<field name="name"/>
-				<field name="atm_report"/>
+				<field name="surv_task"/>
 				<field name="month"/>
 				
-				<field name="atm"/>
+				<field name="atm_surv"/>
 				<field name="state"/>
 
-				<field name="customer_name"/>
-				<field name="acc_manager"/>
+				<field name="customer_surv"/>
+				<field name="surveyor_surv"/>
 
-				<field name="visit_time"/>
+				<field name="visit_tm"/>
 				<field name="status"/>
 			</tree>
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="action_survey_form">
+		<record model="ir.actions.act_window" id="view_survey_details_action">
 			<field name="name">Survey Details</field>
-			<field name="res_model">survey.details</field>
+			<field name="res_model">survey.info</field>
 			<field name="view_mode">tree,form</field>
 		</record>
 
@@ -296,9 +285,7 @@
 		<menuitem name="Survey Details" id="survey_details_menu" parent="atm_survey_management"/>
 		
 		<!-- menu item -->
-		<menuitem name="Survey Details" parent="survey_details_menu" id="survey_details_menu_mainform" action="action_survey_form" sequence = "10"/>
+		<menuitem name="Survey Details" parent="survey_details_menu" id="survey_details_menu_mainform" action="view_survey_details_action" sequence = "10"/>
 
 	</data>
 </openerp>
-
-						

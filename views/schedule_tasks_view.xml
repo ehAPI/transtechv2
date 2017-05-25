@@ -4,7 +4,7 @@
 	
 		<record model="ir.ui.view" id="view_atm_schedule_tasks_form"> 
 		    <field name="name">schedule.tasks.form</field>
-		    <field name="model">schedule.tasks</field>
+		    <field name="model">schedule.task</field>
 		    <field name="type">form</field>
 		    <field name="arch" type="xml">
 
@@ -24,32 +24,24 @@
 						<group>
 				
 							<field name="name"/>
-
 							<field name="customer"/>
-
 							<field name="state"/>
 							<field name="atm"/>
-
 							<field name="visit_shift"/>
 							<field name="country"/>
-
 							<field name="surveyor"/>
-							
 							<field name="visit_date"/>
-							<field name= "add_instr"/>
+							<field name= "additional_info"/>
 							<field name="bulk_insert"/>
 							<field name="visit_type"/>
 
 						</group>
 						<group string='Visit Details'>
-							<field name="remarks_category"/>
+							<field name="remarks_id"/>
 							<field name="remarks"/>
-
 							<field name="next_exec"/>
-
 						</group>
 
-						
 					</group>
 				</sheet>
 			</form>
@@ -58,42 +50,29 @@
 
 		<record model="ir.ui.view" id="view_atm_schedule_tasks_tree"> 
 		    <field name="name">schedule.tasks.tree</field>
-		    <field name="model">schedule.tasks</field>
+		    <field name="model">schedule.task</field>
 		    <field name="type">tree</field>
 		    <field name="arch" type="xml">
 
 			<tree string="Schedule Tasks">
 					
-							<field name="name"/>
+				<field name="name"/>
+				<field name="customer"/>
+<!-- <tree string="Schedule Tasks" version="8.0"> -->
+				<field name="atm"/>
+				<field name="country"/>
+				<field name="state"/>
+				<field name="surveyor"/>
+				<field name="visits_count"/>
+				<field name="status"/>
 
-							<field name="customer"/>
-
-			<!-- <tree string="Schedule Tasks" version="8.0"> -->
-					
-						
-						
-							<field name="atm"/>
-
-							
-							<field name="country"/>
-							<field name="state"/>
-
-							<field name="surveyor"/>
-							<field name="visits_count"/>
-							
-							
-							<field name="status"/>
-
-							
-
-						
 			</tree>
 			</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="action_schedule_tasks_form">
 			<field name="name">Schedule Tasks</field>
-			<field name="res_model">schedule.tasks</field>
+			<field name="res_model">schedule.task</field>
 			<field name="view_mode">tree,form</field>
 		</record>
 

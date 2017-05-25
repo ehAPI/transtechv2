@@ -33,7 +33,7 @@
 			</field>
 		</record>
 
-		<record id="action_country_state" model="ir.actions.act_window">
+		<record id="view_state_info_action" model="ir.actions.act_window">
 			<field name="name">State Setup</field>
 		   <field name="type">ir.actions.act_window</field>
 		   <field name="res_model">res.country.state</field>
@@ -55,6 +55,6 @@
 		<menuitem name="Administration Setup" id="admin_setup" parent="atm_survey_management"/>
 		
 		<!-- menu item -->
-		<menuitem name="State Setup" parent="admin_setup" id="state_setup_menu_mainform" action="action_country_state" sequence="19" groups="group_atm_manager"/>
+		<menuitem name="State Setup" parent="admin_setup" id="menu_state_info" action="view_state_info_action" sequence="19" groups="group_atm_manager"/>
 	</data>
 </openerp>

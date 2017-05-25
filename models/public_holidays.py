@@ -3,23 +3,23 @@ from datetime import date
 from openerp.tools.translate import _
 # from osv import osv, fields
 
-class public_holidays(osv.osv):
-	_name = 'public.holidays'
-	_rec_name = 'cal_year'
+class hr_holidays(osv.osv):
+	_name = 'hr.holidays.public'
+	_rec_name = 'year'
 	_description = 'Public Holidays'
 	_columns = {
-	'cal_year' : fields.char('Calendar Year', required=True),
-	'public_holiday' : fields.one2many('public.holiday.days','dn','Public Holidays'),
+	'year' : fields.char('Calendar Year', required=True),
+	'line_ids' : fields.one2many('hr.holidays.public.line','holidays_id','Holiday Dates'),
 	}
 	_sql_constraints = [
-		('year_unique', 'UNIQUE(cal_year)', _('Duplicate cal_year!')),
+		('year_unique', 'UNIQUE(year)', _('Duplicate year!')),
 	]
-	_order = "cal_year desc"
+	_order = "year"
 
 	def is_public_holiday(self, cr, uid, dt, context=None):
-		ph_obj = self.pool.get('public.holidays')
+		ph_obj = self.pool.get('hr.holidays.public')
 		ph_ids = ph_obj.search(cr, uid, [
-			('cal_year', '=', dt.year),
+			('year', '=', dt.year),
 		],
 			context=context)
 		if len(ph_ids) == 0:
@@ -34,7 +34,7 @@ class public_holidays(osv.osv):
 	def get_holidays_list(self, cr, uid, year, context=None):
 
 		res = []
-		ph_ids = self.search(cr, uid, [('cal_year', '=', year)], context=context)
+		ph_ids = self.search(cr, uid, [('year', '=', year)], context=context)
 		if len(ph_ids) == 0:
 			return res
 		[res.append(l.date)
@@ -42,16 +42,17 @@ class public_holidays(osv.osv):
 		return res
 
 
-public_holidays()
+hr_holidays()
 
-class public_holiday_days(osv.osv):
-	_name = 'public.holiday.days'
+class hr_holidays_line(osv.osv):
+	_name = 'hr.holidays.public.line'
 	_description = 'Public Holidays Lines'
 	_columns = {
 	'dn' : fields.integer('Day', required= True),
 	'date' : fields.date('Date', required= True),
 	'name' : fields.char('Name', required= True),
-	'date_may_change' : fields.boolean('Date May Change'),
+    'holidays_id': fields.many2one('hr.holidays.public', 'Holiday Calendar Year'),
+	'variable' : fields.boolean('Date May Change'),
 	}
 
 	_order = "date, name desc"

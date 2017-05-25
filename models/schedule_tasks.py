@@ -21,7 +21,7 @@ class schedule_tasks(osv.Model):
 		return result
 
 
-	_name = 'schedule.tasks'
+	_name = 'schedule.task'
 	_columns = {
 	        'name':fields.char('Scheduled Task ID', readonly=True),
 
@@ -39,7 +39,7 @@ class schedule_tasks(osv.Model):
 			'surveyor' : fields.many2one('res.users', 'Surveyor', required=True),
 			'visit_date':fields.date('Start Date', required=True),
 			#'customer':fields.many2one('customer.info','Customer Name'),
-			'add_instr':fields.text('Additional instructions'),
+			'additional_info':fields.text('Additional instructions'),
 			'bulk_insert' : fields.boolean('Bulk Insert',size=5),
 			'visit_type': fields.selection([
 
@@ -58,7 +58,7 @@ class schedule_tasks(osv.Model):
 				('16','16 times')],'Visit Type/ No. of Visits to be done',required=True),
 			'visit_details':fields.char('Visit Details',readonly=True),
 
-            'remarks_category' : fields.many2one('remark.category','Remarks Category'),
+            'remarks_id' : fields.many2one('remark.category','Remarks Category'),
 			'remarks':fields.text('Remarks'),
 
 			'next_exec':fields.date('Next Execution',readonly=True),
@@ -165,7 +165,7 @@ class schedule_tasks(osv.Model):
 			vals['next_exec'] =  vals['next_exec'] - relativedelta(days=1)
 
 		if vals.get('name','/') == '/': 
-			vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'schedule.tasks') or '/'
+			vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'schedule.task') or '/'
 		return super(schedule_tasks, self).create(cr, uid, vals, context=context)
 
 
@@ -365,7 +365,7 @@ class schedule_tasks(osv.Model):
 				if vals['next_exec'].weekday() == 4 or holiday:
 					vals['next_visit'] =  vals['next_visit'] - relativedelta(days=1)
 
-				t_ids = self.pool.get('view.plan.tasks').search(cr,uid,[('customer','=',vals['customer']),('atm','=',vals['atm']),('task_month','=',vals['task_month'])])
+				t_ids = self.pool.get('atm.surverys.management').search(cr,uid,[('customer','=',vals['customer']),('atm','=',vals['atm']),('task_month','=',vals['task_month'])])
 				
 				# if i.visit_type == 'daily':
 				# 	i.visit_type = '30'
@@ -377,8 +377,8 @@ class schedule_tasks(osv.Model):
 					i.visit_type = '1'
 					
 				if len(t_ids) < int(i.visit_type) and visit_date.month == datetime.datetime.now().month:
-					self.pool.get('view.plan.tasks').create(cr,uid,vals,context=None)
-				self.pool.get('schedule.tasks').write(cr,uid,i.id,{'next_exec':vals['next_visit']},context=None)
+					self.pool.get('atm.surverys.management').create(cr,uid,vals,context=None)
+				self.pool.get('schedule.task').write(cr,uid,i.id,{'next_exec':vals['next_visit']},context=None)
 		return True
 
 

@@ -10,13 +10,13 @@
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
 				<tree string="Internal Alerts">
-					<field name='alert_id'/>
+					<field name='name'/>
 					<field name='customer'/>
-					<field name='atm'/>
+					<field name='atm_id'/>
 					<field name='priority'/>
 					<field name='summary'/>
 					<field name='status'/>
-					<field name='assigned_to'/>
+					<field name='assign_to'/>
 					<field name='category'/>
 				</tree>
 			</field>
@@ -27,34 +27,36 @@
 			<field name="model">internal.alerts</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="Internal Alerts">
-					<header>
-						<button name="status_resolve" type="object" String="Resolve" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('resolved','closed'))]}" class="oe_highlight"/>
-						<!-- <button name="send_alert_invitation" type="object" String="Send" groups="atm.group_atm_manager, atm.group_atm_user" class="oe_highlight"/> -->
-						<button name="status_close" type="object" String="Close" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('assigned','closed'))]}" class="oe_highlight"/>
-						<field name="status" widget="statusbar" statusbar_visible="assigned,resolved,closed"/>
-					</header>
-					<group>
+				<form string="Internal Alerts">					
+						<header>
+							<button name="status_resolve" type="object" String="Resolve" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('resolved','closed'))]}" class="oe_highlight"/>
+							<!-- <button name="send_alert_invitation" type="object" String="Send" groups="atm.group_atm_manager, atm.group_atm_user" class="oe_highlight"/> -->
+							<button name="status_close" type="object" String="Close" groups="atm.group_atm_manager, atm.group_atm_user" attrs="{'invisible': [('status','in',('assigned','closed'))]}" class="oe_highlight"/>
+							<field name="status" widget="statusbar" statusbar_visible="assigned,resolved,closed"/>
+						</header>
+					<sheet>
 						<group>
-							<field name='alert_id'/>
-							<field name='customer' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='created_by' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='atm' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='category' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='priority' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='country' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='state' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='assigned_to' attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<group>
+								<field name='name'/>
+								<field name='customer' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='user' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='atm_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='category' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='priority' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='country_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='state_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='assign_to' attrs="{'readonly':[('status','!=','assigned')]}"/>
+							</group>
+							<group string='Alert Categorization Details'>
+								<field name='reason_id'  attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='reason_disc'  attrs="{'readonly':[('status','!=','assigned')]}"/>
+							</group>
 						</group>
-						<group string='Alert Categorization Details'>
-							<field name='reason_code_id'  attrs="{'readonly':[('status','!=','assigned')]}"/>
-							<field name='reason_description'  attrs="{'readonly':[('status','!=','assigned')]}"/>
+						<group string='Summary &amp; Description'>
+							<field name='summary' attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name='description' attrs="{'readonly':[('status','!=','assigned')]}"/>
 						</group>
-					</group>
-					<group string='Summary and Description'>
-						<field name='summary' attrs="{'readonly':[('status','!=','assigned')]}"/>
-						<field name='description' attrs="{'readonly':[('status','!=','assigned')]}"/>
-					</group>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -95,7 +97,7 @@
                      <group expand="0" string="Group By...">
                         <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'customer'}"/>
 			<separator/>
-                       <filter string="Assigned To" icon="terp-folder" domain="[]" context="{'group_by':'assigned_to'}"/>
+                       <filter string="Assigned To" icon="terp-folder" domain="[]" context="{'group_by':'assign_to'}"/>
 			<separator/>
                         <filter string="Category" icon="terp-go-month" domain="[]" context="{'group_by':'category'}"/>
 			<separator/>
@@ -110,7 +112,7 @@
 		<menuitem name="ATM Survey Management" id="atm_survey_management"/>
 
 		<!-- sub menu -->
-		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" />
+		<menuitem name="Alerts" id="alerts" parent="atm_survey_management" sequence="5"/>
 		
 		<!-- menu item -->
 		<menuitem name="Internal Alerts" parent="alerts" id="internal_alerts" action="action_internal_alerts_form" sequence="17" groups="group_atm_user,group_atm_manager"/>

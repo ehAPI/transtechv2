@@ -16,7 +16,7 @@ class manage_users(osv.osv):
 	# 'tuser_id':fields.char('User ID',readonly=True, size=64),
 	'contact_num':fields.char('Contact Number',size=32),
 	'joining_date':fields.date('Joining Date'),
-	'comments':fields.text('Comments'),
+	'Comments':fields.text('Comments'),
 	'team_leader':fields.char('Team Leader',size=32),
 	'role':fields.char('Role',size=32),
 	'survey_limit':fields.integer('Limit of Surveys'),

@@ -2,14 +2,14 @@
 <openerp>
 	<data>
 		<record model="ir.ui.view" id="cust_alerts_tree_view">
-			<field name="name">cust.alerts.tree</field>
-			<field name="model">cust.alerts</field>
+			<field name="name">alert.info.tree</field>
+			<field name="model">alert.info</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
 				<tree string="Customer Alerts">
-					<field name='alert_id'/>
+					<field name='name'/>
 					<field name='customer'/>
-					<field name='atm'/>
+					<field name='atm_id'/>
 					<field name='priority'/>
 					<field name='summary'/>
 					<field name='status'/>
@@ -19,8 +19,8 @@
 		</record>
 
 		<record model="ir.ui.view" id="cust_alerts_form_view">
-			<field name="name">cust.alerts.form</field>
-			<field name="model">cust.alerts</field>
+			<field name="name">alert.info.form</field>
+			<field name="model">alert.info</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Customer Alerts">
@@ -34,28 +34,30 @@
 					<sheet>
 						<group>
 							<group>
-								<field name='alert_id'/>
+								<field name='name'/>
 								<field name="customer" attrs="{'readonly':[('status','!=','assigned')]}" />
-								<field name='atm' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='atm_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
 								<field name='category' attrs="{'readonly':[('status','!=','assigned')]}"/>
 								<field name='priority' attrs="{'readonly':[('status','!=','assigned')]}"/>
-								<field name='country' attrs="{'readonly':[('status','!=','assigned')]}"/>
-								<field name='state' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='country_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='state_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
 								<field name='submitted_by' attrs="{'readonly':[('status','!=','assigned')]}"/>
 							</group>
 							<group string='Alert Categorization Details'>
-								<field name='reason_code_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
-								<field name='reason_description' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='reason_id' attrs="{'readonly':[('status','!=','assigned')]}"/>
+								<field name='reason_disc' attrs="{'readonly':[('status','!=','assigned')]}"/>
 							</group>
 						</group>
-							<group string='Summary &amp; Description'>
-								<field name='summary' attrs="{'readonly':[('status','!=','assigned')]}"/>
-								<field name='description' attrs="{'readonly':[('status','!=','assigned')]}"/>
-							</group>
-							<h2>Error Images</h2>
-							<field name='img1' widget='image'/>
-							<field name='img2' widget='image'/>
-							<field name='img3' widget='image'/>
+
+						<group string='Summary &amp; Description'>
+							<field name='summary' attrs="{'readonly':[('status','!=','assigned')]}"/>
+							<field name='description' attrs="{'readonly':[('status','!=','assigned')]}"/>
+						</group>
+						<h2>Error Images</h2>
+						<field name='img1' widget='image' class="transtech"/>
+						<field name='img2' widget='image' class="transtech"/>
+						<field name='img3' widget='image' class="transtech"/>
+
 					</sheet>
 				</form>
 			</field>
@@ -64,7 +66,7 @@
 		<record id="action_cust_alerts_form" model="ir.actions.act_window">
 		  	<field name="name">Customer Alerts</field>
 			   <field name="type">ir.actions.act_window</field>
-			   <field name="res_model">cust.alerts</field>
+			   <field name="res_model">alert.info</field>
 			   <field name="view_type">form</field>
 			   <field name="view_id" ref="cust_alerts_tree_view"/>
 			   <field name="view_mode">tree,form</field>         
@@ -77,7 +79,7 @@
 
 	<record model="ir.ui.view" id="view_atm_alerts_filter">
             <field name="name">view_atm_alerts_filter</field>
-            <field name="model">cust.alerts</field>
+            <field name="model">alert.info</field>
             <field name="arch" type="xml">
              <search string="atm alerts search">
 			<filter icon="terp-check" string="Complants"  domain="[('category','=','complaint')]"/>
@@ -104,13 +106,13 @@
             </record>
 
 	<record id="view_alert_info_filter" model="ir.ui.view">
-            <field name="name">cust.alerts.select</field>
-            <field name="model">cust.alerts</field>
+            <field name="name">alert.info.select</field>
+            <field name="model">alert.info</field>
             <field name="arch" type="xml">
                 <search string="Search Details">
 			<group string="Search">
 				<field name="summary" filter_domain="[('summary','ilike', self)]" string="Summary"/>
-				<filter string="ATM" domain="[('atm','=',1)]" context="{'group_by':'atm'}"/>
+				<filter string="ATM" domain="[('atm_id','=',1)]" context="{'group_by':'atm_id'}"/>
 			</group>
 			 </search>
 			</field>

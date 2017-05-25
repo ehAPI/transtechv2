@@ -9,22 +9,23 @@ from email.MIMEText import MIMEText
 
 class internal_alerts(osv.osv):
 	_name = 'internal.alerts'
-	_inherit="cust.alerts"
-	_rec_name = 'alert_id'
+	_inherit="alert.info"
+	
+	_rec_name = 'name'
 	_description = 'Internal Alerts'
 	_columns = {
-	'alert_id' : fields.char('Alert ID', readonly=True),
-	'customer' : fields.many2one('customer.info', 'Customer', ondelete='set null'),
-	'created_by' : fields.many2one('res.users','Created By', ondelete='set null'),
-	'assigned_to' : fields.many2one('res.users','Assign To', ondelete='set null'),
+	'name' : fields.char('Alert ID', readonly=True),
+	'customer' : fields.many2one('customer.info', 'Customer', ondelete='set null',required=True),
+	'user' : fields.many2one('res.users','Created By', ondelete='set null'),
+	'assign_to' : fields.many2one('res.users','Assign To', ondelete='set null'),
 	}
 
 	_defaults = {
-        'created_by': lambda obj, cr, uid, context: uid,
+        'user': lambda obj, cr, uid, context: uid,
 		'status': 'assigned'
 	}
 
-	_order = "alert_id desc"
+	_order = "name desc"
 
 	def status_resolve(self,cr,uid,ids,context=None):
 		self.write(cr,uid,ids,{'status':'resolved'},context=context)
@@ -35,16 +36,16 @@ class internal_alerts(osv.osv):
 		return True
 
 	def create(self,cr,uid,vals,context=None):
-		if vals.get('alert_id','/') == '/': 
-			vals['alert_id'] = self.pool.get('ir.sequence').get(cr, uid, 'internal.alerts') or '/'
-		alert_id = super(internal_alerts, self).create(cr, uid, vals, context=context)
-		alert_info = self.browse(cr,uid,[alert_id],context=None)[0]
-		alertnumber = alert_info.alert_id
-		
-		if alert_id != False and alertnumber[0:5]=='Alert':
-			self.send_alert_invitation_customer(cr,uid,[alert_id],context=None)
-			self.send_alert_invitation_teamleader(cr,uid,[alert_id],context=None)
-		return alert_id
+		if vals.get('name','/') == '/': 
+			vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'internal.alerts') or '/'
+		user_id = super(internal_alerts, self).create(cr, uid, vals, context=context)
+		alert_info = self.browse(cr,uid,[user_id],context=None)[0]
+		alertnumber = alert_info.user
+				
+		if user_id != False and alertnumber[0:5]=='Alert':
+			self.send_alert_invitation_customer(cr,uid,[user_id],context=None)
+			self.send_alert_invitation_teamleader(cr,uid,[user_id],context=None)
+		return user_id
 
 	def unlink(self, cr, uid, ids, context=None):
         	intr_obj = self.pool.get('internal.alerts').browse(cr,uid,ids[0])
@@ -61,8 +62,9 @@ class internal_alerts(osv.osv):
 		atm_id1 =self.pool.get('atm.info').browse(cr,uid,alert_obj.atm_id.id)
 		atm_name = atm_id1.name
 		user_ids = self.pool.get('res.users').browse(cr,uid,alert_obj.assign_to.id)
-		print user_ids.name_tl
+		print user_ids.team_leader
 		teamleader_find = self.pool.get('res.users').browse(cr,uid,user_ids.name_tl.id)
+
 		print teamleader_find
 		temail_id = teamleader_find.email
 		print temail_id
