@@ -20,7 +20,7 @@ class atm_localization(osv.osv):
         self.pool.get('atm.info').write(cr,uid,atm_id[0],
             {'child_ids':[[0, False, 
             {'latitude': atm_obj.latitude,
-         'name_': atm_obj.atm_branch_details, 
+         'name_': atm_obj.name, 
          'longitude': atm_obj.longitude,
          'date':atm_obj.date}]]},context=context)
         self.pool.get('atm.info').write(cr,uid,atm_id[0],data,context=context)
