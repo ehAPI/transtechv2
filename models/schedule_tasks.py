@@ -58,7 +58,9 @@ class schedule_tasks(osv.Model):
 				('16','16 times')],'Visit Type/ No. of Visits to be done',required=True),
 			'visit_details':fields.char('Visit Details',readonly=True),
 
-            'remarks_id' : fields.many2one('remark.category','Remarks Category'),
+
+            'remarks_id' : fields.many2one('remarks.category','Remarks Category'),
+
 			'remarks':fields.text('Remarks'),
 
 			'next_exec':fields.date('Next Execution',readonly=True),
